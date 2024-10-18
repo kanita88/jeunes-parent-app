@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		619B1E2A2CC294A2009A06C3 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E292CC294A2009A06C3 /* Register.swift */; };
 		695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */; };
 		695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A82CB6768400D64E06 /* ContentView.swift */; };
 		695AA1AB2CB6768500D64E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AA2CB6768500D64E06 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		619B1E292CC294A2009A06C3 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		695AA1A32CB6768400D64E06 /* jeunesParents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jeunesParents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jeunesParentsApp.swift; sourceTree = "<group>"; };
 		695AA1A82CB6768400D64E06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -22,6 +24,11 @@
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		619B1E272CC2910D009A06C3 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
+		619B1E282CC291A1009A06C3 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		695AA1A02CB6768400D64E06 /* Frameworks */ = {
@@ -34,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		619B1E262CC28E3B009A06C3 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				619B1E282CC291A1009A06C3 /* View */,
+				619B1E272CC2910D009A06C3 /* ViewModel */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		695AA19A2CB6768400D64E06 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +97,7 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				619B1E262CC28E3B009A06C3 /* Register */,
 				69C5A0502CC2622B006A88A5 /* Home */,
 				69C5A04C2CC26199006A88A5 /* Root */,
 			);
@@ -99,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
+				619B1E292CC294A2009A06C3 /* Register.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +158,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				619B1E272CC2910D009A06C3 /* ViewModel */,
+				619B1E282CC291A1009A06C3 /* View */,
 			);
 			name = jeunesParents;
 			productName = jeunesParents;
@@ -198,6 +220,7 @@
 			files = (
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
+				619B1E2A2CC294A2009A06C3 /* Register.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

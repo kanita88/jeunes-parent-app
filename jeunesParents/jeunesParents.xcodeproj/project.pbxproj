@@ -12,6 +12,10 @@
 		695AA1AB2CB6768500D64E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AA2CB6768500D64E06 /* Assets.xcassets */; };
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
+		70BFDB6E2CC2A31600BB6E98 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFDB6D2CC2A31600BB6E98 /* Parent.swift */; };
+		70BFDB712CC2A43900BB6E98 /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFDB702CC2A43900BB6E98 /* AuthentificationViewModel.swift */; };
+		70BFDB732CC2A45000BB6E98 /* AuthentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFDB722CC2A45000BB6E98 /* AuthentificationView.swift */; };
+		70BFDB762CC2A61500BB6E98 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFDB752CC2A61500BB6E98 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		695AA1AA2CB6768500D64E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		70BFDB6D2CC2A31600BB6E98 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
+		70BFDB702CC2A43900BB6E98 /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
+		70BFDB722CC2A45000BB6E98 /* AuthentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationView.swift; sourceTree = "<group>"; };
+		70BFDB752CC2A61500BB6E98 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,7 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7062A83F2CC2A2B700B66746 /* Authenfication */,
 				69C5A0502CC2622B006A88A5 /* Home */,
 				69C5A04C2CC26199006A88A5 /* Root */,
 			);
@@ -99,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
+				70BFDB6D2CC2A31600BB6E98 /* Parent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +134,40 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7062A83F2CC2A2B700B66746 /* Authenfication */ = {
+			isa = PBXGroup;
+			children = (
+				70BFDB742CC2A5E500BB6E98 /* API Service */,
+				70BFDB6F2CC2A42000BB6E98 /* ViewModel */,
+				70BFDB6C2CC2A2EF00BB6E98 /* View */,
+			);
+			path = Authenfication;
+			sourceTree = "<group>";
+		};
+		70BFDB6C2CC2A2EF00BB6E98 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70BFDB722CC2A45000BB6E98 /* AuthentificationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		70BFDB6F2CC2A42000BB6E98 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70BFDB702CC2A43900BB6E98 /* AuthentificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		70BFDB742CC2A5E500BB6E98 /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				70BFDB752CC2A61500BB6E98 /* AuthService.swift */,
+			);
+			path = "API Service";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +241,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
+				70BFDB6E2CC2A31600BB6E98 /* Parent.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
+				70BFDB712CC2A43900BB6E98 /* AuthentificationViewModel.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
+				70BFDB732CC2A45000BB6E98 /* AuthentificationView.swift in Sources */,
+				70BFDB762CC2A61500BB6E98 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

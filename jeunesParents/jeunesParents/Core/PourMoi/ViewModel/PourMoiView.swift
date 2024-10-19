@@ -20,7 +20,7 @@ struct PourMoiView: View {
                   }
                   .navigationBarTitle("Aujourd'hui, vous êtes de bonne humeur !")
                   .navigationBarTitleDisplayMode(.inline) // Affiche le titre dans la barre de navigation
-                  .searchable(text: $searchText, prompt: "Rechercher...")
+                  .searchable(text: $searchText, prompt: "Rechercher un article...")
                }
 
             }

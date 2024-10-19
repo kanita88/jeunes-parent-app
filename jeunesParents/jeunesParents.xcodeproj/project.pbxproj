@@ -24,9 +24,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6A02C7682CC379880051BF2E /* Component */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Component; sourceTree = "<group>"; };
+		6A02C7682CC379880051BF2E /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		6A02C76B2CC3F9190051BF2E /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		6A6F4FC62CC29E0200136F49 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
-		6A6F4FC82CC29E8000136F49 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +43,7 @@
 		695AA19A2CB6768400D64E06 = {
 			isa = PBXGroup;
 			children = (
+				6A02C7682CC379880051BF2E /* Components */,
 				695AA1A52CB6768400D64E06 /* jeunesParents */,
 				695AA1A42CB6768400D64E06 /* Products */,
 			);
@@ -87,7 +88,6 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6A02C7682CC379880051BF2E /* Component */,
 				6A6F4FC52CC29D5700136F49 /* PourMoi */,
 				69C5A0502CC2622B006A88A5 /* Home */,
 				69C5A04C2CC26199006A88A5 /* Root */,
@@ -138,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6F4FC62CC29E0200136F49 /* ViewModel */,
-				6A6F4FC82CC29E8000136F49 /* View */,
+				6A02C76B2CC3F9190051BF2E /* View */,
 			);
 			path = PourMoi;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				6A02C7682CC379880051BF2E /* Component */,
+				6A02C7682CC379880051BF2E /* Components */,
+				6A02C76B2CC3F9190051BF2E /* View */,
 				6A6F4FC62CC29E0200136F49 /* ViewModel */,
-				6A6F4FC82CC29E8000136F49 /* View */,
 			);
 			name = jeunesParents;
 			productName = jeunesParents;

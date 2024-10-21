@@ -19,6 +19,7 @@
 		A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */; };
 		A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2172CC6D65B00232974 /* AuthentificationView.swift */; };
 		A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2152CC6D65B00232974 /* AuthService.swift */; };
+		A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2372CC6D87E00232974 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A52CC2152CC6D65B00232974 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A52CC2172CC6D65B00232974 /* AuthentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationView.swift; sourceTree = "<group>"; };
 		A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
+		A52CC2372CC6D87E00232974 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -109,6 +111,7 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A52CC2392CC6D87E00232974 /* Splash View */,
 				A52CC21B2CC6D65B00232974 /* Authenfication */,
 				619B1E262CC28E3B009A06C3 /* Register */,
 				69C5A0502CC2622B006A88A5 /* Home */,
@@ -194,6 +197,22 @@
 			path = Authenfication;
 			sourceTree = "<group>";
 		};
+		A52CC2382CC6D87E00232974 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2372CC6D87E00232974 /* SplashView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52CC2392CC6D87E00232974 /* Splash View */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2382CC6D87E00232974 /* View */,
+			);
+			path = "Splash View";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,6 +289,7 @@
 			files = (
 				619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
+				A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
 				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,

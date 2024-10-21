@@ -16,6 +16,9 @@
 		695AA1AB2CB6768500D64E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AA2CB6768500D64E06 /* Assets.xcassets */; };
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
+		A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */; };
+		A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2172CC6D65B00232974 /* AuthentificationView.swift */; };
+		A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2152CC6D65B00232974 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		695AA1AA2CB6768500D64E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		A52CC2152CC6D65B00232974 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A52CC2172CC6D65B00232974 /* AuthentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationView.swift; sourceTree = "<group>"; };
+		A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -103,6 +109,7 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A52CC21B2CC6D65B00232974 /* Authenfication */,
 				619B1E262CC28E3B009A06C3 /* Register */,
 				69C5A0502CC2622B006A88A5 /* Home */,
 				69C5A04C2CC26199006A88A5 /* Root */,
@@ -151,6 +158,40 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A52CC2162CC6D65B00232974 /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2152CC6D65B00232974 /* AuthService.swift */,
+			);
+			path = "API Service";
+			sourceTree = "<group>";
+		};
+		A52CC2182CC6D65B00232974 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2172CC6D65B00232974 /* AuthentificationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52CC21A2CC6D65B00232974 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A52CC21B2CC6D65B00232974 /* Authenfication */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2162CC6D65B00232974 /* API Service */,
+				A52CC2182CC6D65B00232974 /* View */,
+				A52CC21A2CC6D65B00232974 /* ViewModel */,
+			);
+			path = Authenfication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +271,9 @@
 				619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
+				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
+				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,
+				A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */,
 				619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */,
 				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
 				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,

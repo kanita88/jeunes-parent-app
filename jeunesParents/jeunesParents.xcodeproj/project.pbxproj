@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		619B1E2A2CC294A2009A06C3 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E292CC294A2009A06C3 /* Register.swift */; };
+		619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E292CC294A2009A06C3 /* Parent.swift */; };
+		619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */; };
+		619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E2F2CC2A67A009A06C3 /* Enfant.swift */; };
+		619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */; };
 		695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */; };
 		695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A82CB6768400D64E06 /* ContentView.swift */; };
 		695AA1AB2CB6768500D64E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AA2CB6768500D64E06 /* Assets.xcassets */; };
@@ -16,7 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		619B1E292CC294A2009A06C3 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		619B1E292CC294A2009A06C3 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
+		619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grossesse.swift; sourceTree = "<group>"; };
+		619B1E2F2CC2A67A009A06C3 /* Enfant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enfant.swift; sourceTree = "<group>"; };
+		619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionMedicalRegister.swift; sourceTree = "<group>"; };
 		695AA1A32CB6768400D64E06 /* jeunesParents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jeunesParents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jeunesParentsApp.swift; sourceTree = "<group>"; };
 		695AA1A82CB6768400D64E06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -115,8 +121,11 @@
 		69C5A04D2CC261C5006A88A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */,
+				619B1E2F2CC2A67A009A06C3 /* Enfant.swift */,
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
-				619B1E292CC294A2009A06C3 /* Register.swift */,
+				619B1E292CC294A2009A06C3 /* Parent.swift */,
+				619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -218,9 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
-				619B1E2A2CC294A2009A06C3 /* Register.swift in Sources */,
+				619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */,
+				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
+				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

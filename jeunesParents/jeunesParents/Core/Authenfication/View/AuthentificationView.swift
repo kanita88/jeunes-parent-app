@@ -59,11 +59,13 @@ struct AuthentificationView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.blue)
+                            .background(Color.primaire)
                             .cornerRadius(10)
                     }
                 }
                 .padding(.horizontal)
+                
+                Text("Mot de passe oublié ? ")
                 
                 // Error Handling
                 if showError, let errorMessage = authViewModel.errorMessage {
@@ -74,6 +76,14 @@ struct AuthentificationView: View {
             }
             
             Spacer()
+//            Group {
+//                Text("Don't have account ? ") +
+//                NavigationLink(destination: FormView()) {
+//                    Text("Create account")
+//                        .foregroundStyle(Color.primaire).bold()
+//                }
+//                
+//            }
         }
         .padding()
         .onReceive(authViewModel.$errorMessage) { _ in

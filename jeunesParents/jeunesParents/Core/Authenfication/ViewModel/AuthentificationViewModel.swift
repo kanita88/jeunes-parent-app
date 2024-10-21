@@ -11,18 +11,19 @@ class AuthentificationViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?
+    @Published var isLoading: Bool = false
     
     
     func login() {
+        self.isLoading = true  // Démarrer le chargement
         AuthService.shared.login(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
+                self?.isLoading = false  // Arrêter le chargement une fois terminé
                 switch result {
                 case .success(_):
-                    // Traitement de la réponse
-                    self?.isAuthenticated = true
+                    self?.isAuthenticated = true  // Connexion réussie
                 case .failure(let error):
-                    // Gestion des erreurs
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.localizedDescription  // Gestion des erreurs
                     
                 }
             }

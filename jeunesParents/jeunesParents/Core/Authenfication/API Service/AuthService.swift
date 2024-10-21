@@ -15,7 +15,7 @@ class AuthService {
     
     func login(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         // Code pour appeler l'API d'authentification
-        let loginEndpoint = "https://localhost:3000/login"
+        let loginEndpoint = "http://127.0.0.1:8080/parent"
         var request = URLRequest(url: URL(string: loginEndpoint)!)
         request.httpMethod = "POST"
         let parameters = ["email": email, "password": password]

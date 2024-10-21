@@ -1,20 +1,21 @@
 //
-//  Parent.swift
+//  Register.swift
 //  jeunesParents
 //
-//  Created by Apprenant 154 on 18/10/2024.
+//  Created by Apprenant 142 on 18/10/2024.
 //
 
 import Foundation
+import SwiftUI
 
 struct Parent: Identifiable, Codable {
-    let id: UUID
-    let fullName: String?
-    let birthDate: Date
-    let email: String
-    let token: String
-    let firstExperience: Bool
-    let numbersOfChildren: Int
-    let avatarURL: String?
-    //    let children: [Child]
+    var id: UUID
+    var nom: String
+    var prenom: String
+    var dateDeNaissance: String
+    var motDePasse: String
+    var motDePasseConfirmation: String
+    var premiereExperienceParentale: Bool
+    var enCouple: Bool
+    
 }

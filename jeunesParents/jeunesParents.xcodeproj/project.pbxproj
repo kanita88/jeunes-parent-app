@@ -3,27 +3,46 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E292CC294A2009A06C3 /* Parent.swift */; };
+		619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */; };
+		619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E2F2CC2A67A009A06C3 /* Enfant.swift */; };
+		619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */; };
 		695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */; };
 		695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AA1A82CB6768400D64E06 /* ContentView.swift */; };
 		695AA1AB2CB6768500D64E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AA2CB6768500D64E06 /* Assets.xcassets */; };
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
-		705CB35C2CC29981004A6C36 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705CB35B2CC29981004A6C36 /* SplashView.swift */; };
+		A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */; };
+		A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2172CC6D65B00232974 /* AuthentificationView.swift */; };
+		A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2152CC6D65B00232974 /* AuthService.swift */; };
+		A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2372CC6D87E00232974 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		619B1E292CC294A2009A06C3 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
+		619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grossesse.swift; sourceTree = "<group>"; };
+		619B1E2F2CC2A67A009A06C3 /* Enfant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enfant.swift; sourceTree = "<group>"; };
+		619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionMedicalRegister.swift; sourceTree = "<group>"; };
 		695AA1A32CB6768400D64E06 /* jeunesParents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jeunesParents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695AA1A62CB6768400D64E06 /* jeunesParentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jeunesParentsApp.swift; sourceTree = "<group>"; };
 		695AA1A82CB6768400D64E06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		695AA1AA2CB6768500D64E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		705CB35B2CC29981004A6C36 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashView.swift; path = "jeunesParents/Core/Splash View/View/SplashView.swift"; sourceTree = SOURCE_ROOT; };
+		A52CC2152CC6D65B00232974 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A52CC2172CC6D65B00232974 /* AuthentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationView.swift; sourceTree = "<group>"; };
+		A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
+		A52CC2372CC6D87E00232974 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		619B1E272CC2910D009A06C3 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
+		619B1E282CC291A1009A06C3 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		695AA1A02CB6768400D64E06 /* Frameworks */ = {
@@ -36,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		619B1E262CC28E3B009A06C3 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				619B1E282CC291A1009A06C3 /* View */,
+				619B1E272CC2910D009A06C3 /* ViewModel */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		695AA19A2CB6768400D64E06 = {
 			isa = PBXGroup;
 			children = (
@@ -83,7 +111,9 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				705CB35D2CC29BAF004A6C36 /* Splash View */,
+				A52CC2392CC6D87E00232974 /* Splash View */,
+				A52CC21B2CC6D65B00232974 /* Authenfication */,
+				619B1E262CC28E3B009A06C3 /* Register */,
 				69C5A0502CC2622B006A88A5 /* Home */,
 				69C5A04C2CC26199006A88A5 /* Root */,
 			);
@@ -101,7 +131,11 @@
 		69C5A04D2CC261C5006A88A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */,
+				619B1E2F2CC2A67A009A06C3 /* Enfant.swift */,
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
+				619B1E292CC294A2009A06C3 /* Parent.swift */,
+				619B1E2D2CC2A49A009A06C3 /* Grossesse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,20 +163,54 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		705CB35D2CC29BAF004A6C36 /* Splash View */ = {
+		A52CC2162CC6D65B00232974 /* API Service */ = {
 			isa = PBXGroup;
 			children = (
-				705CB35E2CC29BC5004A6C36 /* View */,
-				705CB35B2CC29981004A6C36 /* SplashView.swift */,
+				A52CC2152CC6D65B00232974 /* AuthService.swift */,
 			);
-			path = "Splash View";
+			path = "API Service";
 			sourceTree = "<group>";
 		};
-		705CB35E2CC29BC5004A6C36 /* View */ = {
+		A52CC2182CC6D65B00232974 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A52CC2172CC6D65B00232974 /* AuthentificationView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A52CC21A2CC6D65B00232974 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A52CC21B2CC6D65B00232974 /* Authenfication */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2162CC6D65B00232974 /* API Service */,
+				A52CC2182CC6D65B00232974 /* View */,
+				A52CC21A2CC6D65B00232974 /* ViewModel */,
+			);
+			path = Authenfication;
+			sourceTree = "<group>";
+		};
+		A52CC2382CC6D87E00232974 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2372CC6D87E00232974 /* SplashView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52CC2392CC6D87E00232974 /* Splash View */ = {
+			isa = PBXGroup;
+			children = (
+				A52CC2382CC6D87E00232974 /* View */,
+			);
+			path = "Splash View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +227,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				619B1E272CC2910D009A06C3 /* ViewModel */,
+				619B1E282CC291A1009A06C3 /* View */,
 			);
 			name = jeunesParents;
 			productName = jeunesParents;
@@ -215,9 +287,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
-				705CB35C2CC29981004A6C36 /* SplashView.swift in Sources */,
+				A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
+				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
+				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,
+				A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */,
+				619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */,
+				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
+				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

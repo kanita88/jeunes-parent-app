@@ -13,6 +13,8 @@
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
 		76AF8AD82CC27F8500BCEF06 /* AdviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF8AD72CC27F8500BCEF06 /* AdviceView.swift */; };
+		76DCCC232CC6590300915878 /* Forum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DCCC222CC6590300915878 /* Forum.swift */; };
+		76DCCC252CC65A4400915878 /* ForumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DCCC242CC65A4400915878 /* ForumViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		76AF8AD72CC27F8500BCEF06 /* AdviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceView.swift; sourceTree = "<group>"; };
+		76DCCC222CC6590300915878 /* Forum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forum.swift; sourceTree = "<group>"; };
+		76DCCC242CC65A4400915878 /* ForumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
+				76DCCC222CC6590300915878 /* Forum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 		76AF8AD52CC27EE700BCEF06 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				76DCCC242CC65A4400915878 /* ForumViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -227,6 +233,8 @@
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				76AF8AD82CC27F8500BCEF06 /* AdviceView.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
+				76DCCC252CC65A4400915878 /* ForumViewModel.swift in Sources */,
+				76DCCC232CC6590300915878 /* Forum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

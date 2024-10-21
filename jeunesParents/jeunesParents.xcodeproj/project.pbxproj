@@ -13,7 +13,7 @@
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
 		705EEB142CC65BE30044D770 /* MyChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705EEB132CC65BE30044D770 /* MyChildView.swift */; };
-		705EEB162CC661390044D770 /* DateCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705EEB152CC661390044D770 /* DateCarouselView.swift */; };
+		705EEB162CC661390044D770 /* DateCarouselAndChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705EEB152CC661390044D770 /* DateCarouselAndChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		705EEB132CC65BE30044D770 /* MyChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChildView.swift; sourceTree = "<group>"; };
-		705EEB152CC661390044D770 /* DateCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCarouselView.swift; sourceTree = "<group>"; };
+		705EEB152CC661390044D770 /* DateCarouselAndChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCarouselAndChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				705EEB132CC65BE30044D770 /* MyChildView.swift */,
-				705EEB152CC661390044D770 /* DateCarouselView.swift */,
+				705EEB152CC661390044D770 /* DateCarouselAndChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 			files = (
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				705EEB142CC65BE30044D770 /* MyChildView.swift in Sources */,
-				705EEB162CC661390044D770 /* DateCarouselView.swift in Sources */,
+				705EEB162CC661390044D770 /* DateCarouselAndChartView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
 			);

@@ -7,6 +7,13 @@ struct AuthentificationView: View {
     
     var body: some View {
         NavigationStack {
+            // Navigation vers la MainView après authentification
+            if authViewModel.isAuthenticated {
+                NavigationLink(destination: HomeView(), isActive: $authViewModel.isAuthenticated) {
+                    EmptyView() // Navigation conditionnelle
+                }
+            }
+            
             // Logo
             Image("Logo")
                 .resizable()
@@ -14,7 +21,7 @@ struct AuthentificationView: View {
                 .frame(width: 300 , height: 300)
             
             VStack(spacing: 21.0) {
-                // Zone pour rentrer l'email
+                // Zone pour entrer l'email
                 TextField("Entrez votre email", text: $authViewModel.email)
                     .autocapitalization(.none)
                     .padding()
@@ -24,7 +31,7 @@ struct AuthentificationView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
                 
-                // Zone pour rentrer le mot de passe
+                // Zone pour entrer le mot de passe
                 VStack {
                     HStack {
                         Group {
@@ -59,7 +66,7 @@ struct AuthentificationView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.primaire)
+                            .background(Color.primaire)  // Remplacez par Color.primaire si défini
                             .cornerRadius(10)
                     }
                 }
@@ -67,8 +74,8 @@ struct AuthentificationView: View {
                 
                 Text("Mot de passe oublié ? ")
                 
-                // Error Handling
-                if showError, let errorMessage = authViewModel.errorMessage {
+                // Gestion des erreurs
+                if let errorMessage = authViewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .padding()
@@ -76,14 +83,6 @@ struct AuthentificationView: View {
             }
             
             Spacer()
-//            Group {
-//                Text("Don't have account ? ") +
-//                NavigationLink(destination: FormView()) {
-//                    Text("Create account")
-//                        .foregroundStyle(Color.primaire).bold()
-//                }
-//                
-//            }
         }
         .padding()
         .onReceive(authViewModel.$errorMessage) { _ in
@@ -92,8 +91,6 @@ struct AuthentificationView: View {
     }
 }
 
-struct AuthView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthentificationView(authViewModel: AuthentificationViewModel())
-    }
+#Preview {
+    AuthentificationView(authViewModel: AuthentificationViewModel(), isShowingPassword: false, showError: false)
 }

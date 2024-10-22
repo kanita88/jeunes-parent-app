@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
     @ObservedObject var taskviewModel = TaskViewModel()
+    @State private var selectedTab: Tab = .myday
     
     var body: some View {
         VStack {

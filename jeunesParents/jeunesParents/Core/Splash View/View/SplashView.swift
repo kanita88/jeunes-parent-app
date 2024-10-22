@@ -6,8 +6,8 @@ struct SplashView: View {
     var body: some View {
         VStack {
             if isActive {
-                // Navigation vers la vue d'authentification lorsque isActive est vrai
-//                AuthView(userViewModel: UserViewModel())
+                //Navigation vers la vue d'authentification lorsque isActive est vrai
+                AuthentificationView(authViewModel: AuthentificationViewModel())
             } else {
                 // Affichage de l'écran de démarrage avec le logo
                 VStack {

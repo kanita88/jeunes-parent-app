@@ -7,13 +7,6 @@ struct AuthentificationView: View {
     
     var body: some View {
         NavigationStack {
-            // Navigation vers la MainView après authentification
-            if authViewModel.isAuthenticated {
-                NavigationLink(destination: HomeView(), isActive: $authViewModel.isAuthenticated) {
-                    EmptyView() // Navigation conditionnelle
-                }
-            }
-            
             // Logo
             Image("Logo")
                 .resizable()
@@ -45,6 +38,7 @@ struct AuthentificationView: View {
                                 isShowingPassword.toggle()
                             } label: {
                                 Image(systemName: isShowingPassword ? "eye.slash" : "eye")
+                                    .foregroundStyle(Color.primaire)
                             }
                         }
                     }
@@ -82,15 +76,15 @@ struct AuthentificationView: View {
                 }
             }
             
-            Spacer()
+            // Navigation conditionnelle vers la HomeView lorsque l'utilisateur est authentifié
+            NavigationLink(destination: HomeView(), isActive: $authViewModel.isAuthenticated) {
+                EmptyView()
+            }
         }
         .padding()
-        .onReceive(authViewModel.$errorMessage) { _ in
-            showError = true
-        }
     }
 }
 
 #Preview {
-    AuthentificationView(authViewModel: AuthentificationViewModel(), isShowingPassword: false, showError: false)
+    AuthentificationView(authViewModel: AuthentificationViewModel())
 }

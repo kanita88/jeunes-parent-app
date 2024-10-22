@@ -7,7 +7,7 @@ class AuthService {
     
     func login(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         // Endpoint de l'API d'authentification
-        let loginEndpoint = "http://127.0.0.1:8080/parent"
+        let loginEndpoint = "http://127.0.0.1:8080/parent/login"
         
         // Préparation de la requête
         guard let url = URL(string: loginEndpoint) else {

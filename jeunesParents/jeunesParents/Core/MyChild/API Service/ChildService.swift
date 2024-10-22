@@ -56,29 +56,25 @@ class ChildService {
     }
     
     // MARK: - Récupération des données d'un enfant
-    func fetchChildData(forChildId childId: String, completion: @escaping (Result<Enfant, Error>) -> Void) {
-        // Endpoint de l'API pour récupérer les données d'un enfant
-        guard let url = URL(string: "http://127.0.0.1:8080/enfant/\(childId)") else {
-            completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
+    func fetchChildData(parentId: UUID, completion: @escaping (Result<Enfant, Error>) -> Void) {
+        let urlString = "http://127.0.0.1:8080/parent/\(parentId)/child"  // URL de l'API pour récupérer l'enfant
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
             return
         }
         
-        let request = URLRequest(url: url)
-        
-        // Créer la session pour la requête
-        let session = URLSession.shared
-        session.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(NSError(domain: "NoData", code: -1, userInfo: nil)))
+                let noDataError = NSError(domain: "NoData", code: -1, userInfo: nil)
+                completion(.failure(noDataError))
                 return
             }
             
-            // Décodage des données reçues
             do {
                 let enfant = try JSONDecoder().decode(Enfant.self, from: data)
                 completion(.success(enfant))

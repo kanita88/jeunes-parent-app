@@ -33,6 +33,7 @@
 		A56D87AA2CC838980096BDBA /* ChildViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A92CC838980096BDBA /* ChildViewModel.swift */; };
 		A56D87AE2CC83A420096BDBA /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87AD2CC83A420096BDBA /* NotificationsView.swift */; };
 		A56D87B02CC83C980096BDBA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87AF2CC83C980096BDBA /* SearchView.swift */; };
+		A56D87B22CC841190096BDBA /* ChildProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87B12CC841190096BDBA /* ChildProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		A56D87A92CC838980096BDBA /* ChildViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewModel.swift; sourceTree = "<group>"; };
 		A56D87AD2CC83A420096BDBA /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		A56D87AF2CC83C980096BDBA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A56D87B12CC841190096BDBA /* ChildProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -227,6 +229,7 @@
 				70B44D4A2CC7B226003C1A91 /* DateCarouselAndChartView.swift */,
 				70B44D4B2CC7B226003C1A91 /* MyChildView.swift */,
 				A56D87AF2CC83C980096BDBA /* SearchView.swift */,
+				A56D87B12CC841190096BDBA /* ChildProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				69C5A0602CC6932E006A88A5 /* TaskViewModel.swift in Sources */,
 				69C5A05B2CC65CA7006A88A5 /* HomeViewModel.swift in Sources */,
 				69C5A0542CC2690E006A88A5 /* HomeView.swift in Sources */,
+				A56D87B22CC841190096BDBA /* ChildProfileView.swift in Sources */,
 				A56D87A72CC837D50096BDBA /* ChildService.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,

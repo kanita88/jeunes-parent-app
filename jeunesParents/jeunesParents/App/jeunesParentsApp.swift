@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct jeunesParentsApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           ContentView()
         }
     }
 }

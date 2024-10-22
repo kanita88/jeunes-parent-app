@@ -26,14 +26,14 @@ struct TabBarView: View {
                 }
                 .tag(Tab.home)
             
-            AppointmentView()
+            MyChildView()
                 .tabItem {
                     Image(systemName: Tab.appointment.rawValue)
                     Text("Rendez-vous")
                 }
                 .tag(Tab.appointment)
             
-           MainView()
+      PourMoiView()
 
              .tabItem {
                     Image(systemName: Tab.favorite.rawValue)

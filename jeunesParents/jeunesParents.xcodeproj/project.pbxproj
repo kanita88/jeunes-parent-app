@@ -28,6 +28,9 @@
 		A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2172CC6D65B00232974 /* AuthentificationView.swift */; };
 		A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2152CC6D65B00232974 /* AuthService.swift */; };
 		A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52CC2372CC6D87E00232974 /* SplashView.swift */; };
+		A56D87A42CC835010096BDBA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A32CC835010096BDBA /* ImagePicker.swift */; };
+		A56D87A72CC837D50096BDBA /* ChildService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A62CC837D50096BDBA /* ChildService.swift */; };
+		A56D87AA2CC838980096BDBA /* ChildViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A92CC838980096BDBA /* ChildViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +56,9 @@
 		A52CC2172CC6D65B00232974 /* AuthentificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationView.swift; sourceTree = "<group>"; };
 		A52CC2192CC6D65B00232974 /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
 		A52CC2372CC6D87E00232974 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		A56D87A32CC835010096BDBA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A56D87A62CC837D50096BDBA /* ChildService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildService.swift; sourceTree = "<group>"; };
+		A56D87A92CC838980096BDBA /* ChildViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -127,6 +133,7 @@
 		69C5A04B2CC26177006A88A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A56D87AB2CC839FB0096BDBA /* Notifications */,
 				70B44D4D2CC7B226003C1A91 /* MyChild */,
 				70F96BEB2CC7A8EC002BB95D /* TabBar */,
 				70F96BE82CC7A8E6002BB95D /* PourMoi */,
@@ -222,6 +229,9 @@
 		70B44D4D2CC7B226003C1A91 /* MyChild */ = {
 			isa = PBXGroup;
 			children = (
+				A56D87A82CC8388B0096BDBA /* ViewModel */,
+				A56D87A52CC837BE0096BDBA /* API Service */,
+				A56D87A22CC834EB0096BDBA /* Components */,
 				70B44D4C2CC7B226003C1A91 /* View */,
 			);
 			path = MyChild;
@@ -309,6 +319,45 @@
 			path = "Splash View";
 			sourceTree = "<group>";
 		};
+		A56D87A22CC834EB0096BDBA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A56D87A32CC835010096BDBA /* ImagePicker.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A56D87A52CC837BE0096BDBA /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				A56D87A62CC837D50096BDBA /* ChildService.swift */,
+			);
+			path = "API Service";
+			sourceTree = "<group>";
+		};
+		A56D87A82CC8388B0096BDBA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56D87A92CC838980096BDBA /* ChildViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A56D87AB2CC839FB0096BDBA /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				A56D87AC2CC83A0D0096BDBA /* View */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		A56D87AC2CC83A0D0096BDBA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -388,10 +437,12 @@
 				619B1E2E2CC2A49A009A06C3 /* Grossesse.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */,
+				A56D87AA2CC838980096BDBA /* ChildViewModel.swift in Sources */,
 				69C5A0622CC6FD85006A88A5 /* TaskAddView.swift in Sources */,
 				69C5A0602CC6932E006A88A5 /* TaskViewModel.swift in Sources */,
 				69C5A05B2CC65CA7006A88A5 /* HomeViewModel.swift in Sources */,
 				69C5A0542CC2690E006A88A5 /* HomeView.swift in Sources */,
+				A56D87A72CC837D50096BDBA /* ChildService.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
 				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,
@@ -400,6 +451,7 @@
 				70F96BEC2CC7A8EC002BB95D /* TabBarView.swift in Sources */,
 				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
 				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,
+				A56D87A42CC835010096BDBA /* ImagePicker.swift in Sources */,
 				70F96BE92CC7A8E6002BB95D /* PourMoiView.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,
 			);

@@ -1,13 +1,26 @@
 import Foundation
 import SwiftUI
+import Combine
+import UIKit
 
 class AuthentificationViewModel: ObservableObject {
-    
+    @Published var parent: Parent?  // Propriété parent doit être @Published pour être observée par la vue
+    @Published var enfant: Enfant?
+    @Published var profileImage: UIImage? // Stocke l'image de profil sélectionnée
+    @Published var isUploading = false
+    @Published var uploadSuccess = false
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(enfant: Enfant?) {
+        self.enfant = enfant
+    }
+    
     
     /// Fonction pour valider les informations d'authentification
     private func validateCredentials() -> Bool {

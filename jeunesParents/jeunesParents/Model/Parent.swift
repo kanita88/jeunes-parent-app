@@ -9,13 +9,14 @@ import Foundation
 import SwiftUI
 
 struct Parent: Identifiable, Codable {
-    var id: UUID
-    var nom: String
+    let id: UUID
+    let nom: String
     var prenom: String
     var dateDeNaissance: String
     var motDePasse: String
     var motDePasseConfirmation: String
     var premiereExperienceParentale: Bool
     var enCouple: Bool
+    let enfants: [Enfant]
     
 }

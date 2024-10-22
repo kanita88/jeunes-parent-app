@@ -95,5 +95,5 @@ struct AuthentificationView: View {
 }
 
 #Preview {
-    AuthentificationView(authViewModel: AuthentificationViewModel())
+    AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
 }

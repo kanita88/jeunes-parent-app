@@ -20,6 +20,7 @@ struct FormView : View {
     @State private var motDePasseConfirmation = ""
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
+    @State private var enfants = ""
     
     // Fonction pour formater la date en String
         func formatDate(_ date: Date) -> String {
@@ -116,7 +117,7 @@ struct FormView : View {
         Button(action: {
     // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
             let formattedDate = formatDate(dateDeNaissance)
-            let newParent = Parent(id: UUID(), nom: nom, prenom: prenom, dateDeNaissance: formattedDate, motDePasse: motDePasse, motDePasseConfirmation : motDePasseConfirmation, premiereExperienceParentale: false, enCouple: enCouple)
+            let newParent = Parent(id: UUID(), nom: nom, prenom: prenom, dateDeNaissance: formattedDate, motDePasse: motDePasse, motDePasseConfirmation : motDePasseConfirmation, premiereExperienceParentale: false, enCouple: enCouple, enfants: [])
            
             parentViewModel.addParent(newParent)
             presentationMode.wrappedValue.dismiss()

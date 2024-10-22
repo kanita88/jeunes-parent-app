@@ -9,12 +9,14 @@ import Foundation
 import SwiftUI
 
 struct Enfant: Identifiable, Codable {
-    var id: UUID
-    var prenom: String
+    let id: UUID
+    let nom: String
+    let age: Int
     var genre: String
     var dateDeNaissance: Date
     var terme: Bool
-    var poinds: Double
+    var poids: Double
     var taille: Int
+    var profileImageURL: String? // URL de l'image de profil
     
 }

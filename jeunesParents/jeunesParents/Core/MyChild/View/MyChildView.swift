@@ -3,10 +3,12 @@ import SwiftUI
 struct MyChildView: View {
     @ObservedObject var childViewModel: ChildViewModel
     @State private var isImagePickerPresented = false
+    @State private var isShowingNotifications = false  // État pour la feuille Notifications
+    @State private var isShowingSearchView = false     // État pour la feuille Recherche
 
     var body: some View {
         VStack {
-            // Barre supérieure avec l'icône de profil
+            // Barre supérieure avec l'icône de profil, la cloche et la recherche
             HStack {
                 if let profileImage = childViewModel.profileImage {
                     // Si l'image a été sélectionnée, affichez-la
@@ -43,7 +45,23 @@ struct MyChildView: View {
                     }
                 }
                 Spacer()
-                Image(systemName: "bell")
+
+                // Icône de recherche
+                Button(action: {
+                    isShowingSearchView = true
+                }) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 24))
+                }
+                .padding(.trailing, 10)
+
+                // Icône de la cloche pour accéder aux notifications
+                Button(action: {
+                    isShowingNotifications = true
+                }) {
+                    Image(systemName: "bell")
+                        .font(.system(size: 24))
+                }
             }
             .padding()
 
@@ -65,18 +83,11 @@ struct MyChildView: View {
             if childViewModel.isLoading {
                 ProgressView("Envoi en cours...")
                     .padding()
-            } else if childViewModel.uploadSuccess {
-                Text("Image envoyée avec succès !")
-                    .foregroundColor(.green)
-                    .padding()
-            } else if let errorMessage = childViewModel.errorMessage {
-                Text("Erreur : \(errorMessage)")
-                    .foregroundColor(.red)
-                    .padding()
             }
 
             Spacer()
         }
+        // Feuille pour la sélection d'une image (profile image)
         .sheet(isPresented: $isImagePickerPresented, onDismiss: {
             // Si une image est sélectionnée, elle sera sauvegardée dans le ViewModel
         }) {
@@ -84,6 +95,14 @@ struct MyChildView: View {
         }
         .onAppear {
             childViewModel.fetchChildData(childId: "12345") // Remplacez par l'ID réel de l'enfant
+        }
+        // Feuille pour les notifications
+        .sheet(isPresented: $isShowingNotifications) {
+            NotificationsView()
+        }
+        // Feuille pour la recherche
+        .sheet(isPresented: $isShowingSearchView) {
+            SearchView()
         }
     }
 }

@@ -31,6 +31,8 @@
 		A56D87A42CC835010096BDBA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A32CC835010096BDBA /* ImagePicker.swift */; };
 		A56D87A72CC837D50096BDBA /* ChildService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A62CC837D50096BDBA /* ChildService.swift */; };
 		A56D87AA2CC838980096BDBA /* ChildViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87A92CC838980096BDBA /* ChildViewModel.swift */; };
+		A56D87AE2CC83A420096BDBA /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87AD2CC83A420096BDBA /* NotificationsView.swift */; };
+		A56D87B02CC83C980096BDBA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D87AF2CC83C980096BDBA /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		A56D87A32CC835010096BDBA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A56D87A62CC837D50096BDBA /* ChildService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildService.swift; sourceTree = "<group>"; };
 		A56D87A92CC838980096BDBA /* ChildViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewModel.swift; sourceTree = "<group>"; };
+		A56D87AD2CC83A420096BDBA /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		A56D87AF2CC83C980096BDBA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -222,6 +226,7 @@
 			children = (
 				70B44D4A2CC7B226003C1A91 /* DateCarouselAndChartView.swift */,
 				70B44D4B2CC7B226003C1A91 /* MyChildView.swift */,
+				A56D87AF2CC83C980096BDBA /* SearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 		A56D87AC2CC83A0D0096BDBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A56D87AD2CC83A420096BDBA /* NotificationsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,11 +452,13 @@
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
 				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,
+				A56D87AE2CC83A420096BDBA /* NotificationsView.swift in Sources */,
 				A52CC21E2CC6D65B00232974 /* AuthService.swift in Sources */,
 				619B1E322CC2AC71009A06C3 /* ConditionMedicalRegister.swift in Sources */,
 				70F96BEC2CC7A8EC002BB95D /* TabBarView.swift in Sources */,
 				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
 				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,
+				A56D87B02CC83C980096BDBA /* SearchView.swift in Sources */,
 				A56D87A42CC835010096BDBA /* ImagePicker.swift in Sources */,
 				70F96BE92CC7A8E6002BB95D /* PourMoiView.swift in Sources */,
 				695AA1A72CB6768400D64E06 /* jeunesParentsApp.swift in Sources */,

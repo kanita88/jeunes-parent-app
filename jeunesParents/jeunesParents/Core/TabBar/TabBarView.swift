@@ -1,57 +1,66 @@
-//
-//  TabBarView.swift
-//  HelloMedic
-//
-//  Created by Apprenant 124 on 19/07/2024.
-//
+////
+////  TabView.swift
+////  jeunesParents
+////
+////  Created by Apprenant 125 on 18/10/2024.
+////
 
 import SwiftUI
 
 enum Tab: String {
-    case home = "house"
-    case appointment = "calendar"
-    case favorite = "bookmark"
-    case profile = "person"
+   case myday = "Ma journée"
+   case mychild = "Mon enfant"
+   case myself = "Pour Moi"
+   case counsels = "Conseils"
 }
 
-struct TabBarView: View {
-    @State private var selectedTab: Tab = .home
-     
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Image(systemName: Tab.home.rawValue)
-                    Text("Accueil")
-                }
-                .tag(Tab.home)
-            
-            MyChildView()
-                .tabItem {
-                    Image(systemName: Tab.appointment.rawValue)
-                    Text("Rendez-vous")
-                }
-                .tag(Tab.appointment)
-            
-//      PourMoiView()
-//
-//             .tabItem {
-//                    Image(systemName: Tab.favorite.rawValue)
-//                    Text("Favoris")
-//                }
-//                .tag(Tab.favorite)
-//            
-//            UserProfileView()
-//                .tabItem {
-//                    Image(systemName: Tab.profile.rawValue)
-//                    Text("Profil")
-//                }
-//                .tag(Tab.profile)
-        }
-//        .tint(.hmBlue)
-    }
+struct MainTabView: View {
+   @State private var selectedTab: Tab = .myday
+
+   static let tertiary = Color("Tertia")
+
+   var body: some View {
+      TabView(selection: $selectedTab) {
+
+         Text("Ma journée")
+            .tabItem {
+               Image(systemName: "sun.max")
+                  .renderingMode(.template)
+               Text("Ma journée")
+            }
+            .tag(Tab.myday)
+
+
+         Text("Mon enfant")
+            .tabItem {
+               Image(systemName: "teddybear.fill")
+                  .renderingMode(.template)
+               Text("Mon enfant")
+            }
+            .tag(Tab.mychild)
+
+
+         Text("Pour Moi")
+            .tabItem {
+               Image(systemName: "heart.fill")
+                  .renderingMode(.template)
+               Text("Pour Moi")
+            }
+            .tag(Tab.myself)
+
+
+         Text("Conseils")
+            .tabItem {
+               Image(systemName: "person.2.wave.2.fill")
+                  .renderingMode(.template)
+               Text("Conseils")
+            }
+            .tag(Tab.counsels)
+      }
+      .accentColor(Color("Primaire"))
+   }
 }
 
 #Preview {
-    TabBarView()
+   MainTabView()
 }

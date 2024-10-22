@@ -77,7 +77,7 @@ struct AuthentificationView: View {
             }
             
             // Navigation conditionnelle vers la HomeView lorsque l'utilisateur est authentifié
-            NavigationLink(destination: HomeView(), isActive: $authViewModel.isAuthenticated) {
+            NavigationLink(destination: MainTabView(), isActive: $authViewModel.isAuthenticated) {
                 EmptyView()
             }
         }

@@ -8,15 +8,30 @@
 import Foundation
 import SwiftUI
 
+// Structure pour représenter un parent
 struct Parent: Identifiable, Codable {
-    let id: UUID
-    let nom: String
+    var id: UUID = UUID()  // ID généré automatiquement
+    var nom: String
     var prenom: String
     var dateDeNaissance: String
     var motDePasse: String
     var motDePasseConfirmation: String
     var premiereExperienceParentale: Bool
     var enCouple: Bool
-    let enfants: [Enfant]
+    var enfants: [Enfant] = []  // Tableau vide par défaut
     
+    // Fonction pour valider si le mot de passe est correct
+    func validerMotDePasse() -> Bool {
+        return motDePasse == motDePasseConfirmation && motDePasse.count >= 8
+    }
+    
+    // Fonction pour ajouter un enfant au tableau
+    mutating func ajouterEnfant(_ enfant: Enfant) {
+        enfants.append(enfant)
+    }
+    
+    // Exemple de méthode pour afficher un résumé du parent
+    func description() -> String {
+        return "\(nom) \(prenom), \(enCouple ? "en couple" : "célibataire")"
+    }
 }

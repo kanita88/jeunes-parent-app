@@ -33,22 +33,22 @@ struct TabBarView: View {
                 }
                 .tag(Tab.appointment)
             
-      PourMoiView()
-
-             .tabItem {
-                    Image(systemName: Tab.favorite.rawValue)
-                    Text("Favoris")
-                }
-                .tag(Tab.favorite)
-            
-            UserProfileView()
-                .tabItem {
-                    Image(systemName: Tab.profile.rawValue)
-                    Text("Profil")
-                }
-                .tag(Tab.profile)
+//      PourMoiView()
+//
+//             .tabItem {
+//                    Image(systemName: Tab.favorite.rawValue)
+//                    Text("Favoris")
+//                }
+//                .tag(Tab.favorite)
+//            
+//            UserProfileView()
+//                .tabItem {
+//                    Image(systemName: Tab.profile.rawValue)
+//                    Text("Profil")
+//                }
+//                .tag(Tab.profile)
         }
-        .tint(.hmBlue)
+//        .tint(.hmBlue)
     }
 }
 

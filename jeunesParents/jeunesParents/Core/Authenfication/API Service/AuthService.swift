@@ -17,7 +17,7 @@ class AuthService {
         // Code pour appeler l'API d'authentification
         let loginEndpoint = "http://127.0.0.1:8080/parent"
         var request = URLRequest(url: URL(string: loginEndpoint)!)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         let parameters = ["email": email, "password": password]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
         

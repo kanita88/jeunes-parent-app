@@ -36,29 +36,29 @@
 //
 //}
 
-struct PourMoiView: View {
-   var body: some View {
-      NavigationView {
-         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-               Text("Aujourd'hui, vous êtes de bonne humeur !")
-                  .font(.headline)
-
-               SearchBar()
-
-            RelaxationMomentView()
-
-               TutorialsAndArticlesView()
-
-               CommunityAndAdviceView()
-            }
-            .pading()
-         }
-         .navigationBarHidden(true)
-      }
-   }
-}
-
-struct SearchBar: View {
-
-}
+//struct PourMoiView: View {
+//   var body: some View {
+//      NavigationView {
+//         ScrollView {
+//            VStack(alignment: .leading, spacing: 20) {
+//               Text("Aujourd'hui, vous êtes de bonne humeur !")
+//                  .font(.headline)
+//
+//               SearchBar()
+//
+//            RelaxationMomentView()
+//
+//               TutorialsAndArticlesView()
+//
+//               CommunityAndAdviceView()
+//            }
+//            .pading()
+//         }
+//         .navigationBarHidden(true)
+//      }
+//   }
+//}
+//
+//struct SearchBar: View {
+//
+//}

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+// Modèle pour une tâche
+struct Task: Identifiable, Codable {
+    var id: UUID?
+    var nom: String
+    var tache: String
+    var completed: Bool
+}

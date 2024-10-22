@@ -16,10 +16,10 @@ enum Tab: String {
 
 struct TabBarView: View {
     @State private var selectedTab: Tab = .home
-     
+    
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
+            ContentView()
                 .tabItem {
                     Image(systemName: Tab.home.rawValue)
                     Text("Accueil")
@@ -33,22 +33,21 @@ struct TabBarView: View {
                 }
                 .tag(Tab.appointment)
             
-      PourMoiView()
-
-             .tabItem {
+            PourMoiView()
+                .tabItem {
                     Image(systemName: Tab.favorite.rawValue)
                     Text("Favoris")
                 }
                 .tag(Tab.favorite)
             
-            UserProfileView()
-                .tabItem {
-                    Image(systemName: Tab.profile.rawValue)
-                    Text("Profil")
-                }
-                .tag(Tab.profile)
+//            UserProfileView()
+//                .tabItem {
+//                    Image(systemName: Tab.profile.rawValue)
+//                    Text("Profil")
+//                }
+//                .tag(Tab.profile)
         }
-        .tint(.hmBlue)
+        .tint(.primaire)
     }
 }
 

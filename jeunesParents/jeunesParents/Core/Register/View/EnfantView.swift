@@ -121,7 +121,7 @@ struct EnfantView : View{
                         // Ferme la vue après l'ajout
                         presentationMode.wrappedValue.dismiss()
                     }){
-                        Text("Création")
+                        Text("Valider")
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                             .padding()

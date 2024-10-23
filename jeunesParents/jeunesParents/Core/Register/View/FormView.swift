@@ -21,12 +21,15 @@ struct FormView : View {
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
     
+    // Variable pour activer la navigation après validation du formulaire
+    @State private var navigateToGrossesse = false
+    
     // Fonction pour formater la date en String
-        func formatDate(_ date: Date) -> String {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium // Format de la date (tu peux personnaliser)
-            return formatter.string(from: date)
-        }
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium // Format de la date (tu peux personnaliser)
+        return formatter.string(from: date)
+    }
     
     var body: some View {
         NavigationStack {
@@ -89,7 +92,7 @@ struct FormView : View {
                         Picker("Avez-vous une première expérience parentale ?", selection: $premiereExperienceParentale) {
                             Text("Oui").tag(true)
                             Text("Non").tag(false)
-                                
+                            
                             
                         }
                         .pickerStyle(SegmentedPickerStyle())
@@ -120,13 +123,17 @@ struct FormView : View {
                             motDePasseConfirmation : motDePasseConfirmation,
                             premiereExperienceParentale: premiereExperienceParentale,
                             enCouple: enCouple)
-                       
+                        
                         // Appel de la méthode d'ajout dans le ViewModel
                         parentViewModel.addParent(newParent)
                         
                         // Ferme la vue après l'ajout
                         presentationMode.wrappedValue.dismiss()
+                        
+                        navigateToGrossesse = true // Active la navigation vers la vue Grossesse
                     }){
+                        
+                       
                         Text("Création")
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
@@ -135,20 +142,30 @@ struct FormView : View {
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
+                        
+                    }
+                
+              
+                // Navigation vers la vue Grossesse
+                        NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
+                            EmptyView() // Ce lien est déclenché par la variable navigateToGrossesse
+                                }
+                    
                 }
                 
+                .disableAutocorrection(true)
+                .scrollContentBackground(.hidden)
             }
             
-            .disableAutocorrection(true)
-            .scrollContentBackground(.hidden)
+            
+            
         }
-        
-        
-    
     }
-}
+    
 
-#Preview {
-    FormView()
-}
+    
+    #Preview {
+        FormView()
+    }
+    
 

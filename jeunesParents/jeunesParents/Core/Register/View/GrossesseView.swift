@@ -12,6 +12,10 @@ struct GrossesseView : View {
     @State private var modeAccouchement  = ""
     @State private var conditionsMedicales = ""
     
+    // Variable pour activer la navigation après validation
+    @State private var navigateToEnfant = false
+    
+    
     let modesAccouchement = ["Naturel", "Césarienne", "Indécis"]
     let conditionsMedicaless = ["Hypertension", "Diabète gestationnel", "Précédente césarienne"]
     
@@ -26,12 +30,12 @@ struct GrossesseView : View {
     func calculerDateConception(dateMenstruation: Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 14, to: dateMenstruation) ?? Date()
     }
-
+    
     // Fonction pour calculer la date d'accouchement (280 jours après la date des dernières menstruations)
     func calculerDateAccouchement(dateMenstruation: Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 288, to: dateMenstruation) ?? Date()
     }
-
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -99,9 +103,9 @@ struct GrossesseView : View {
                             Picker("", selection: $conditionsMedicales) {
                                 ForEach(conditionsMedicaless, id: \.self) { conditions in
                                     Text(conditions).tag(conditions)
-                                                   }
-                                               }
-                                           }
+                                }
+                            }
+                        }
                     }
                     
                     
@@ -122,15 +126,16 @@ struct GrossesseView : View {
                             grossesseMultiple: grossesseMultiple,
                             modeAccouchement: modeAccouchement,
                             conditionsMedicales: conditionsMedicales
-                            )
-                           
-                            
-                       
+                        )
+                        
                         // Appel de la méthode d'ajout dans le ViewModel
-                            grossesseViewModel.addGrossesse(newGrossesse)
+                        grossesseViewModel.addGrossesse(newGrossesse)
                         
                         // Ferme la vue après l'ajout
                         presentationMode.wrappedValue.dismiss()
+                        
+                        navigateToEnfant = true // Active la navigation vers EnfantView
+                        
                     }) {
                         Text("Valider")
                             .fontWeight(.bold)
@@ -140,18 +145,23 @@ struct GrossesseView : View {
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
-                    .padding()
-                
-    
+                    
+                    
+                }
+                // Navigation vers la vue Enfant
+                NavigationLink(destination: EnfantView(), isActive: $navigateToEnfant) {
+                    EmptyView()
+                    
                 }
                 
-              }
+            }
             .disableAutocorrection(true)
             .scrollContentBackground(.hidden)
         }
     }
+    
 }
-
+    
 // Aperçu
 #Preview {
     GrossesseView()

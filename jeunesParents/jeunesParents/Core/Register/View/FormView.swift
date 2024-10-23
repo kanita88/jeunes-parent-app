@@ -6,10 +6,10 @@ import SwiftUI
 //
 
 struct FormView : View {
-    @Environment(\.presentationMode) var presentationMode
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var parentViewModel = ParentViewModel()
-    //
+    
     
     
     @State private var nom = ""

@@ -3,7 +3,7 @@ import SwiftUI
 struct GrossesseView : View {
     
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var parentViewModel = ParentViewModel()
+    @ObservedObject var grossesseViewModel = GrossesseViewModel()
     
     @State private var dateMenstruation = Date()
     @State private var dateConception = Date()
@@ -107,8 +107,30 @@ struct GrossesseView : View {
                     
                     // Bouton de validation
                     Button(action: {
-                        print("Données de grossesse soumises")
-                        // Ajouter une logique pour enregistrer ou transmettre les données
+                        // Utilisation de la fonction formatDate pour convertir date en String
+                        let formattedDate1 = formatDate(dateMenstruation)
+                        let formattedDate2 = formatDate( dateConception)
+                        let formattedDate3 = formatDate(dateAccouchement)
+                        
+                        
+                        // Création d'un nouvel objet Grossesse
+                        let newGrossesse = Grossesse(
+                            id: UUID(), // ID généré automatiquement
+                            dateMenstruation: formattedDate1,
+                            dateConception: formattedDate2,
+                            dateAccouchement: formattedDate3,
+                            grossesseMultiple: grossesseMultiple,
+                            modeAccouchement: modeAccouchement,
+                            conditionsMedicales: conditionsMedicales
+                            )
+                           
+                            
+                       
+                        // Appel de la méthode d'ajout dans le ViewModel
+                            grossesseViewModel.addGrossesse(newGrossesse)
+                        
+                        // Ferme la vue après l'ajout
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Valider")
                             .fontWeight(.bold)

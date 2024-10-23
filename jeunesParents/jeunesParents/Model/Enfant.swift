@@ -12,9 +12,11 @@ struct Enfant: Identifiable, Codable {
     var id: UUID
     var prenom: String
     var genre: String
-    var dateDeNaissance: Date
+    var dateDeNaissance: String
     var terme: Bool
-    var poinds: Double
+    var alimentation: String
+    var poids: Double
     var taille: Int
+   
     
 }

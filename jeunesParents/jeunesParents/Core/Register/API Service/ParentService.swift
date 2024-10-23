@@ -8,7 +8,7 @@ class ParentService {
     func addParent(_ parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
         
         // URL de l'API pour l'ajout de parents
-        guard let url = URL(string: "https://votre-api.com/parent") else {
+        guard let url = URL(string: "https://127.0.0.1:8080/parent") else {
             completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
             return
         }
@@ -47,7 +47,7 @@ class ParentService {
     func fetchParents(completion: @escaping (Result<[Parent], Error>) -> Void) {
         
         // URL de l'API pour récupérer la liste des parents
-        guard let url = URL(string: "https://votre-api.com/parents") else {
+        guard let url = URL(string: "https://127.0.0.1:8080/parents") else {
             completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
             return
         }
@@ -76,7 +76,7 @@ class ParentService {
     
     // Fonction pour récupérer un parent par son ID
     func fetchParent(byID id: UUID, completion: @escaping (Result<Parent, Error>) -> Void) {
-        let urlString = "https://votre-api.com/parent/\(id)" // URL de l'API pour récupérer un parent spécifique
+        let urlString = "https://127.0.0.1:8080/parent/\(id)" // URL de l'API pour récupérer un parent spécifique
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
             return
@@ -108,7 +108,7 @@ class ParentService {
     func updateParent(_ parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
         
         // URL de l'API pour la mise à jour des parents
-        guard let url = URL(string: "https://votre-api.com/parent/\(parent.id)") else {
+        guard let url = URL(string: "https://127.0.0.1:8080/parent/\(parent.id)") else {
             completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
             return
         }
@@ -144,7 +144,7 @@ class ParentService {
     
     // Fonction pour supprimer un parent
     func deleteParent(byID id: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
-        let urlString = "https://votre-api.com/parent/\(id)" // URL de l'API pour la suppression
+        let urlString = "https://127.0.0.1:8080/parent/\(id)" // URL de l'API pour la suppression
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
             return

@@ -1,10 +1,9 @@
-////
-////  PourMoiView.swift
-////  jeunesParents
-////
-////  Created by Apprenant 125 on 18/10/2024.
-////
-///
+//
+//  PourMoiView.swift
+//  jeunesParents
+//
+//  Created by Apprenant 125 on 18/10/2024.
+//
 
 import SwiftUI
 
@@ -144,3 +143,4 @@ struct CommunauteImg: View {
 #Preview {
    PourMoiView()
 }
+

@@ -4,7 +4,6 @@ import UIKit
 class ChildService {
     static let shared = ChildService()
     
-    private init() {}
     
     // MARK: - Upload de la photo de profil
     func uploadProfileImage(forChildId childId: String, image: UIImage, completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -82,5 +81,43 @@ class ChildService {
                 completion(.failure(error))
             }
         }.resume()
+    }
+    
+    // Fonction pour récupérer les cartes de développement via une API
+    func fetchDevelopmentCards(completion: @escaping (Result<[DevelopmentCard], Error>) -> Void) {
+        // URL de l'API
+        guard let url = URL(string: "https://api.example.com/jalon") else {
+            completion(.failure(ServiceError.invalidURL))
+            return
+        }
+        
+        // Effectuer la requête réseau
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            // Gestion des erreurs réseau
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // Vérifier que les données sont présentes
+            guard let data = data else {
+                completion(.failure(ServiceError.noData))
+                return
+            }
+            
+            // Tenter de décoder les données JSON
+            do {
+                let decodedCards = try JSONDecoder().decode([DevelopmentCard].self, from: data)
+                completion(.success(decodedCards)) // Renvoyer les cartes décodées en cas de succès
+            } catch let decodeError {
+                completion(.failure(decodeError)) // Renvoyer une erreur si le décodage échoue
+            }
+        }.resume() // N'oubliez pas de démarrer la requête avec .resume()
+    }
+    
+    // Définir les erreurs de service possibles
+    enum ServiceError: Error {
+        case invalidURL
+        case noData
     }
 }

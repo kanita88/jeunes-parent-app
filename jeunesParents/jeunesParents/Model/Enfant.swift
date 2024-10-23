@@ -17,6 +17,7 @@ struct Enfant: Identifiable, Codable {
     var poids: Double
     var taille: Int
     var profileImageURL: String? // URL de l'image de profil
+    var cartesDeDeveloppement: [DevelopmentCard]
     
     var age: String {
         // Calcul de l'âge à partir de la date de naissance (simple exemple)
@@ -31,4 +32,12 @@ struct Enfant: Identifiable, Codable {
         return "Inconnu"
     }
     
+}
+
+struct DevelopmentCard: Identifiable, Codable {
+    let id: UUID
+    let title: String
+    let description: String
+    let imageUrl: String?
+    let ageRange: ClosedRange<Int>
 }

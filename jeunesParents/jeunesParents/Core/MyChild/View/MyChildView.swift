@@ -8,10 +8,11 @@ struct MyChildView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 20) {
+                
                 // Barre supérieure avec l'icône de profil, la cloche et la recherche
                 HStack {
-                    buildProfileImage()
+                    buildProfileImage() // Affichage de l'image de profil
                     
                     Spacer()
                     
@@ -32,20 +33,21 @@ struct MyChildView: View {
                             .font(.system(size: 24))
                     }
                 }
-                .padding()
+                .padding(.horizontal)
                 
-                // Bouton d'enregistrement de la photo après sélection
-                if let _ = childViewModel.profileImage {
+                // Si l'image de profil est sélectionnée, afficher le bouton d'enregistrement
+                if childViewModel.profileImage != nil {
                     Button(action: {
                         childViewModel.uploadProfileImage()
                     }) {
                         Text("Enregistrer la photo")
                             .foregroundColor(.white)
                             .padding()
+                            .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(10)
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
                 
                 // Indicateur de chargement pendant l'upload
@@ -60,29 +62,59 @@ struct MyChildView: View {
                     .font(.system(size: 30))
                     .padding(.top, 10)
                 
-                // Ajout de la vue ChildProfile si nécessaire
+                // Affichage du profil de l'enfant (personnalisé)
                 ChildProfileView(childViewModel: childViewModel)
                 
                 // Carrousel de dates et graphique de croissance
                 DateCarouselAndChartView()
                 
+                // Section des cartes (scroll horizontal)
                 ScrollView(.horizontal, showsIndicators: false) {
-                    // Section des cartes
                     HStack(spacing: 16) {
-                        // Utilisation de la CardView pour chaque carte
-                        CardView(title: "Rendez-vous Médicale", value: "15", subtitle: "Avril", iconName: "stethoscope")
-                        CardView(title: "Vaccination", value: "3", subtitle: "A venir", iconName: "stethoscope")
-                        CardView(title: "Taille", value: "62", subtitle: "Cm", iconName: "stethoscope")
+                        CardView(title: "Rendez-vous Médical", value: "15", subtitle: "Avril", iconName: "stethoscope")
+                        CardView(title: "Vaccination", value: "3", subtitle: "À venir", iconName: "syringe")
+                        CardView(title: "Taille", value: "62", subtitle: "Cm", iconName: "ruler")
+                    }
+                    .padding(.horizontal)
+                }
+                
+                // Section des cartes de développement
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Développement à 2 ans")
+                        .font(.title)
+                        .bold()
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                    
+                    VStack(spacing: 16) {
+                        DevelopmentCardView(
+                            title: "Progrès moteurs",
+                            description: "Capacité à courir, sauter sur place, monter des escaliers avec assistance."
+                        )
+                        
+                        DevelopmentCardView(
+                            title: "Langage",
+                            description: "Utilisation de phrases simples de 2 à 3 mots.",
+                            image: Image("languageImage")
+                        )
+                        
+                        DevelopmentCardView(
+                            title: "Interaction sociale",
+                            description: "Jeux avec d'autres enfants, début de la reconnaissance des émotions."
+                        )
+                        
+                        DevelopmentCardView(
+                            title: "Autonomie",
+                            description: "Capacité à manger seul, essayer de s'habiller."
+                        )
                     }
                     .padding(.horizontal)
                 }
             }
             .padding()
         }
-        // Feuille pour la sélection d'une image (profile image)
-        .sheet(isPresented: $isImagePickerPresented, onDismiss: {
-            // Si une image est sélectionnée, elle sera sauvegardée dans le ViewModel
-        }) {
+        // Feuille pour la sélection d'une image de profil
+        .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(selectedImage: $childViewModel.profileImage, isPresented: $isImagePickerPresented)
         }
         .onAppear {
@@ -106,7 +138,7 @@ struct MyChildView: View {
     @ViewBuilder
     private func buildProfileImage() -> some View {
         if let profileImage = childViewModel.profileImage {
-            // Si l'image a été sélectionnée, l'affiche
+            // Afficher l'image de profil sélectionnée
             Image(uiImage: profileImage)
                 .resizable()
                 .frame(width: 50, height: 50)
@@ -115,7 +147,7 @@ struct MyChildView: View {
                     isImagePickerPresented = true
                 }
         } else {
-            // Si l'image n'a pas été sélectionnée, affiche l'image par défaut ou l'image existante
+            // Afficher l'image de profil par défaut ou chargée depuis l'URL
             Button(action: {
                 isImagePickerPresented = true
             }) {

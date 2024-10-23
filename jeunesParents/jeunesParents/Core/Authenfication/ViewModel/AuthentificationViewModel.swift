@@ -1,13 +1,26 @@
 import Foundation
 import SwiftUI
+import Combine
+import UIKit
 
 class AuthentificationViewModel: ObservableObject {
-    
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var parent: Parent?  // Propriété parent doit être @Published pour être observée par la vue
+    @Published var enfant: Enfant?
+    @Published var profileImage: UIImage? // Stocke l'image de profil sélectionnée
+    @Published var isUploading = false
+    @Published var uploadSuccess = false
+    @Published var email: String = "emilie.petit@example.com"
+    @Published var password: String = "emilie1234"
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(enfant: Enfant?) {
+        self.enfant = enfant
+    }
+    
     
     /// Fonction pour valider les informations d'authentification
     private func validateCredentials() -> Bool {
@@ -50,7 +63,13 @@ class AuthentificationViewModel: ObservableObject {
                 case .success(_):
                     self?.isAuthenticated = true  // Connexion réussie
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription  // Gestion des erreurs
+                    if error.localizedDescription.contains("Mot de passe incorrect") {
+                        self?.errorMessage = "Le mot de passe est incorrect. Veuillez réessayer."
+                    } else if error.localizedDescription.contains("Could not connect") {
+                        self?.errorMessage = "Impossible de se connecter. Vérifiez votre connexion Internet et réessayez."
+                    } else {
+                        self?.errorMessage = error.localizedDescription  // Message générique
+                    }
                 }
             }
         }

@@ -43,6 +43,7 @@ struct AuthentificationView: View {
                         }
                     }
                     .padding()
+                    .autocapitalization(.none)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
@@ -75,10 +76,18 @@ struct AuthentificationView: View {
                         .padding()
                 }
             }
-            
             // Navigation conditionnelle vers la HomeView lorsque l'utilisateur est authentifié
-            NavigationLink(destination: MainTabView(), isActive: $authViewModel.isAuthenticated) {
-                EmptyView()
+            .navigationDestination(isPresented: $authViewModel.isAuthenticated) {
+                MainTabView()
+            }
+            Spacer()
+            HStack {
+                Text("Pas encore de compte ?")
+                NavigationLink(destination: FormView()){
+                    Text("Inscrivez-vous").bold()
+                        .foregroundStyle(Color.primaire)
+                }
+                .navigationBarBackButtonHidden(true)
             }
         }
         .padding()
@@ -86,5 +95,5 @@ struct AuthentificationView: View {
 }
 
 #Preview {
-    AuthentificationView(authViewModel: AuthentificationViewModel())
+    AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
 }

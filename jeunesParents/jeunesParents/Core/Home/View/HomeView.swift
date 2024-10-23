@@ -11,6 +11,8 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
+    @ObservedObject var taskviewModel = TaskViewModel()
+    @State private var selectedTab: Tab = .myday
     @ObservedObject var taskViewModel = TaskViewModel()
     @State private var showingAddTaskView = false
     @State private var selectedTask: Task?
@@ -29,7 +31,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            //profil et notification
+
             HStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -65,7 +67,7 @@ struct HomeView: View {
             .cornerRadius(25)
             .shadow(radius: 5)
             
-            // affiche l'emoji sélectionné ou un message par défaut
+            
             if let smile = viewModel.selectSmile {
                 Text("Votre humeur du jour : \(viewModel.emojiText(index: smile))")
                     .font(.headline)
@@ -185,6 +187,11 @@ struct HomeView: View {
                         .padding()
                 }
             }
+        }
+
+        HStack() {
+            Text("Recommandation :")
+                .font(.headline)
             
         }
     }

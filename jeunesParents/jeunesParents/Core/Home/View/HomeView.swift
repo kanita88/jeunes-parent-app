@@ -78,7 +78,6 @@ struct HomeView: View {
                     .foregroundColor(.gray)
             }
             //Ajouter une tâche
-            NavigationView {
                 VStack {
                     if taskViewModel.tasks.isEmpty {
                         Text("Aucune tâche ajoutée.")
@@ -125,7 +124,6 @@ struct HomeView: View {
                 .onAppear {
                     taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
                 }
-            }
             
             Divider()
                 .frame(height: 4)

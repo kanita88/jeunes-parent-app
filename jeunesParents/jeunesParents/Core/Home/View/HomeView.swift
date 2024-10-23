@@ -115,6 +115,15 @@ struct HomeView: View {
                                         .foregroundColor(task.completed ? .green : .gray)
                                 }
                             }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    selectedTask = task  // Sélectionner la tâche à éditer
+                                    print("Selected task: \(selectedTask?.nom ?? "None")")
+                                    showingTaskDetailView = true  // Afficher la vue détal
+                                } label: {
+                                    Label("Détail", systemImage: "info.circle")
+                                }.tint(.blue)
+                            }
                             // Ajouter les actions "Éditer" et "Supprimer" via glissement
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
@@ -144,6 +153,11 @@ struct HomeView: View {
             .sheet(isPresented: $showingEditTaskView) {
                 if let selectedTask = selectedTask {
                     TaskEditView(taskViewModel: taskViewModel, task: selectedTask)
+                }
+            }
+            .sheet(isPresented: $showingTaskDetailView) {
+                if let selectedTask = selectedTask {
+                    TaskDetailView(task: selectedTask)
                 }
             }
             .onAppear {

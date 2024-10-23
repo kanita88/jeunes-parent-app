@@ -110,10 +110,24 @@ class TaskViewModel: ObservableObject {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Erreur de mise à jour de la tâche : \(error)")
+                print("Erreur de mise à jour de la tâche : \(error.localizedDescription)")
                 return
             }
-            self.fetchTasks() // Recharger les tâches après la mise à jour
+            
+            // Vérifier la réponse HTTP
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    // Mise à jour réussie
+                    DispatchQueue.main.async {
+                        self.fetchTasks() // Recharger les tâches après la mise à jour
+                    }
+                } else {
+                    print("Erreur HTTP: \(httpResponse.statusCode)")
+                    if let data = data, let responseBody = String(data: data, encoding: .utf8) {
+                        print("Réponse du serveur : \(responseBody)")
+                    }
+                }
+            }
         }.resume()
     }
     

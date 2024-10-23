@@ -3,7 +3,7 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchText = ""
     @State private var isSearching = false
-
+    
     // Exemple de données fixes pour la recherche
     let fixedData = [
         "Vaccination : 3 à venir",
@@ -25,7 +25,7 @@ struct SearchView: View {
             return fixedData.filter { $0.localizedCaseInsensitiveContains(searchText) }
         }
     }
-
+    
     var body: some View {
         VStack {
             // Barre de recherche
@@ -52,7 +52,7 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             .padding(.top, 10)
-
+            
             // Affichage des résultats de la recherche
             List {
                 ForEach(filteredResults, id: \.self) { result in

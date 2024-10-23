@@ -48,7 +48,7 @@ class ParentViewModel: ObservableObject {
             // Exemple d'enregistrement dans une API. Vous pouvez adapter selon l'API ou la base de données utilisée.
             
             // Ici, vous pouvez soit envoyer des requêtes HTTP avec `URLSession`, soit utiliser un ORM local comme CoreData
-            guard let url = URL(string: "https://votre-api.com/parent") else {
+            guard let url = URL(string: "https://127.0.0.1:8080/parent") else {
                 completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
                 return
             }

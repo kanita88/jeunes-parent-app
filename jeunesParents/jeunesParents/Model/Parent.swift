@@ -15,15 +15,10 @@ struct Parent: Identifiable, Codable {
     var prenom: String
     var dateDeNaissance: Date
     var motDePasse: String
-    var motDePasseConfirmation: String
     var premiereExperienceParentale: Bool
     var enCouple: Bool
     var enfants: [Enfant] = []  // Tableau vide par défaut
     
-    // Fonction pour valider si le mot de passe est correct
-    func validerMotDePasse() -> Bool {
-        return motDePasse == motDePasseConfirmation && motDePasse.count >= 8
-    }
     
     // Fonction pour ajouter un enfant au tableau
     mutating func ajouterEnfant(_ enfant: Enfant) {

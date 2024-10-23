@@ -18,22 +18,15 @@ class ParentViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     // Méthode pour ajouter un parent
-    func addParent(id: UUID, nom: String, prenom: String, dateDeNaissance: Date, motDePasse: String, motDePasseConfirmation: String, premiereExperienceParentale: Bool, enCouple: Bool) {
-        
-        
-        // Validation des mots de passe
-        guard motDePasse == motDePasseConfirmation else {
-            self.errorMessage = "Les mots de passe ne correspondent pas."
-            return
-        }
+    func addParent(id: UUID, nom: String, prenom: String, dateDeNaissance: Date, motDePasse: String, premiereExperienceParentale: Bool, enCouple: Bool) {
         
         // Création d'un objet Parent
         let newParent = Parent(
             id: UUID(), // Génération automatique d'un UUID
             nom: nom,
             prenom: prenom,
-            dateDeNaissance: dateDeNaissance,
-            motDePasse: motDePasse, motDePasseConfirmation: motDePasseConfirmation,
+            dateDeNaissance: dateDeNaissance, // On passe directement la date
+            motDePasse: motDePasse,
             premiereExperienceParentale: premiereExperienceParentale,
             enCouple: enCouple
         )
@@ -54,9 +47,6 @@ class ParentViewModel: ObservableObject {
     
     // Exemple de fonction pour enregistrer les données dans une base ou une API
     func saveParentToDatabase(parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
-        // Exemple d'enregistrement dans une API. Vous pouvez adapter selon l'API ou la base de données utilisée.
-        
-        // Ici, vous pouvez soit envoyer des requêtes HTTP avec `URLSession`, soit utiliser un ORM local comme CoreData
         guard let url = URL(string: "http://127.0.0.1:8080/parent") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
             return
@@ -89,4 +79,3 @@ class ParentViewModel: ObservableObject {
         }
     }
 }
-

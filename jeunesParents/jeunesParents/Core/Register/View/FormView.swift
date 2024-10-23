@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FormView : View {
+struct FormView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var parentViewModel = ParentViewModel()
@@ -10,10 +10,10 @@ struct FormView : View {
     @State private var dateDeNaissance = Date()
     @State private var email = ""
     @State private var motDePasse = ""
-    @State private var motDePasseConfirmation = ""
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
     
+    // Variable pour activer la navigation après validation du formulaire
     @State private var navigateToGrossesse = false
     
     // Variables pour afficher les messages d'erreur
@@ -29,9 +29,43 @@ struct FormView : View {
         return emailPred.evaluate(with: email)
     }
     
+    // Validation des champs
+    func validateFields() -> Bool {
+        var isValid = true
+        
+        // Réinitialiser les erreurs
+        emailError = ""
+        motDePasseError = ""
+        nomError = ""
+        prenomError = ""
+        
+        // Validation des informations
+        if nom.isEmpty {
+            nomError = "Le nom ne peut pas être vide."
+            isValid = false
+        }
+        
+        if prenom.isEmpty {
+            prenomError = "Le prénom ne peut pas être vide."
+            isValid = false
+        }
+        
+        if !validateEmail(email) {
+            emailError = "Veuillez entrer un email valide."
+            isValid = false
+        }
+        
+        if motDePasse.isEmpty {
+            motDePasseError = "Le mot de passe ne peut pas être vide."
+            isValid = false
+        }
+        
+        return isValid
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack() {
+            VStack {
                 Image("Logo")
                     .resizable()
                     .frame(width: 200, height: 200)
@@ -41,9 +75,9 @@ struct FormView : View {
                     .fontWeight(.bold)
                 
                 Form {
-                    // Nom
                     Section(header: Text("Nom")) {
                         TextField("Quel est votre nom ?", text: $nom)
+                        
                         if !nomError.isEmpty {
                             Text(nomError)
                                 .foregroundColor(.red)
@@ -51,7 +85,6 @@ struct FormView : View {
                         }
                     }
                     
-                    // Prénom
                     Section(header: Text("Prénom")) {
                         TextField("Quel est votre prénom ?", text: $prenom)
                         if !prenomError.isEmpty {
@@ -61,14 +94,12 @@ struct FormView : View {
                         }
                     }
                     
-                    // Date de naissance
                     Section(header: Text("Date de Naissance")) {
                         DatePicker("", selection: $dateDeNaissance, displayedComponents: .date)
                     }
                     
-                    // Email
                     Section(header: Text("Email")) {
-                        TextField("", text: $email)
+                        TextField("test@test.com", text: $email)
                             .textInputAutocapitalization(.never)
                         if !emailError.isEmpty {
                             Text(emailError)
@@ -77,24 +108,11 @@ struct FormView : View {
                         }
                     }
                     
-                    // Mot de passe
                     Section(header: Text("Mot de passe")) {
                         SecureField("Mot de passe", text: $motDePasse)
                             .textInputAutocapitalization(.never)
                     }
                     
-                    // Confirmation du mot de passe
-                    Section(header: Text("Confirmez le mot de passe")) {
-                        SecureField("Confirmez", text: $motDePasseConfirmation)
-                            .textInputAutocapitalization(.never)
-                        if !motDePasseError.isEmpty {
-                            Text(motDePasseError)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                        }
-                    }
-                    
-                    // Première expérience parentale
                     Section(header: Text("Première expérience parentale")) {
                         Picker("Avez-vous une première expérience parentale ?", selection: $premiereExperienceParentale) {
                             Text("Oui").tag(true)
@@ -103,7 +121,6 @@ struct FormView : View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     
-                    // En couple
                     Section(header: Text("Êtes-vous en couple ?")) {
                         Picker("Êtes-vous en couple ?", selection: $enCouple) {
                             Text("Oui").tag(true)
@@ -113,45 +130,23 @@ struct FormView : View {
                     }
                 }
                 
+                // Bouton de validation
                 Button(action: {
-                    // Réinitialiser les erreurs
-                    emailError = ""
-                    motDePasseError = ""
-                    nomError = ""
-                    prenomError = ""
-                    
-                    // Validation des informations
-                    if nom.isEmpty {
-                        nomError = "Le nom ne peut pas être vide."
-                    }
-                    
-                    if prenom.isEmpty {
-                        prenomError = "Le prénom ne peut pas être vide."
-                    }
-                    
-                    if !validateEmail(email) {
-                        emailError = "Veuillez entrer un email valide."
-                    }
-                    
-                    if motDePasse != motDePasseConfirmation {
-                        motDePasseError = "Les mots de passe ne correspondent pas."
-                    }
-                    
-                    // Si pas d'erreurs, ajouter le parent
-                    if nomError.isEmpty && prenomError.isEmpty && emailError.isEmpty && motDePasseError.isEmpty {
+                    if validateFields() {
+                        // Ajouter le parent si toutes les validations réussissent
                         parentViewModel.addParent(
                             id: UUID(),
                             nom: nom,
                             prenom: prenom,
                             dateDeNaissance: dateDeNaissance,
                             motDePasse: motDePasse,
-                            motDePasseConfirmation: motDePasseConfirmation,
                             premiereExperienceParentale: premiereExperienceParentale,
                             enCouple: enCouple
                         )
                         
                         // Fermer la vue après l'ajout
                         presentationMode.wrappedValue.dismiss()
+                        
                         navigateToGrossesse = true
                     }
                 }) {
@@ -163,8 +158,7 @@ struct FormView : View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }
-                .padding()
-                
+                .padding(.horizontal)
                 // Navigation vers la vue Grossesse
                 NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
                     EmptyView()

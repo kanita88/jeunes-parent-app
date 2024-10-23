@@ -6,10 +6,10 @@ import SwiftUI
 //
 
 struct FormView : View {
+    
     @Environment(\.presentationMode) var presentationMode
-    //
     @ObservedObject var parentViewModel = ParentViewModel()
-    //
+    
     
     
     @State private var nom = ""
@@ -20,14 +20,16 @@ struct FormView : View {
     @State private var motDePasseConfirmation = ""
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
-    @State private var enfants = ""
+    
+    // Variable pour activer la navigation après validation du formulaire
+    @State private var navigateToGrossesse = false
     
     // Fonction pour formater la date en String
-        func formatDate(_ date: Date) -> String {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium // Format de la date (tu peux personnaliser)
-            return formatter.string(from: date)
-        }
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium // Format de la date (tu peux personnaliser)
+        return formatter.string(from: date)
+    }
     
     var body: some View {
         NavigationStack {
@@ -91,6 +93,7 @@ struct FormView : View {
                             Text("Oui").tag(true)
                             Text("Non").tag(false)
                             
+                            
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .accentColor(Color.blue)
@@ -101,34 +104,68 @@ struct FormView : View {
                             Text("Oui").tag(true)
                             Text("Non").tag(false)
                         }
+                        
                         .pickerStyle(SegmentedPickerStyle())
                         .tint(.blue)
                     }
                     
+                    Button(action: {
+                        // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
+                        let formattedDate = formatDate(dateDeNaissance)
+                        
+                        // Création d'un nouvel objet Parent
+                        let newParent = Parent(
+                            id: UUID(), // ID généré automatiquement
+                            nom: nom,
+                            prenom: prenom,
+                            dateDeNaissance: formattedDate, // Date formatée
+                            motDePasse: motDePasse,
+                            motDePasseConfirmation : motDePasseConfirmation,
+                            premiereExperienceParentale: premiereExperienceParentale,
+                            enCouple: enCouple)
+                        
+                        // Appel de la méthode d'ajout dans le ViewModel
+                        parentViewModel.addParent(newParent)
+                        
+                        // Ferme la vue après l'ajout
+                        presentationMode.wrappedValue.dismiss()
+                        
+                        navigateToGrossesse = true // Active la navigation vers la vue Grossesse
+                    }){
+                        
+                       
+                        Text("Création")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                        
+                    }
+                
+              
+                // Navigation vers la vue Grossesse
+                        NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
+                            EmptyView() // Ce lien est déclenché par la variable navigateToGrossesse
+                                }
+                    
                 }
                 
+                .disableAutocorrection(true)
+                .scrollContentBackground(.hidden)
             }
             
-            .disableAutocorrection(true)
-            .scrollContentBackground(.hidden)
-        }
-        
-        
-        Button(action: {
-    // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
-            let formattedDate = formatDate(dateDeNaissance)
-            let newParent = Parent(id: UUID(), nom: nom, prenom: prenom, dateDeNaissance: formattedDate, motDePasse: motDePasse, motDePasseConfirmation : motDePasseConfirmation, premiereExperienceParentale: false, enCouple: enCouple, enfants: [])
-           
-            parentViewModel.addParent(newParent)
-            presentationMode.wrappedValue.dismiss()
-        })
-        {
+            
             
         }
     }
-}
+    
 
-#Preview {
-    FormView()
-}
+    
+    #Preview {
+        FormView()
+    }
+    
 

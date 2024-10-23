@@ -1,123 +1,100 @@
-import Foundation
+import Combine
 import UIKit
+
+struct ChildAndParentData: Codable {
+    let enfant: Enfant
+    let parentName: String
+}
+
 
 class ChildService {
     static let shared = ChildService()
     
-    
-    // MARK: - Upload de la photo de profil
-    func uploadProfileImage(forChildId childId: String, image: UIImage, completion: @escaping (Result<Bool, Error>) -> Void) {
-        // Endpoint de l'API pour uploader l'image
-        guard let url = URL(string: "http://127.0.0.1:8080/enfant/\(childId)/uploadPhoto") else {
-            completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        // Spécifier que c'est du multipart/form-data
-        let boundary = UUID().uuidString
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-        // Convertir l'image en données JPEG
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            completion(.failure(NSError(domain: "InvalidImage", code: -1, userInfo: nil)))
-            return
-        }
-        
-        // Créer le corps multipart/form-data
-        var body = Data()
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-        body.append(imageData)
-        body.append("\r\n".data(using: .utf8)!)
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        // Assigner le corps de la requête
-        request.httpBody = body
-        
-        // Créer la session pour l'upload
-        let session = URLSession.shared
-        session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+    func uploadProfileImage(forChildId childId: String, image: UIImage) -> Future<Bool, Error> {
+        return Future { promise in
+            guard let url = URL(string: "http://127.0.0.1:8080/enfant/\(childId)/uploadPhoto") else {
+                promise(.failure(ServiceError.invalidURL))
                 return
             }
             
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                completion(.success(true))  // Succès de l'upload
-            } else {
-                completion(.failure(NSError(domain: "UploadFailed", code: -1, userInfo: nil)))
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let boundary = UUID().uuidString
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            
+            guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+                promise(.failure(ServiceError.invalidImage))
+                return
             }
-        }.resume()
+            
+            var body = Data()
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"file\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+            body.append(imageData)
+            body.append("\r\n".data(using: .utf8)!)
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            
+            request.httpBody = body
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                    return
+                }
+                
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                    promise(.success(true))
+                } else {
+                    promise(.failure(ServiceError.uploadFailed))
+                }
+            }.resume()
+        }
     }
     
-    // MARK: - Récupération des données d'un enfant
-    func fetchChildData(parentId: UUID, completion: @escaping (Result<Enfant, Error>) -> Void) {
+    // Méthode pour récupérer les cartes de développement depuis l'API
+    func fetchDevelopmentCards() -> AnyPublisher<[DevelopmentCard], Error> {
+        guard let url = URL(string: "https://api.example.com/jalon") else {
+            return Fail(error: ServiceError.invalidURL).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: [DevelopmentCard].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    // Méthode pour récupérer les données de l'enfant et du parent
+    func fetchChildAndParentData(parentId: UUID) -> AnyPublisher<ChildAndParentData, Error> {
+        let urlString = "http://127.0.0.1:8080/parent/\(parentId)/child"
+        guard let url = URL(string: urlString) else {
+            return Fail(error: ServiceError.invalidURL).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: ChildAndParentData.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchChildData(parentId: UUID) -> AnyPublisher<Enfant, Error> {
         let urlString = "http://127.0.0.1:8080/parent/\(parentId)/child"  // URL de l'API pour récupérer l'enfant
         guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
+            return Fail(error: ServiceError.invalidURL).eraseToAnyPublisher()
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                let noDataError = NSError(domain: "NoData", code: -1, userInfo: nil)
-                completion(.failure(noDataError))
-                return
-            }
-            
-            do {
-                let enfant = try JSONDecoder().decode(Enfant.self, from: data)
-                completion(.success(enfant))
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
-    
-    // Fonction pour récupérer les cartes de développement via une API
-    func fetchDevelopmentCards(completion: @escaping (Result<[DevelopmentCard], Error>) -> Void) {
-        // URL de l'API
-        guard let url = URL(string: "https://api.example.com/jalon") else {
-            completion(.failure(ServiceError.invalidURL))
-            return
-        }
-        
-        // Effectuer la requête réseau
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            // Gestion des erreurs réseau
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // Vérifier que les données sont présentes
-            guard let data = data else {
-                completion(.failure(ServiceError.noData))
-                return
-            }
-            
-            // Tenter de décoder les données JSON
-            do {
-                let decodedCards = try JSONDecoder().decode([DevelopmentCard].self, from: data)
-                completion(.success(decodedCards)) // Renvoyer les cartes décodées en cas de succès
-            } catch let decodeError {
-                completion(.failure(decodeError)) // Renvoyer une erreur si le décodage échoue
-            }
-        }.resume() // N'oubliez pas de démarrer la requête avec .resume()
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: Enfant.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
     
     // Définir les erreurs de service possibles
     enum ServiceError: Error {
         case invalidURL
         case noData
+        case invalidImage
+        case uploadFailed
     }
 }

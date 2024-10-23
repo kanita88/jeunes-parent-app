@@ -119,7 +119,7 @@ struct MyChildView: View {
         }
         .onAppear {
             if let parentId = UUID(uuidString: "PARENT_ID_Ici") {
-                childViewModel.fetchChildData(parentId: parentId)
+                childViewModel.fetchChildAndParentData(parentId: parentId) // Appeler les données de l'enfant et des parents
             } else {
                 print("Erreur : parentId est nil")
             }

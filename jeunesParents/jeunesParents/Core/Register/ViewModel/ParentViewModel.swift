@@ -10,7 +10,7 @@ import SwiftUI
 class ParentViewModel: ObservableObject {
     @Published var parents: [Parent] = []
     
-    private let baseURL: String = "http://10.80.55.104:3000/User"
+    private let baseURL: String = "http://127.0.0.1:8080/parent"
     
     // Récupérer tous les parents du serveur
     func fetchParent() {
@@ -21,9 +21,9 @@ class ParentViewModel: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 do {
-                    let decodedUsers = try JSONDecoder().decode([Parent].self,from: data)
+                    let decodedParents = try JSONDecoder().decode([Parent].self,from: data)
                     DispatchQueue.main.async {
-                        self.parents = decodedUsers
+                        self.parents = decodedParents
                     }
                 } catch {
                     print("Error decoding data: \(error)")

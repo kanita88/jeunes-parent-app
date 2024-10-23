@@ -10,7 +10,7 @@ import SwiftUI
 class GrossesseViewModel: ObservableObject {
     @Published var grossesses: [Grossesse] = []
     
-    private let baseURL: String = "http://10.80.55.104:3000/User"
+    private let baseURL: String = "http://127.0.0.1:8080/grossesse"
    
     
     // Récupérer toutes les gorssesses du serveur
@@ -22,9 +22,9 @@ class GrossesseViewModel: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 do {
-                    let decodedUsers = try JSONDecoder().decode([Grossesse].self,from: data)
+                    let decodedGrossesses = try JSONDecoder().decode([Grossesse].self,from: data)
                     DispatchQueue.main.async {
-                        self.grossesses = decodedUsers
+                        self.grossesses = decodedGrossesses
                     }
                 } catch {
                     print("Error decoding data: \(error)")

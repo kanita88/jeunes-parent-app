@@ -10,7 +10,7 @@ import SwiftUI
 class EnfantViewModel: ObservableObject {
     @Published var enfants: [Enfant] = []
     
-    private let baseURL: String = "http://10.80.55.104:3000/User"
+    private let baseURL: String = "http://127.0.0.1:8080/Enfant"
     
     
     // Récupérer tout les enfants du serveur
@@ -22,9 +22,9 @@ class EnfantViewModel: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 do {
-                    let decodedUsers = try JSONDecoder().decode([Enfant].self,from: data)
+                    let decodedEnfants = try JSONDecoder().decode([Enfant].self,from: data)
                     DispatchQueue.main.async {
-                        self.enfants = decodedUsers
+                        self.enfants = decodedEnfants
                     }
                 } catch {
                     print("Error decoding data: \(error)")

@@ -7,7 +7,7 @@ import SwiftUI
 
 struct FormView : View {
     @Environment(\.presentationMode) var presentationMode
-    //
+    
     @ObservedObject var parentViewModel = ParentViewModel()
     //
     
@@ -89,6 +89,7 @@ struct FormView : View {
                         Picker("Avez-vous une première expérience parentale ?", selection: $premiereExperienceParentale) {
                             Text("Oui").tag(true)
                             Text("Non").tag(false)
+                                
                             
                         }
                         .pickerStyle(SegmentedPickerStyle())
@@ -100,10 +101,40 @@ struct FormView : View {
                             Text("Oui").tag(true)
                             Text("Non").tag(false)
                         }
+                        
                         .pickerStyle(SegmentedPickerStyle())
                         .tint(.blue)
                     }
                     
+                    Button(action: {
+                        // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
+                        let formattedDate = formatDate(dateDeNaissance)
+                        
+                        // Création d'un nouvel objet Parent
+                        let newParent = Parent(
+                            id: UUID(), // ID généré automatiquement
+                            nom: nom,
+                            prenom: prenom,
+                            dateDeNaissance: formattedDate, // Date formatée
+                            motDePasse: motDePasse,
+                            motDePasseConfirmation : motDePasseConfirmation,
+                            premiereExperienceParentale: premiereExperienceParentale,
+                            enCouple: enCouple)
+                       
+                        // Appel de la méthode d'ajout dans le ViewModel
+                        parentViewModel.addParent(newParent)
+                        
+                        // Ferme la vue après l'ajout
+                        presentationMode.wrappedValue.dismiss()
+                    }){
+                        Text("Création")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
                 }
                 
             }
@@ -113,17 +144,7 @@ struct FormView : View {
         }
         
         
-        Button(action: {
-    // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
-            let formattedDate = formatDate(dateDeNaissance)
-            let newParent = Parent(id: UUID(), nom: nom, prenom: prenom, dateDeNaissance: formattedDate, motDePasse: motDePasse, motDePasseConfirmation : motDePasseConfirmation, premiereExperienceParentale: false, enCouple: enCouple)
-           
-            parentViewModel.addParent(newParent)
-            presentationMode.wrappedValue.dismiss()
-        })
-        {
-            
-        }
+    
     }
 }
 

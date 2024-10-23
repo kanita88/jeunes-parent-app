@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 
-struct ConditionMedicalRegister: Identifiable, Codable {
+struct ConditionsMedicales: Identifiable, Codable {
     var id: UUID
     var nom: String
     var detail: String

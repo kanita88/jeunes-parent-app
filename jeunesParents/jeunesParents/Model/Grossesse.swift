@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Grossesse: Identifiable, Codable {
     var id: UUID
-    var dateMenstruation: Date?
-    var dateConception: Date?
-    var dateAccouchement: Date?
+    var dateMenstruation: String
+    var dateConception: String
+    var dateAccouchement: String
     var grossesseMultiple: Bool
     var modeAccouchement: String
-    var conditionsMedicales: [ConditionMedicalRegister]
+    var conditionsMedicales: String
     
 }

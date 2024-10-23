@@ -15,6 +15,8 @@
 		76AF8AD82CC27F8500BCEF06 /* AdviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF8AD72CC27F8500BCEF06 /* AdviceView.swift */; };
 		76DCCC232CC6590300915878 /* Forum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DCCC222CC6590300915878 /* Forum.swift */; };
 		76DCCC252CC65A4400915878 /* ForumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DCCC242CC65A4400915878 /* ForumViewModel.swift */; };
+		76ED77A32CC8DF94002AFB8F /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ED77A22CC8DF94002AFB8F /* Article.swift */; };
+		76ED77A52CC8DFE1002AFB8F /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ED77A42CC8DFE1002AFB8F /* ArticleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		76AF8AD72CC27F8500BCEF06 /* AdviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceView.swift; sourceTree = "<group>"; };
 		76DCCC222CC6590300915878 /* Forum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forum.swift; sourceTree = "<group>"; };
 		76DCCC242CC65A4400915878 /* ForumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewModel.swift; sourceTree = "<group>"; };
+		76ED77A22CC8DF94002AFB8F /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		76ED77A42CC8DFE1002AFB8F /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 			children = (
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
 				76DCCC222CC6590300915878 /* Forum.swift */,
+				76ED77A22CC8DF94002AFB8F /* Article.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				76DCCC242CC65A4400915878 /* ForumViewModel.swift */,
+				76ED77A42CC8DFE1002AFB8F /* ArticleViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -229,6 +235,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76ED77A32CC8DF94002AFB8F /* Article.swift in Sources */,
+				76ED77A52CC8DFE1002AFB8F /* ArticleViewModel.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				76AF8AD82CC27F8500BCEF06 /* AdviceView.swift in Sources */,

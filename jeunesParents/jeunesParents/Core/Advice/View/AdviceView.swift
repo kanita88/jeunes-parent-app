@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AdviceView: View {
     @StateObject private var forumViewModel = ForumViewModel()
+    @StateObject private var articleViewModel = ArticleViewModel()
     @State var searchBar : String = ""
     var jpBlue = Color(red: 0.29, green: 0.47, blue: 0.59)
     private var categories = ["Parent", "Enfant", "Grossesse", "Post-Partum", "Pro"]
@@ -67,7 +68,7 @@ struct AdviceView: View {
                                             .frame(maxWidth: .infinity,alignment: .leading)
                                         
                                         HStack {
-                                            Text("00/00/0000")
+                                            Text(formatDate(forum.publicationDate))
                                                 .foregroundStyle(.gray)
                                                 .font(.system(size: 10))
                                             
@@ -114,37 +115,86 @@ struct AdviceView: View {
                     
                     Text("Articles")
                         .padding(.top, 8)
-                        .padding(.bottom, -5.0)
+                        .padding(.bottom, -50.0)
                         .foregroundStyle(jpBlue)
                         .bold()
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding(.leading, 16.0)
                         .font(.title)
                     
-                    HStack(spacing: 10) {
-                        Rectangle()
-                            .frame(width: 140, height: 140)
-                            .cornerRadius(25)
-                            .foregroundStyle(.black)
-                            .background() {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(articleViewModel.articles) { article in
+                                // AsyncImage pour charger l'image à partir de l'URL
                                 ZStack {
                                     Rectangle()
-                                        .frame(width: 140, height: 83)
+                                        .frame(width: 170, height: 83)
                                         .cornerRadius(25)
                                         .foregroundStyle(Color(red: 0.94, green: 0.95, blue: 0.98))
-                                        .padding(.top, 130.0)
-                                    Text("Title")
-                                        .multilineTextAlignment(.center)
-                                        .font(.system(size: 11))
                                         .padding(.top, 160.0)
+                                        .overlay(content: {
+                                            Text(article.title)  // Affichage du titre de l'article
+                                                .multilineTextAlignment(.center)
+                                                .bold()
+                                                .font(.system(size: 10))
+                                                .padding(.top, 200.0)
+                                        })
+                                    
+                                    AsyncImage(url: URL(string: article.imageURL)) { phase in
+                                        if let image = phase.image {
+                                            // Image chargée avec succès
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 170, height: 170)
+                                                .cornerRadius(25)
+//                                                .background(
+//                                                    // Fond pour le titre sous l'image
+//                                                    ZStack {
+//                                                        Rectangle()
+//                                                            .frame(width: 170, height: 83)
+//                                                            .cornerRadius(25)
+//                                                            .foregroundStyle(Color(red: 0.94, green: 0.95, blue: 0.98))
+//                                                            .padding(.top, 160.0)
+//                                                        Text(article.title)  // Affichage du titre de l'article
+//                                                            .multilineTextAlignment(.center)
+//                                                            .bold()
+//                                                            .font(.system(size: 10))
+//                                                            .padding(.top, 200.0)
+//                                                    }
+//                                                )
+                                        } else if phase.error != nil {
+                                            // Erreur lors du chargement de l'image
+                                            Text("Erreur de chargement de l'image")
+                                                .foregroundColor(.red)
+                                        } else {
+                                            // Indicateur de chargement pendant que l'image est en cours de téléchargement
+                                            ProgressView()
+                                                .frame(width: 140, height: 140)
+                                        }
+                                    }
+                                    
+                                    HStack(spacing:0) {
+                                        Image(systemName: "book.fill")
+                                        Text("\(article.readTime)min")
+                                    }
+                                    .padding(.top, -70.0)
+                                    .padding(.leading, 94.0)
+                                    .foregroundStyle(Color(red: 1, green: 0.94, blue: 0.65))
                                 }
                             }
+                        }
                     }
-                    
                 }
             }
             .navigationTitle("Conseils")
         }
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"  // Spécifie le format jour/mois/année
+        return dateFormatter.string(from: date)
     }
 }
 

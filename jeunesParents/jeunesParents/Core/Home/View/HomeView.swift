@@ -188,12 +188,6 @@ struct HomeView: View {
                 }
             }
         }
-
-        HStack() {
-            Text("Recommandation :")
-                .font(.headline)
-            
-        }
     }
     // Suppression via glissement
     func deleteTask(at offsets: IndexSet) {

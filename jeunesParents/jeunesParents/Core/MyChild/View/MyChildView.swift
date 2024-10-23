@@ -7,63 +7,77 @@ struct MyChildView: View {
     @State private var isShowingSearchView = false     // État pour la feuille Recherche
     
     var body: some View {
-        VStack {
-            // Barre supérieure avec l'icône de profil, la cloche et la recherche
-            HStack {
-                buildProfileImage()
-                
-                Spacer()
-                
-                // Icône de recherche
-                Button(action: {
-                    isShowingSearchView = true
-                }) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 24))
+        ScrollView {
+            VStack {
+                // Barre supérieure avec l'icône de profil, la cloche et la recherche
+                HStack {
+                    buildProfileImage()
+                    
+                    Spacer()
+                    
+                    // Icône de recherche
+                    Button(action: {
+                        isShowingSearchView = true
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 24))
+                    }
+                    .padding(.trailing, 10)
+                    
+                    // Icône de la cloche pour accéder aux notifications
+                    Button(action: {
+                        isShowingNotifications = true
+                    }) {
+                        Image(systemName: "bell")
+                            .font(.system(size: 24))
+                    }
                 }
-                .padding(.trailing, 10)
+                .padding()
                 
-                // Icône de la cloche pour accéder aux notifications
-                Button(action: {
-                    isShowingNotifications = true
-                }) {
-                    Image(systemName: "bell")
-                        .font(.system(size: 24))
+                // Bouton d'enregistrement de la photo après sélection
+                if let _ = childViewModel.profileImage {
+                    Button(action: {
+                        childViewModel.uploadProfileImage()
+                    }) {
+                        Text("Enregistrer la photo")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                    .padding()
+                }
+                
+                // Indicateur de chargement pendant l'upload
+                if childViewModel.isLoading {
+                    ProgressView("Envoi en cours...")
+                        .padding()
+                }
+                
+                // Message de bienvenue dynamique
+                Text("Bienvenue, \(childViewModel.parentName) !")
+                    .bold()
+                    .font(.system(size: 30))
+                    .padding(.top, 10)
+                
+                // Ajout de la vue ChildProfile si nécessaire
+                ChildProfileView(childViewModel: childViewModel)
+                
+                // Carrousel de dates et graphique de croissance
+                DateCarouselAndChartView()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    // Section des cartes
+                    HStack(spacing: 16) {
+                        // Utilisation de la CardView pour chaque carte
+                        CardView(title: "Rendez-vous Médicale", value: "15", subtitle: "Avril", iconName: "stethoscope")
+                        CardView(title: "Vaccination", value: "3", subtitle: "A venir", iconName: "stethoscope")
+                        CardView(title: "Taille", value: "62", subtitle: "Cm", iconName: "stethoscope")
+                    }
+                    .padding(.horizontal)
                 }
             }
             .padding()
-            
-            // Bouton d'enregistrement de la photo après sélection
-            if let _ = childViewModel.profileImage {
-                Button(action: {
-                    childViewModel.uploadProfileImage()
-                }) {
-                    Text("Enregistrer la photo")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-                .padding()
-            }
-            
-            // Indicateur de chargement pendant l'upload
-            if childViewModel.isLoading {
-                ProgressView("Envoi en cours...")
-                    .padding()
-            }
-            
-            //            // Message de bienvenue dynamique
-            //            Text("Bienvenue, \(childViewModel.parentName) !")
-            //                .bold()
-            //                .font(.system(size: 30))
-            //                .padding(.top, 10)
-            
-            // Ajout de la vue ChildProfile si nécessaire
-            ChildProfileView(childViewModel: childViewModel)
-            
-            // Carrousel de dates et graphique de croissance
-            DateCarouselAndChartView()
         }
         // Feuille pour la sélection d'une image (profile image)
         .sheet(isPresented: $isImagePickerPresented, onDismiss: {

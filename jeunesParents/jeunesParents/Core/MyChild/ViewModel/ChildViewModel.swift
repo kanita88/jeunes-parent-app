@@ -7,6 +7,7 @@ class ChildViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var uploadSuccess = false
     @Published var errorMessage: String?
+    @Published var parentName: String = "Parent par défaut"
 
     // Fonction pour récupérer les données de l'enfant via l'API
     func fetchChildData(parentId: UUID) {

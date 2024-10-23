@@ -63,7 +63,13 @@ class AuthentificationViewModel: ObservableObject {
                 case .success(_):
                     self?.isAuthenticated = true  // Connexion réussie
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription  // Gestion des erreurs
+                    if error.localizedDescription.contains("Mot de passe incorrect") {
+                        self?.errorMessage = "Le mot de passe est incorrect. Veuillez réessayer."
+                    } else if error.localizedDescription.contains("Could not connect") {
+                        self?.errorMessage = "Impossible de se connecter. Vérifiez votre connexion Internet et réessayez."
+                    } else {
+                        self?.errorMessage = error.localizedDescription  // Message générique
+                    }
                 }
             }
         }

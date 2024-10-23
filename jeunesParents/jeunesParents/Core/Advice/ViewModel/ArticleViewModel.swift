@@ -167,7 +167,7 @@ class ArticleViewModel : ObservableObject {
                     ],
                     publicationDate: createDate(year: 2023, month: 9, day: 9),
                     readTime: 6,
-                    imageURL: "https://images.pexels.com/photos/7752253/pexels-photo-7752253.jpeg",
+                    imageURL: "https://images.pexels.com/photos/28998255/pexels-photo-28998255/free-photo-of-une-mere-et-sa-fille-se-lient-d-amitie-au-coucher-du-soleil.jpeg",
                     category: "Enfant",
                     content: """
                     Le stress et l'anxiété peuvent affecter les enfants de manière significative.
@@ -191,8 +191,8 @@ class ArticleViewModel : ObservableObject {
                     ],
                     publicationDate: createDate(year: 2023, month: 10, day: 1),
                     readTime: 5,
-                    imageURL: "https://images.pexels.com/photos/8347461/pexels-photo-8347461.jpeg",
-                    category: "Éducation",
+                    imageURL: "https://images.pexels.com/photos/8260495/pexels-photo-8260495.jpeg",
+                    category: "Enfant",
                     content: """
                     La transition vers l'école peut être une étape stressante pour les enfants. Voici quelques
                     conseils pour les aider à se préparer :
@@ -215,8 +215,8 @@ class ArticleViewModel : ObservableObject {
                     ],
                     publicationDate: createDate(year: 2023, month: 10, day: 11),
                     readTime: 5,
-                    imageURL: "https://images.pexels.com/photos/4408574/pexels-photo-4408574.jpeg",
-                    category: "Bien-Être",
+                    imageURL: "https://images.pexels.com/photos/2597205/pexels-photo-2597205.jpeg",
+                    category: "Enfant",
                     content: """
                     La méditation est un excellent outil pour aider les enfants à gérer leurs émotions et à
                     développer la concentration. Voici quelques bienfaits :
@@ -239,8 +239,8 @@ class ArticleViewModel : ObservableObject {
                     ],
                     publicationDate: createDate(year: 2023, month: 11, day: 2),
                     readTime: 6,
-                    imageURL: "https://images.pexels.com/photos/8347485/pexels-photo-8347485.jpeg",
-                    category: "Éducation",
+                    imageURL: "https://images.pexels.com/photos/4867670/pexels-photo-4867670.jpeg",
+                    category: "Enfant",
                     content: """
                     L'utilisation des écrans est de plus en plus fréquente chez les enfants, ce qui soulève des
                     préoccupations quant à son impact sur leur développement. Voici quelques points à

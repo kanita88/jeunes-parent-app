@@ -415,11 +415,11 @@
 			};
 			buildConfigurationList = 695AA19E2CB6768400D64E06 /* Build configuration list for PBXProject "jeunesParents" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				fr,
 			);
 			mainGroup = 695AA19A2CB6768400D64E06;
 			productRefGroup = 695AA1A42CB6768400D64E06 /* Products */;

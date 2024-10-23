@@ -108,64 +108,71 @@ struct FormView : View {
                         .pickerStyle(SegmentedPickerStyle())
                         .tint(.blue)
                     }
-                    
-                    Button(action: {
-                        // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
-                        let formattedDate = formatDate(dateDeNaissance)
-                        
-                        // Création d'un nouvel objet Parent
-                        let newParent = Parent(
-                            id: UUID(), // ID généré automatiquement
-                            nom: nom,
-                            prenom: prenom,
-                            dateDeNaissance: formattedDate, // Date formatée
-                            motDePasse: motDePasse,
-                            motDePasseConfirmation : motDePasseConfirmation,
-                            premiereExperienceParentale: premiereExperienceParentale,
-                            enCouple: enCouple)
-                        
-                        // Appel de la méthode d'ajout dans le ViewModel
-                        parentViewModel.addParent(newParent)
-                        
-                        // Ferme la vue après l'ajout
-                        presentationMode.wrappedValue.dismiss()
-                        
-                        navigateToGrossesse = true // Active la navigation vers la vue Grossesse
-                    }){
-                        
-                       
-                        Text("Création")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.accentColor)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                        
-                    }
-                
-              
-                // Navigation vers la vue Grossesse
-                        NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
-                            EmptyView() // Ce lien est déclenché par la variable navigateToGrossesse
-                                }
-                    
                 }
                 
-                .disableAutocorrection(true)
-                .scrollContentBackground(.hidden)
+                Button(action: {
+                    // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
+                    //                        let formattedDate = formatDate(dateDeNaissance)
+                    //
+                    //                        // Création d'un nouvel objet Parent
+                    //                        let newParent = Parent(
+                    //                            id: UUID(), // ID généré automatiquement
+                    //                            nom: nom,
+                    //                            prenom: prenom,
+                    //                            dateDeNaissance: formattedDate, // Date formatée
+                    //                            motDePasse: motDePasse,
+                    //                            motDePasseConfirmation : motDePasseConfirmation,
+                    //                            premiereExperienceParentale: premiereExperienceParentale,
+                    //                            enCouple: enCouple)
+                    
+                    // Appel de la méthode d'ajout dans le ViewModel
+                    parentViewModel.addParent(id: UUID(),
+                                              nom: nom,
+                                              prenom: prenom,
+                                              dateDeNaissance: formatDate(dateDeNaissance),
+                                              motDePasse: motDePasse,
+                                              motDePasseConfirmation : motDePasseConfirmation,
+                                              premiereExperienceParentale: premiereExperienceParentale,
+                                              enCouple: enCouple)
+                    
+                    // Ferme la vue après l'ajout
+                    presentationMode.wrappedValue.dismiss()
+                    
+                    navigateToGrossesse = true // Active la navigation vers la vue Grossesse
+                }){
+                    
+                    
+                    Text("Création")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+                
+                
+                
+                // Navigation vers la vue Grossesse
+                NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
+                    EmptyView() // Ce lien est déclenché par la variable navigateToGrossesse
+                }
+                
             }
             
-            
-            
+            .disableAutocorrection(true)
+            .scrollContentBackground(.hidden)
         }
+        
+        
+        
     }
-    
+}
 
-    
-    #Preview {
-        FormView()
-    }
-    
+
+
+#Preview {
+    FormView()
+}
+
 

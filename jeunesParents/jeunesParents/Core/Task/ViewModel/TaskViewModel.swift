@@ -69,7 +69,7 @@ class TaskViewModel: ObservableObject {
                                 let newTask = try decoder.decode(Task.self, from: data)
                                 print(newTask)
                                 DispatchQueue.main.async {
-                                    self.tasks.append(newTask) // Mise à jour de la liste des tâches
+                                    self.tasks.insert(newTask, at: 0) // Mise à jour de la liste des tâches
                                 }
                             } catch {
                                 print("Erreur lors du décodage de la tâche : \(error.localizedDescription)")
@@ -84,7 +84,6 @@ class TaskViewModel: ObservableObject {
                     }
                 }
             }.resume()
-            fetchTasks()
         } catch {
             print("Erreur d'encodage de la tâche : \(error.localizedDescription)")
         }

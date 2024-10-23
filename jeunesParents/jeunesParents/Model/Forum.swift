@@ -13,15 +13,17 @@ class Forum : Identifiable {
     var theme : String
     var publicationDate : Date
     var description : String
-    var comment : [String]
+    var comments : [Comment]
     var resolu : Bool
+    var category : String
     
-    init(title: String, theme: String, publicationDate: Date, description: String, comment: [String], resolu: Bool) {
+    init(title: String, theme: String, publicationDate: Date, description: String, comments: [Comment], resolu: Bool, category: String) {
         self.title = title
         self.theme = theme
         self.publicationDate = publicationDate
         self.description = description
-        self.comment = comment
+        self.comments = comments
         self.resolu = resolu
+        self.category = category
     }
 }

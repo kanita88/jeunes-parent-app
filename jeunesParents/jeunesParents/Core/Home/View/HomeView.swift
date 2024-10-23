@@ -31,7 +31,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-
+            
             HStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -78,59 +78,63 @@ struct HomeView: View {
                     .foregroundColor(.gray)
             }
             //Ajouter une tâche
-                VStack {
-                    if taskViewModel.tasks.isEmpty {
-                        Text("Aucune tâche ajoutée.")
-                            .foregroundColor(.gray)
-                            .padding()
-                    } else {
-                        List {
-                            ForEach(taskViewModel.tasks) { task in
-                                HStack {
-                                    Text(task.nom)
-                                        .font(.headline)
-                                    Spacer()
-                                    Button(action: {
-                                        taskViewModel.updateTask(Task(id: task.id, nom: task.nom, tache: task.tache, completed: !task.completed))
-                                    }) {
-                                        Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
-                                            .foregroundColor(task.completed ? .green : .gray)
-                                    }
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Ma journée")
+                        .font(.title2)
+                        .bold()
+                    
+                    Spacer()
+                    
+                    // Bouton d'ajout avec l'icône "plus"
+                    Button(action: {
+                        showingAddTaskView = true
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                    }
+                }
+                
+                if taskViewModel.tasks.isEmpty {
+                    Text("Aucune tâche ajoutée.")
+                        .foregroundColor(.gray)
+                        .padding()
+                } else {
+                    List {
+                        ForEach(taskViewModel.tasks) { task in
+                            HStack {
+                                Text(task.nom)
+                                    .font(.headline)
+                                Spacer()
+                                Button(action: {
+                                    taskViewModel.updateTask(Task(id: task.id, nom: task.nom, tache: task.tache, completed: !task.completed))
+                                }) {
+                                    Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+                                        .foregroundColor(task.completed ? .green : .gray)
                                 }
                             }
-                            .onDelete(perform: deleteTask)
                         }
-                        .listStyle(PlainListStyle())
+                        .onDelete(perform: deleteTask)
                     }
+                    .listStyle(PlainListStyle())
                 }
-                .toolbar (content:{
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("Ma journée : ")
-                            .font(.title2)
-                            .bold()
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            showingAddTaskView = true
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title)
-                        }
-                    }
-                })
-                .sheet(isPresented: $showingAddTaskView) {
-                    TaskAddView(taskViewModel: taskViewModel)
-                }
-                .onAppear {
-                    taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
-                }
+            }
+            .padding()
+            .sheet(isPresented: $showingAddTaskView) {
+                TaskAddView(taskViewModel: taskViewModel)
+            }
+            .onAppear {
+                taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
+            }
             
-            Divider()
-                .frame(height: 4)
-                .overlay(.blue)
-                .padding()
             // Section des recommandations
-            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Recommandation : ")
+                        .font(.title2)
+                        .bold()
+                }
                 List(articles) { article in
                     HStack {
                         AsyncImage(url: URL(string: article.imageURL)) { phase in
@@ -170,19 +174,14 @@ struct HomeView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("Recommandation : ")
-                            .font(.title2)
-                            .bold()
-                    }
-                }
-                .sheet(isPresented: $showingArticleDetail) {
-                    // Contenu de la modal (pour le moment juste "Hello")
-                    Text("Hello")
-                        .font(.largeTitle)
-                        .padding()
-                }
+            }
+            .padding()
+            .sheet(isPresented: $showingArticleDetail) {
+                // Contenu de la modal (pour le moment juste "Hello")
+                Text("Hello")
+                    .font(.largeTitle)
+                    .padding()
+            }
         }
     }
     // Suppression via glissement

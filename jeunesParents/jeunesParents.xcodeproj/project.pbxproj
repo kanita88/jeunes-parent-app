@@ -17,6 +17,7 @@
 		695AA1AE2CB6768500D64E06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */; };
 		696AC4B32CC87A8100EB0FFA /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696AC4B22CC87A7E00EB0FFA /* TaskEditView.swift */; };
 		696AC4B52CC884BA00EB0FFA /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696AC4B42CC884AE00EB0FFA /* TaskDetailView.swift */; };
+		696AC5192CC99E7500EB0FFA /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696AC5182CC99E6700EB0FFA /* Article.swift */; };
 		69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A04E2CC261FC006A88A5 /* Task.swift */; };
 		69C5A0542CC2690E006A88A5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A0532CC2690E006A88A5 /* HomeView.swift */; };
 		69C5A05B2CC65CA7006A88A5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A05A2CC65CA7006A88A5 /* HomeViewModel.swift */; };
@@ -54,6 +55,7 @@
 		695AA1AD2CB6768500D64E06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		696AC4B22CC87A7E00EB0FFA /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		696AC4B42CC884AE00EB0FFA /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		696AC5182CC99E6700EB0FFA /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		69C5A04E2CC261FC006A88A5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		69C5A0532CC2690E006A88A5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		69C5A05A2CC65CA7006A88A5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		69C5A04D2CC261C5006A88A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				696AC5182CC99E6700EB0FFA /* Article.swift */,
 				619B1E312CC2AC5B009A06C3 /* ConditionMedicalRegister.swift */,
 				619B1E2F2CC2A67A009A06C3 /* Enfant.swift */,
 				69C5A04E2CC261FC006A88A5 /* Task.swift */,
@@ -483,6 +486,7 @@
 				696AC4B32CC87A8100EB0FFA /* TaskEditView.swift in Sources */,
 				696AC4B52CC884BA00EB0FFA /* TaskDetailView.swift in Sources */,
 				70F96BEC2CC7A8EC002BB95D /* TabBarView.swift in Sources */,
+				696AC5192CC99E7500EB0FFA /* Article.swift in Sources */,
 				619B1E2A2CC294A2009A06C3 /* Parent.swift in Sources */,
 				619B1E302CC2A68C009A06C3 /* Enfant.swift in Sources */,
 				A56D87B02CC83C980096BDBA /* SearchView.swift in Sources */,

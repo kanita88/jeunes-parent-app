@@ -129,9 +129,8 @@ struct FormView : View {
                     parentViewModel.addParent(id: UUID(),
                                               nom: nom,
                                               prenom: prenom,
-                                              dateDeNaissance: formatDate(dateDeNaissance),
-                                              motDePasse: motDePasse,
-                                              motDePasseConfirmation : motDePasseConfirmation,
+                                              dateDeNaissance: dateDeNaissance,
+                                              motDePasse: motDePasse, motDePasseConfirmation: motDePasseConfirmation,
                                               premiereExperienceParentale: premiereExperienceParentale,
                                               enCouple: enCouple)
                     

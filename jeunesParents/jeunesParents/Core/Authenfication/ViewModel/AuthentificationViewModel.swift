@@ -9,8 +9,8 @@ class AuthentificationViewModel: ObservableObject {
     @Published var profileImage: UIImage? // Stocke l'image de profil sélectionnée
     @Published var isUploading = false
     @Published var uploadSuccess = false
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var email: String = "emilie.petit@example.com"
+    @Published var password: String = "emilie1234"
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false

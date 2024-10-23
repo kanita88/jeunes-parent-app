@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var selectedTab: Tab = .myday
     @ObservedObject var taskViewModel = TaskViewModel()
     @State private var showingAddTaskView = false
+    @State private var showingEditTaskView = false
     @State private var selectedTask: Task?
     @State private var showEditTaskSheet = false
     @State private var showingTaskDetailView = false
@@ -103,6 +104,7 @@ struct HomeView: View {
                     List {
                         ForEach(taskViewModel.tasks) { task in
                             HStack {
+                                Image(systemName: "pencil.and.list.clipboard")
                                 Text(task.nom)
                                     .font(.headline)
                                 Spacer()
@@ -113,8 +115,24 @@ struct HomeView: View {
                                         .foregroundColor(task.completed ? .green : .gray)
                                 }
                             }
-                        }
-                        .onDelete(perform: deleteTask)
+                            // Ajouter les actions "Éditer" et "Supprimer" via glissement
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    taskViewModel.deleteTask(task)
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                                
+                                Button {
+                                    selectedTask = task  // Sélectionner la tâche à éditer
+                                    print("Selected task: \(task.nom)")
+                                    showingEditTaskView = true  // Afficher la vue d'édition
+                                } label: {
+                                    Label("Éditer", systemImage: "pencil")
+                                }
+                                .tint(.blue)  // Changer la couleur du bouton "Éditer"
+                            }
+                        }//.onDelete(perform: deleteTask)
                     }
                     .listStyle(PlainListStyle())
                 }
@@ -122,6 +140,11 @@ struct HomeView: View {
             .padding()
             .sheet(isPresented: $showingAddTaskView) {
                 TaskAddView(taskViewModel: taskViewModel)
+            }
+            .sheet(isPresented: $showingEditTaskView) {
+                if let selectedTask = selectedTask {
+                    TaskEditView(taskViewModel: taskViewModel, task: selectedTask)
+                }
             }
             .onAppear {
                 taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
@@ -136,6 +159,7 @@ struct HomeView: View {
                 }
                 List(articles) { article in
                     HStack {
+                        Image(systemName: "list.star")
                         AsyncImage(url: URL(string: article.imageURL)) { phase in
                             if let image = phase.image {
                                 image
@@ -163,7 +187,6 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        // Bouton pour ouvrir la modal avec un simple message "Hello"
                         Button(action: {
                             showingArticleDetail = true // Ouvrir la feuille modale
                         }) {

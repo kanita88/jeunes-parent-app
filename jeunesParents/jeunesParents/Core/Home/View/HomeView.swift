@@ -16,7 +16,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            //profil et notification
+
             HStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -52,7 +52,7 @@ struct HomeView: View {
             .cornerRadius(25)
             .shadow(radius: 5)
             
-            // affiche l'emoji sélectionné ou un message par défaut
+            
             if let smile = viewModel.selectSmile {
                 Text("Votre humeur du jour : \(viewModel.emojiText(index: smile))")
                     .font(.headline)
@@ -94,7 +94,7 @@ struct HomeView: View {
                 }
             }
         }
-            // Section des recommandations
+
         HStack() {
             Text("Recommandation :")
                 .font(.headline)

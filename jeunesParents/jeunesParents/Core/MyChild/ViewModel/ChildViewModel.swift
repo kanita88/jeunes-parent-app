@@ -1,7 +1,5 @@
-import Foundation
-import UIKit
 import Combine
-import SwiftUI
+import UIKit
 
 class ChildViewModel: ObservableObject {
     @Published var enfant: Enfant?
@@ -13,81 +11,99 @@ class ChildViewModel: ObservableObject {
     @Published var developmentCards: [DevelopmentCard] = []
     @Published var childAge: Int = 2
     
-    private var cancellables = Set<AnyCancellable>() // Pour gérer les abonnements Combine
-    private let childService = ChildService() // Instance du service pour récupérer les cartes
+    private var cancellables = Set<AnyCancellable>()
+    private let childService = ChildService()
     
+    // Fonction pour ajouter un enfant
+    func addEnfant(_ newEnfant: Enfant) {
+        // Vous pouvez ici définir la logique pour ajouter l'enfant.
+        // Par exemple, vous pourriez l'envoyer à une API ou simplement l'assigner localement.
+        enfant = newEnfant
+    }
     
     // Fonction pour récupérer les données de l'enfant via l'API
     func fetchChildData(parentId: UUID) {
-        // Réinitialiser les états précédents
         isLoading = true
         errorMessage = nil
-        uploadSuccess = false
-        
-        ChildService.shared.fetchChildData(parentId: parentId) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                switch result {
-                case .success(let enfant):
-                    self?.enfant = enfant
-                    self?.errorMessage = nil  // Réinitialiser le message d'erreur
+        childService.fetchChildData(parentId: parentId)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
                 case .failure(let error):
                     self?.errorMessage = "Échec du chargement : \(error.localizedDescription)"
+                    self?.isLoading = false
+                case .finished:
+                    self?.isLoading = false
                 }
+            } receiveValue: { [weak self] enfant in
+                self?.enfant = enfant
             }
-        }
+            .store(in: &cancellables)
     }
+    
     
     // Fonction pour uploader la photo de profil de l'enfant
     func uploadProfileImage() {
-        // Validation des données avant l'upload
         guard let enfant = enfant, let image = profileImage else {
             errorMessage = "Données manquantes"
             return
         }
         
-        // Réinitialiser les états précédents
         isLoading = true
         errorMessage = nil
-        uploadSuccess = false
         
-        ChildService.shared.uploadProfileImage(forChildId: enfant.id.uuidString, image: image) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                switch result {
-                case .success:
-                    self?.uploadSuccess = true
-                    self?.errorMessage = nil  // Réinitialiser le message d'erreur
+        childService.uploadProfileImage(forChildId: enfant.id.uuidString, image: image)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
                 case .failure(let error):
                     self?.uploadSuccess = false
                     self?.errorMessage = "Échec de l'upload : \(error.localizedDescription)"
+                case .finished:
+                    self?.uploadSuccess = true
+                    self?.errorMessage = nil
                 }
-            }
-        }
-    }
-    
-    // Fonction pour réinitialiser l'état du succès d'upload après affichage d'un feedback
-    func resetUploadState() {
-        uploadSuccess = false
+                self?.isLoading = false
+            } receiveValue: { _ in }
+            .store(in: &cancellables)
     }
     
     // Fonction pour récupérer les cartes de développement depuis le service
     func fetchDevelopmentCards() {
-        // Appeler le service et annoter explicitement le type du résultat
-        childService.fetchDevelopmentCards { [weak self] (result: Result<[DevelopmentCard], Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let cards):
-                    self?.developmentCards = cards // Mettre à jour les cartes si tout va bien
+        isLoading = true
+        errorMessage = nil
+        childService.fetchDevelopmentCards()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
                 case .failure(let error):
                     self?.errorMessage = "Erreur lors de la récupération des cartes : \(error.localizedDescription)"
+                case .finished:
+                    self?.isLoading = false
                 }
+            } receiveValue: { [weak self] cards in
+                self?.developmentCards = cards
             }
-        }
+            .store(in: &cancellables)
     }
     
-    // Filtrer les cartes en fonction de l'âge de l'enfant
-    func filteredCards() -> [DevelopmentCard] {
-        return developmentCards.filter { $0.ageRange.contains(childAge) }
+    // Méthode pour récupérer les données de l'enfant et du parent
+    func fetchChildAndParentData(parentId: UUID) {
+        isLoading = true
+        childService.fetchChildAndParentData(parentId: parentId)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.errorMessage = "Échec du chargement : \(error.localizedDescription)"
+                    self?.isLoading = false
+                case .finished:
+                    self?.isLoading = false
+                }
+            } receiveValue: { [weak self] childData in
+                self?.enfant = childData.enfant
+                self?.parentName = childData.parentName
+            }
+            .store(in: &cancellables)
     }
 }

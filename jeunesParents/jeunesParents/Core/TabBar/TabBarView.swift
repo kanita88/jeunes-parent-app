@@ -26,14 +26,14 @@ struct TabBarView: View {
                 }
                 .tag(Tab.home)
             
-            MyChildView()
+//            MyChildView()
                 .tabItem {
                     Image(systemName: Tab.appointment.rawValue)
                     Text("Rendez-vous")
                 }
                 .tag(Tab.appointment)
             
-      PourMoiView()
+//      PourMoiView()
 
              .tabItem {
                     Image(systemName: Tab.favorite.rawValue)
@@ -41,14 +41,14 @@ struct TabBarView: View {
                 }
                 .tag(Tab.favorite)
             
-            UserProfileView()
+//            UserProfileView()
                 .tabItem {
                     Image(systemName: Tab.profile.rawValue)
                     Text("Profil")
                 }
                 .tag(Tab.profile)
         }
-        .tint(.hmBlue)
+//        .tint(.hmBlue)
     }
 }
 

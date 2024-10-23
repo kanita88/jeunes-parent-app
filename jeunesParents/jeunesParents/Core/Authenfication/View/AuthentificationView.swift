@@ -79,6 +79,7 @@ struct AuthentificationView: View {
             // Navigation conditionnelle vers la HomeView lorsque l'utilisateur est authentifié
             .navigationDestination(isPresented: $authViewModel.isAuthenticated) {
                 MainTabView()
+                    .navigationBarBackButtonHidden(true)
             }
             Spacer()
             HStack {
@@ -87,7 +88,6 @@ struct AuthentificationView: View {
                     Text("Inscrivez-vous").bold()
                         .foregroundStyle(Color.primaire)
                 }
-                .navigationBarBackButtonHidden(true)
             }
         }
         .padding()

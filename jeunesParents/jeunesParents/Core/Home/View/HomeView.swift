@@ -133,7 +133,6 @@ struct HomeView: View {
                 .padding()
             // Section des recommandations
             
-            NavigationView {
                 List(articles) { article in
                     HStack {
                         AsyncImage(url: URL(string: article.imageURL)) { phase in
@@ -186,7 +185,6 @@ struct HomeView: View {
                         .font(.largeTitle)
                         .padding()
                 }
-            }
         }
     }
     // Suppression via glissement

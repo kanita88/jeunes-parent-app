@@ -11,19 +11,18 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
-    @ObservedObject var taskviewModel = TaskViewModel()
-    @State private var selectedTab: Tab = .myday
     @ObservedObject var taskViewModel = TaskViewModel()
+    @StateObject var articleViewModel = ArticleViewModel()
+    @State private var selectedTab: Tab = .myday
     @State private var showingAddTaskView = false
+    @State private var showingEditTaskView = false
     @State private var selectedTask: Task?
     @State private var showEditTaskSheet = false
     @State private var showingTaskDetailView = false
     @State private var showingArticleDetail = false
     
-    
     var body: some View {
         VStack {
-            
             HStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -96,6 +95,7 @@ struct HomeView: View {
                     List {
                         ForEach(taskViewModel.tasks) { task in
                             HStack {
+                                Image(systemName: "pencil.and.list.clipboard")
                                 Text(task.nom)
                                     .font(.headline)
                                 Spacer()
@@ -106,8 +106,33 @@ struct HomeView: View {
                                         .foregroundColor(task.completed ? .green : .gray)
                                 }
                             }
-                        }
-                        .onDelete(perform: deleteTask)
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    selectedTask = task  // Sélectionner la tâche à éditer
+                                    print("Selected task: \(selectedTask?.nom ?? "None")")
+                                    showingTaskDetailView = true  // Afficher la vue détal
+                                } label: {
+                                    Label("Détail", systemImage: "info.circle")
+                                }.tint(.blue)
+                            }
+                            // Ajouter les actions "Éditer" et "Supprimer" via glissement
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    taskViewModel.deleteTask(task)
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                                
+                                Button {
+                                    selectedTask = task  // Sélectionner la tâche à éditer
+                                    print("Selected task: \(task.nom)")
+                                    showingEditTaskView = true  // Afficher la vue d'édition
+                                } label: {
+                                    Label("Éditer", systemImage: "pencil")
+                                }
+                                .tint(.blue)  // Changer la couleur du bouton "Éditer"
+                            }
+                        }//.onDelete(perform: deleteTask)
                     }
                     .listStyle(PlainListStyle())
                 }
@@ -115,6 +140,16 @@ struct HomeView: View {
             .padding()
             .sheet(isPresented: $showingAddTaskView) {
                 TaskAddView(taskViewModel: taskViewModel)
+            }
+            .sheet(isPresented: $showingEditTaskView) {
+                if let selectedTask = selectedTask {
+                    TaskEditView(taskViewModel: taskViewModel, task: selectedTask)
+                }
+            }
+            .sheet(isPresented: $showingTaskDetailView) {
+                if let selectedTask = selectedTask {
+                    TaskDetailView(task: selectedTask)
+                }
             }
             .onAppear {
                 taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
@@ -127,7 +162,48 @@ struct HomeView: View {
                         .font(.title2)
                         .bold()
                 }
-               
+                List(articleViewModel.articles) { article in
+                    HStack {
+                        Image(systemName: "list.star")
+                        AsyncImage(url: URL(string: article.imageURL)) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 70, height: 70)
+                                    .clipShape(Circle())
+                            } else if phase.error != nil {
+                                Text("Erreur d'image")
+                                    .foregroundColor(.red)
+                                    .frame(width: 70, height: 70)
+                            } else {
+                                ProgressView()
+                                    .frame(width: 70, height: 70)
+                            }
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text(article.title)
+                                .font(.headline)
+                            Text(article.description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showingArticleDetail = true // Ouvrir la feuille modale
+                        }) {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                }
+                .listStyle(PlainListStyle())
+                .onAppear {
+                    articleViewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
+                }
             }
             .padding()
             .sheet(isPresented: $showingArticleDetail) {

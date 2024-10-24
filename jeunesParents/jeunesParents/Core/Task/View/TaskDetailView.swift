@@ -21,10 +21,10 @@ struct TaskDetailView: View {
             Text(task.tache)
                 .font(.body)
 
-            Text("ID Parent")
-                .font(.headline)
-            Text(task.id_parent?.uuidString ?? "Aucun parent")
-                .font(.body)
+//            Text("Nom du parent")
+//                .font(.headline)
+//            Text(task.id_parent?.uuidString ?? "Aucun parent")
+//                .font(.body)
 
             Text("Statut")
                 .font(.headline)

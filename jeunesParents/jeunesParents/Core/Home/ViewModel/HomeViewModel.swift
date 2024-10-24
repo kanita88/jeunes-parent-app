@@ -12,10 +12,10 @@ class HomeViewModel: ObservableObject {
     @Published var selectSmile: Int? = nil
     
     // Exécuter une action lors de la sélection d'un émoji
-       func moodSelected(index: Int) {
-           selectSmile = index
-       }
-
+    func moodSelected(index: Int) {
+        selectSmile = index
+    }
+    
     // Retourner l'emoji correspondant à chaque index
     func emojiText(index: Int) -> String {
         switch index {
@@ -26,5 +26,4 @@ class HomeViewModel: ObservableObject {
         default: return "🙂"
         }
     }
-    
 }

@@ -291,17 +291,17 @@ struct ArticleDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Divider()
-            ForEach(article.comments) { comment in
-                HStack {
-                    Text(comment.username)
-                        .fontWeight(.semibold)
-                    Text(comment.content)
-                }
+//            ForEach(article.comments) { comment in
+//                HStack {
+//                    Text(comment.username)
+//                        .fontWeight(.semibold)
+//                    Text(comment.content)
+//                }
                 Divider()
             }
         }
     }
-}
+
 
 func formatDate(_ date: Date) -> String {
     let dateFormatter = DateFormatter()

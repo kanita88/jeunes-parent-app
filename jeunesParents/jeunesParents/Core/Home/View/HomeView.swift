@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
+    @StateObject var articleViewModel = ArticleViewModel()
     @State private var selectedTab: Tab = .myday
     @State private var showingAddTaskView = false
     @State private var showingEditTaskView = false
@@ -161,7 +162,7 @@ struct HomeView: View {
                         .font(.title2)
                         .bold()
                 }
-                List(viewModel.articles) { article in
+                List(articleViewModel.articles) { article in
                     HStack {
                         Image(systemName: "list.star")
                         AsyncImage(url: URL(string: article.imageURL)) { phase in
@@ -201,7 +202,7 @@ struct HomeView: View {
                 }
                 .listStyle(PlainListStyle())
                 .onAppear {
-                    viewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
+                    articleViewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
                 }
             }
             .padding()

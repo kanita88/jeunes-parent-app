@@ -7,15 +7,10 @@
 
 import Foundation
 
-class Comment: Identifiable {
-    let id = UUID()
+struct Comment: Identifiable, Codable {
+    let id : UUID?
+    var articleId: UUID?
     var content: String
     var username: String
     var publicationDate: Date
-
-    init(content: String, username: String, publicationDate: Date) {
-        self.content = content
-        self.username = username
-        self.publicationDate = publicationDate
-    }
 }

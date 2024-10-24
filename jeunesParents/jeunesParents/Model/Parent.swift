@@ -14,7 +14,7 @@ struct Parent: Identifiable, Codable {
     var nom: String
     var prenom: String
     var dateDeNaissance: Date?
-    var motDePasse: String
+    var motDePasse: String?
     var premiereExperienceParentale: Bool
     var enCouple: Bool
     var enfants: [Enfant] = []  // Tableau vide par défaut

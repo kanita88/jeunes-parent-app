@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GrossesseView : View {
+struct GrossesseView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var grossesseViewModel = GrossesseViewModel()
@@ -14,6 +14,10 @@ struct GrossesseView : View {
     
     // Variable pour activer la navigation après validation
     @State private var navigateToEnfant = false
+    
+    // Variables pour afficher les messages d'erreur
+    @State private var modeAccouchementError = ""
+    @State private var conditionsMedicalesError = ""
     
     let modesAccouchement = ["Naturel", "Césarienne", "Indécis"]
     let conditionsMedicaless = ["Hypertension", "Diabète gestationnel", "Précédente césarienne"]
@@ -33,6 +37,27 @@ struct GrossesseView : View {
     // Fonction pour calculer la date d'accouchement (280 jours après la date des dernières menstruations)
     func calculerDateAccouchement(dateMenstruation: Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 280, to: dateMenstruation) ?? Date()
+    }
+    
+    // Validation des champs
+    func validateFields() -> Bool {
+        var isValid = true
+        
+        // Réinitialiser les erreurs
+        modeAccouchementError = ""
+        conditionsMedicalesError = ""
+        
+        if modeAccouchement.isEmpty {
+            modeAccouchementError = "Veuillez sélectionner un mode d'accouchement."
+            isValid = false
+        }
+        
+        if conditionsMedicales.isEmpty {
+            conditionsMedicalesError = "Veuillez sélectionner une condition médicale."
+            isValid = false
+        }
+        
+        return isValid
     }
     
     var body: some View {
@@ -83,6 +108,11 @@ struct GrossesseView : View {
                                 Text(mode).tag(mode)
                             }
                         }
+                        if !modeAccouchementError.isEmpty {
+                            Text(modeAccouchementError)
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
                     }
                     
                     // Conditions médicales
@@ -92,34 +122,36 @@ struct GrossesseView : View {
                                 Text(conditions).tag(conditions)
                             }
                         }
+                        if !conditionsMedicalesError.isEmpty {
+                            Text(conditionsMedicalesError)
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
                     }
                     
                     // Bouton de validation
                     Button(action: {
-                        // Utilisation de la fonction formatDate pour convertir la date en String
-                        let formattedDateMenstruation = formatDate(dateMenstruation)
-                        let formattedDateConception = formatDate(dateConception)
-                        let formattedDateAccouchement = formatDate(dateAccouchement)
-                        
-                        // Utilisation dans l'initialisation de l'objet Grossesse
-                        let newGrossesse = Grossesse(
-                            id: UUID(),
-                            dateMenstruation: dateMenstruation,
-                            dateConception: dateConception,
-                            dateAccouchement: dateAccouchement,
-                            grossesseMultiple: grossesseMultiple,
-                            modeAccouchement: modeAccouchement,
-                            conditionsMedicales: conditionsMedicales
-                        )
-                        
-                        grossesseViewModel.addGrossesse(newGrossesse)
-                        navigateToEnfant = true
+                        // Validation des champs avant l'ajout
+                        if validateFields() {
+                            let newGrossesse = Grossesse(
+                                id: UUID(),
+                                dateMenstruation: dateMenstruation,
+                                dateConception: dateConception,
+                                dateAccouchement: dateAccouchement,
+                                grossesseMultiple: grossesseMultiple,
+                                modeAccouchement: modeAccouchement,
+                                conditionsMedicales: conditionsMedicales
+                            )
+                            
+                            grossesseViewModel.addGrossesse(newGrossesse)
+                            navigateToEnfant = true
+                        }
                     }) {
                         Text("Valider")
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.accentColor)
+                            .background(Color.primaire)
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }

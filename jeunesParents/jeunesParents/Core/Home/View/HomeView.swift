@@ -21,14 +21,6 @@ struct HomeView: View {
     @State private var showingArticleDetail = false
     
     
-    let articles: [Article] = [
-        Article(title: "Conseils pour le sommeil des bébés", description: "Découvrez des astuces pour aider votre bébé à mieux dormir.", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqk4dN-wIWibqC2KpmCRKpOWTyxE_MKIY7OA&s"),
-        Article(title: "Alimentation des nouveaux-nés", description: "Les meilleures pratiques pour nourrir votre nouveau-né.", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-V7yb02uKAjYWOGAxi4aQLqc-QevvihbXWw&s"),
-        Article(title: "Les indispensables pour jeunes parents", description: "Les objets à avoir absolument pour bien commencer avec votre bébé.", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS39QMDS5LiHLKXqq4O-MhINUTidw0FF3GvqQ&s"),
-        Article(title: "Comment gérer les pleurs de bébé", description: "Comprendre et calmer les pleurs de votre bébé.", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtko33YgIMB86-QRtBos8KGLmyxniY-fTpeg&s"),
-        Article(title: "Activités à faire avec votre enfant", description: "Idées d'activités amusantes pour renforcer les liens avec votre enfant.", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMP6IaSdTrWlAtqjrh6j-Xy8arYiTnByUdhg&s")
-    ]
-    
     var body: some View {
         VStack {
             
@@ -135,45 +127,7 @@ struct HomeView: View {
                         .font(.title2)
                         .bold()
                 }
-                List(articles) { article in
-                    HStack {
-                        AsyncImage(url: URL(string: article.imageURL)) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 70, height: 70)
-                                    .clipShape(Circle())
-                            } else if phase.error != nil {
-                                Text("Erreur d'image")
-                                    .foregroundColor(.red)
-                                    .frame(width: 70, height: 70)
-                            } else {
-                                ProgressView()
-                                    .frame(width: 70, height: 70)
-                            }
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text(article.title)
-                                .font(.headline)
-                            Text(article.description)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        
-                        Spacer()
-                        
-                        // Bouton pour ouvrir la modal avec un simple message "Hello"
-                        Button(action: {
-                            showingArticleDetail = true // Ouvrir la feuille modale
-                        }) {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                .listStyle(PlainListStyle())
+               
             }
             .padding()
             .sheet(isPresented: $showingArticleDetail) {

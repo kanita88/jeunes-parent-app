@@ -108,7 +108,7 @@ class ChildViewModel: ObservableObject {
     }
     // Fonction pour filtrer les cartes en fonction de l'âge de l'enfant
     func filteredCards() -> [DevelopmentCard] {
-        guard let enfant = enfant else { return [] } // S'assurer que les données de l'enfant existent
+        guard enfant != nil else { return [] } // S'assurer que les données de l'enfant existent
         return developmentCards.filter { $0.ageRange.contains(childAge) }
     }
 }

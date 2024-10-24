@@ -19,11 +19,3 @@ struct Task: Identifiable, Codable {
 extension Task {
     static var Model_Task = Task(nom: "", tache: "", completed: Bool())
 }
-
-//Modèle article
-struct Article: Identifiable {
-    let id = UUID()
-    let title: String
-    let description: String
-    let imageURL: String
-}

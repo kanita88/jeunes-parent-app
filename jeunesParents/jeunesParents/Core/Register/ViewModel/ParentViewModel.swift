@@ -5,112 +5,77 @@
 //  Created by Apprenant 142 on 21/10/2024.
 //
 import SwiftUI
+import Combine
 
 
 class ParentViewModel: ObservableObject {
+    
+    // Publie les changements pour réagir dans la vue
     @Published var parents: [Parent] = []
+    @Published var errorMessage: String?
+    @Published var isLoading = false
     
-    private let baseURL: String = "http://10.80.55.104:3000/User"
+    private var cancellables = Set<AnyCancellable>()
     
-    // Récupérer tous les parents du serveur
-    func fetchParent() {
-        guard let url = URL(string: baseURL) else {
-            print("Invalid URL")
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let decodedUsers = try JSONDecoder().decode([Parent].self,from: data)
-                    DispatchQueue.main.async {
-                        self.parents = decodedUsers
-                    }
-                } catch {
-                    print("Error decoding data: \(error)")
+    // Méthode pour ajouter un parent
+    func addParent(id: UUID, nom: String, prenom: String, dateDeNaissance: Date, motDePasse: String, premiereExperienceParentale: Bool, enCouple: Bool) {
+        
+        // Création d'un objet Parent
+        let newParent = Parent(
+            id: UUID(), // Génération automatique d'un UUID
+            nom: nom,
+            prenom: prenom,
+            dateDeNaissance: dateDeNaissance, // On passe directement la date
+            motDePasse: motDePasse,
+            premiereExperienceParentale: premiereExperienceParentale,
+            enCouple: enCouple
+        )
+        
+        // Simuler l'enregistrement des données (via une API ou une base de données locale)
+        saveParentToDatabase(parent: newParent) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.parents.append(newParent)  // Ajouter le parent à la liste locale
+                case .failure(let error):
+                    self?.errorMessage = "Erreur lors de l'enregistrement: \(error.localizedDescription)"
                 }
-                
-            } else if let error = error {
-                print("error fetching data: \(error)")
+                self?.isLoading = false
             }
-            
-        }.resume()
+        }
     }
     
-    
-    // Ajouter un nouveau parent sur le serveur
-    func addParent(_ parent: Parent) {
-            guard let url = URL(string: baseURL) else {
-                print("Invalid URL")
-                return
-            }
-
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            do {
-                let data = try JSONEncoder().encode(parent)
-                request.httpBody = data
-            } catch {
-                print("Error encoding contact: \(error)")
-                return
-            }
-
+    // Exemple de fonction pour enregistrer les données dans une base ou une API
+    func saveParentToDatabase(parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let url = URL(string: "http://127.0.0.1:8080/parent") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let jsonData = try JSONEncoder().encode(parent)
+            request.httpBody = jsonData
+            
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    print("Error adding contact: \(error)")
+                    completion(.failure(error))
                     return
                 }
-                self.fetchParent()
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    completion(.failure(NSError(domain: "Invalid response", code: 0, userInfo: nil)))
+                    return
+                }
+                
+                completion(.success(()))
             }.resume()
+            
+        } catch {
+            completion(.failure(error))
         }
-    
-    // Mettre à jour un parent existant sur le serveur
-       func updateParent(_ parent: Parent) {
-           guard let url = URL(string: "\(baseURL)/\(parent.id)") else {
-               print("URL invalide")
-               return
-           }
-
-           var request = URLRequest(url: url)
-           request.httpMethod = "PUT"
-           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-           do {
-               let data = try JSONEncoder().encode(parent)
-               request.httpBody = data
-           } catch {
-               print("Erreur lors de l'encodage de l'utilisateur : \(error)")
-               return
-           }
-
-           URLSession.shared.dataTask(with: request) { data, response, error in
-               if let error = error {
-                   print("Erreur lors de la mise à jour de l'utilisateur : \(error)")
-                   return
-               }
-               self.fetchParent()  // Rafraîchir la liste après la mise à jour
-           }.resume()
-       }
-
-       // Supprimer un parent du serveur
-       func deleteParent(_ parentId: Int) {
-           guard let url = URL(string: "\(baseURL)/\(parentId)") else {
-               print("URL invalide")
-               return
-           }
-
-           var request = URLRequest(url: url)
-           request.httpMethod = "DELETE"
-
-           URLSession.shared.dataTask(with: request) { data, response, error in
-               if let error = error {
-                   print("Erreur lors de la suppression de l'utilisateur : \(error)")
-                   return
-               }
-               self.fetchParent()  // Rafraîchir la liste après suppression
-           }.resume()
-       }
-    
-    
-    
+    }
 }
-

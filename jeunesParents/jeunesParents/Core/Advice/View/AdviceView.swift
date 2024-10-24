@@ -28,6 +28,9 @@ struct AdviceView: View {
                     
                     ArticleList(articleViewModel: articleViewModel, selectedCategory: selectedCategory)
                 }
+                .onAppear {
+                    articleViewModel.fetchArticles()
+                }
             }
             .navigationTitle("Conseils")
         }
@@ -221,7 +224,7 @@ struct ArticleCard: View {
                         .padding(.top, 200.0)
                 })
             
-            AsyncImage(url: URL(string: article.imageURL)) { phase in
+            AsyncImage(url: URL(string: article.imageURL ?? "")) { phase in
                 if let image = phase.image {
                     // Image chargée avec succès
                     image
@@ -260,7 +263,7 @@ struct ArticleDetailView: View {
                 .font(.title)
                 .bold()
             
-            AsyncImage(url: URL(string: article.imageURL)) { phase in
+            AsyncImage(url: URL(string: article.imageURL ?? "")) { phase in
                 if let image = phase.image {
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
@@ -276,13 +279,13 @@ struct ArticleDetailView: View {
             }
             
             HStack {
-                Text(formatDate(article.publicationDate))
-                Text(article.category)
+                //Text(article.publicationDate)
+                Text(article.category ?? "")
             }
             .font(.caption)
             .padding(.bottom)
             
-            Text(article.content)
+            Text(article.content ?? "")
                 .multilineTextAlignment(.leading)
             
             Text("Commentaires")

@@ -12,9 +12,9 @@ class Article : Identifiable, Codable {
     var title : String
     var description : String
     //var comments : [Comment]
-    var publicationDate : Date
-    var readTime : Int
-    var imageURL : String
-    var category : String
-    var content : String
+    //var publicationDate : String
+    var readTime : Int?
+    var imageURL : String?
+    var category : String?
+    var content : String?
 }

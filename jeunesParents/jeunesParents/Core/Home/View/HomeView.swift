@@ -165,7 +165,7 @@ struct HomeView: View {
                 List(articleViewModel.articles) { article in
                     HStack {
                         Image(systemName: "list.star")
-                        AsyncImage(url: URL(string: article.imageURL)) { phase in
+                        AsyncImage(url: URL(string: article.imageURL ?? "")) { phase in
                             if let image = phase.image {
                                 image
                                     .resizable()
@@ -201,17 +201,19 @@ struct HomeView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
-                .onAppear {
-                    articleViewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
-                }
+                
             }
-            .padding()
+            .onAppear {
+                articleViewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
+                print("Fetching articles...")
+            }
             .sheet(isPresented: $showingArticleDetail) {
                 // Contenu de la modal (pour le moment juste "Hello")
                 Text("Hello")
                     .font(.largeTitle)
                     .padding()
             }
+            
         }
     }
     // Suppression via glissement

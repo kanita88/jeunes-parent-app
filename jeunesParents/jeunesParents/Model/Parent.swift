@@ -13,7 +13,7 @@ struct Parent: Identifiable, Codable {
     var id: UUID = UUID()  // ID généré automatiquement
     var nom: String
     var prenom: String
-    var dateDeNaissance: Date
+    var dateDeNaissance: Date?
     var motDePasse: String
     var premiereExperienceParentale: Bool
     var enCouple: Bool

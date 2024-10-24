@@ -55,7 +55,7 @@ class ChildService {
     
     // Méthode pour récupérer les cartes de développement depuis l'API
     func fetchDevelopmentCards() -> AnyPublisher<[DevelopmentCard], Error> {
-        guard let url = URL(string: "https://api.example.com/jalon") else {
+        guard let url = URL(string: "http://127.0.0.1:8080/jalon") else {
             return Fail(error: ServiceError.invalidURL).eraseToAnyPublisher()
         }
         

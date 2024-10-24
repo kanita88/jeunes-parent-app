@@ -19,7 +19,7 @@ struct ArticlesView: View {
             .padding(.top, 20)
 
          VStack(alignment: .leading, spacing: 16) {
-               // Title
+
             Text("Le temps pour Soi : Un luxe\nEssentiel pour les Jeunes Parents")
                .font(.system(size: 24, weight: .bold))
                .lineSpacing(4)

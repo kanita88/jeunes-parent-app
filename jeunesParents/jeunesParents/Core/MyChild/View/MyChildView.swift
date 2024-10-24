@@ -57,10 +57,17 @@ struct MyChildView: View {
                 }
                 
                 // Message de bienvenue dynamique
-                Text("Bienvenue, \(childViewModel.parentName) !")
+                Text("Bienvenue, \(childViewModel.enfant?.nom ?? "Enfant") !")
                     .bold()
                     .font(.system(size: 30))
                     .padding(.top, 10)
+                
+                // Afficher l'âge de l'enfant si disponible
+                if let age = childViewModel.enfant?.age {
+                    Text("Âge : \(age)")
+                        .font(.subheadline)
+                        .padding(.bottom, 10)
+                }
                 
                 // Affichage du profil de l'enfant (personnalisé)
                 ChildProfileView(childViewModel: childViewModel)
@@ -71,42 +78,29 @@ struct MyChildView: View {
                 // Section des cartes (scroll horizontal)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                        CardView(title: "Rendez-vous Médical", value: "15", subtitle: "Avril", iconName: "stethoscope")
-                        CardView(title: "Vaccination", value: "3", subtitle: "À venir", iconName: "syringe")
-                        CardView(title: "Taille", value: "62", subtitle: "Cm", iconName: "ruler")
+                        ForEach(childViewModel.developmentCards) { card in
+                            DevelopmentCardView(title: card.title, description: card.description)
+                        }
                     }
                     .padding(.horizontal)
                 }
                 
                 // Section des cartes de développement
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Développement à 2 ans")
+                    Text("Développement à \(childViewModel.childAge) ans")
                         .font(.title)
                         .bold()
                         .padding(.horizontal)
                         .padding(.top, 10)
                     
                     VStack(spacing: 16) {
-                        DevelopmentCardView(
-                            title: "Progrès moteurs",
-                            description: "Capacité à courir, sauter sur place, monter des escaliers avec assistance."
-                        )
-                        
-                        DevelopmentCardView(
-                            title: "Langage",
-                            description: "Utilisation de phrases simples de 2 à 3 mots.",
-                            image: Image("languageImage")
-                        )
-                        
-                        DevelopmentCardView(
-                            title: "Interaction sociale",
-                            description: "Jeux avec d'autres enfants, début de la reconnaissance des émotions."
-                        )
-                        
-                        DevelopmentCardView(
-                            title: "Autonomie",
-                            description: "Capacité à manger seul, essayer de s'habiller."
-                        )
+                        ForEach(childViewModel.filteredCards()) { card in
+                            DevelopmentCardView(
+                                title: card.title,
+                                description: card.description,
+                                image: card.imageUrl != nil ? Image("yourDefaultImage") : nil
+                            )
+                        }
                     }
                     .padding(.horizontal)
                 }

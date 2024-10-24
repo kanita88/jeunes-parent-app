@@ -7,8 +7,9 @@
 
 import Foundation
 
-class Comment: Identifiable, Codable {
+struct Comment: Identifiable, Codable {
     let id : UUID?
+    var articleId: UUID?
     var content: String
     var username: String
     var publicationDate: Date

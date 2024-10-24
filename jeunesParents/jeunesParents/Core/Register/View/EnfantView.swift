@@ -4,7 +4,6 @@ import SwiftUI
 //  jeunesParents
 //
 //  Created by Apprenant 142 on 23/10/2024.
-//
 
 struct EnfantView: View {
     
@@ -14,31 +13,55 @@ struct EnfantView: View {
     // Variable pour activer la navigation après validation
     @State private var navigateToHome = false
     
+    // Champs d'entrée pour les informations de l'enfant
     @State private var prenom = ""
     @State private var genre = ""
     @State private var dateDeNaissance = Date()
     @State private var terme = false
-    @State var alimentation = ""
-    @State var poidsString = "" // Stocker le poids comme une chaîne de caractères
-    @State var tailleString = "" // Stocker la taille comme une chaîne de caractères
+    @State private var alimentation = ""
+    @State private var poidsString = "" // Stocker le poids comme une chaîne de caractères
+    @State private var tailleString = "" // Stocker la taille comme une chaîne de caractères
     
     let alimentations = ["allaitement", "biberon", "mixte"]
     
-    // Fonction pour formater la date en String
-    func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium // Format de la date (tu peux personnaliser)
-        return formatter.string(from: date)
-    }
+    // Messages d'erreur
+    @State private var errorMessage = ""
     
     // Fonction pour convertir une chaîne en Double
-    func convertToDouble(_ input: String) -> Double {
-        return Double(input) ?? 0.0
+    func convertToDouble(_ input: String) -> Double? {
+        return Double(input)
     }
     
     // Fonction pour convertir une chaîne en Int
-    func convertToInt(_ input: String) -> Int {
-        return Int(input) ?? 0
+    func convertToInt(_ input: String) -> Int? {
+        return Int(input)
+    }
+    
+    // Validation des champs
+    func validateFields() -> Bool {
+        errorMessage = ""
+        
+        if prenom.isEmpty {
+            errorMessage = "Le prénom est requis."
+            return false
+        }
+        
+        if genre.isEmpty {
+            errorMessage = "Le genre est requis."
+            return false
+        }
+        
+        if convertToDouble(poidsString) == nil {
+            errorMessage = "Le poids doit être un nombre valide."
+            return false
+        }
+        
+        if convertToInt(tailleString) == nil {
+            errorMessage = "La taille doit être un nombre entier valide."
+            return false
+        }
+        
+        return true
     }
     
     var body: some View {
@@ -48,17 +71,17 @@ struct EnfantView: View {
                     .resizable()
                     .frame(width: 200, height: 200)
                 
-                Text("Informations sur l'enfant ")
+                Text("Informations sur l'enfant")
                     .font(.title)
                     .fontWeight(.bold)
                 
                 Form {
-                    Section(header: Text("Prenom")) {
-                        TextField("Prenom", text: $prenom)
+                    Section(header: Text("Prénom")) {
+                        TextField("Entrez le prénom", text: $prenom)
                     }
                     
                     Section(header: Text("Genre")) {
-                        TextField("Genre", text: $genre)
+                        TextField("Entrez le genre", text: $genre)
                     }
                     
                     Section(header: Text("Date de Naissance")) {
@@ -82,51 +105,57 @@ struct EnfantView: View {
                     }
                     
                     Section(header: Text("Poids (kg)")) {
-                        TextField("Poids en kg", text: $poidsString)
-                            .keyboardType(.decimalPad) // Assurez-vous que le clavier est configuré pour les nombres décimaux
+                        TextField("Entrez le poids", text: $poidsString)
+                            .keyboardType(.decimalPad) // Clavier pour les nombres décimaux
                     }
                     
                     Section(header: Text("Taille (cm)")) {
-                        TextField("Taille en cm", text: $tailleString)
-                            .keyboardType(.numberPad) // Assurez-vous que le clavier est configuré pour les nombres entiers
+                        TextField("Entrez la taille", text: $tailleString)
+                            .keyboardType(.numberPad) // Clavier pour les nombres entiers
+                    }
+                    
+                    if !errorMessage.isEmpty {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
                     }
                 }
                 
                 Button(action: {
-                    // Utilisation de la fonction formatDate pour convertir dateDeNaissance en String
-                    let formattedDate = formatDate(dateDeNaissance)
-                    
-                    // Création d'un nouvel objet Enfant
-                    let newEnfant = Enfant(
-                        id: UUID(), // ID généré automatiquement
-                        nom: prenom, // Utilisez 'nom' ici pour correspondre à la structure
-                        genre: genre,
-                        dateDeNaissance: formattedDate, // Date formatée
-                        terme: terme,
-                        poids: convertToDouble(poidsString), // Conversion manuelle de la chaîne vers Double
-                        taille: convertToInt(tailleString), // Conversion manuelle de la chaîne vers Int
-                        profileImageURL: nil, // Si aucune URL de l'image n'est disponible
-                        cartesDeDeveloppement: [] // Initialisez avec une liste vide pour les cartes de développement
-                    )
-                    
-                    // Appel de la méthode d'ajout dans le ViewModel
-                    childViewModel.addEnfant(newEnfant)
-                    
-                    // Active la navigation vers HomeView après l'ajout
-                    navigateToHome = true
+                    // Validation des champs
+                    if validateFields() {
+                        // Création d'un nouvel objet Enfant
+                        let newEnfant = Enfant(
+                            id: UUID(),
+                            nom: prenom,
+                            genre: genre,
+                            dateDeNaissance: formatDate(dateDeNaissance), // Date formatée
+                            terme: terme,
+                            poids: convertToDouble(poidsString) ?? 0.0, // Conversion du poids
+                            taille: convertToInt(tailleString) ?? 0, // Conversion de la taille
+                            profileImageURL: nil, // Pas d'image par défaut
+                            cartesDeDeveloppement: [] // Liste vide par défaut
+                        )
+                        
+                        // Ajout de l'enfant dans le ViewModel
+                        childViewModel.addEnfant(newEnfant)
+                        
+                        // Navigation vers HomeView
+                        navigateToHome = true
+                    }
                 }) {
                     Text("Valider")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.accentColor)
+                        .background(Color.primaire)
                         .foregroundColor(.white)
                         .cornerRadius(8)
-                }
+                }.padding(.horizontal)
             }
             .navigationDestination(isPresented: $navigateToHome) {
                 HomeView()
-                    .navigationBarBackButtonHidden(true)
+                    .navigationBarBackButtonHidden(true) // Cache le bouton de retour pour la HomeView
             }
         }
         .disableAutocorrection(true)

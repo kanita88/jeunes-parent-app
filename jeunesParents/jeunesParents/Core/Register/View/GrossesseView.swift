@@ -22,13 +22,6 @@ struct GrossesseView: View {
     let modesAccouchement = ["Naturel", "Césarienne", "Indécis"]
     let conditionsMedicaless = ["Hypertension", "Diabète gestationnel", "Précédente césarienne"]
     
-    // Fonction pour convertir une date en chaîne de caractères
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        return dateFormatter.string(from: date)
-    }
-    
     // Fonction pour calculer la date de conception (14 jours après la date des dernières menstruations)
     func calculerDateConception(dateMenstruation: Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 14, to: dateMenstruation) ?? Date()
@@ -84,12 +77,12 @@ struct GrossesseView: View {
                     
                     // Date de conception (calculée automatiquement)
                     Section(header: Text("Date estimée de conception")) {
-                        Text(formatDate(dateConception)) // Convertir la date en String pour l'affichage
+                        DatePicker("", selection: $dateConception, displayedComponents: .date) // Utilisation de Date directement
                     }
                     
                     // Date prévue d'accouchement (calculée automatiquement)
                     Section(header: Text("Date prévue d'accouchement")) {
-                        Text(formatDate(dateAccouchement)) // Convertir la date en String pour l'affichage
+                        DatePicker("", selection: $dateAccouchement, displayedComponents: .date) // Utilisation de Date directement
                     }
                     
                     // Grossesse multiple

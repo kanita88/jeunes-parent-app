@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
-        FormView()
+        AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
     }
 }
 

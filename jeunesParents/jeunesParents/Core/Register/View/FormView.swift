@@ -154,7 +154,7 @@ struct FormView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.accentColor)
+                        .background(Color.primaire)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }

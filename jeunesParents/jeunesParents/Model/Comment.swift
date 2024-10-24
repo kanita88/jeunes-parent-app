@@ -13,12 +13,4 @@ struct Comment: Identifiable, Codable {
     var content: String
     var username: String
     var publicationDate: Date
-    
-    required init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
-        self.content = try container.decode(String.self, forKey: .content)
-        self.username = try container.decode(String.self, forKey: .username)
-        self.publicationDate = try container.decode(Date.self, forKey: .publicationDate)
-    }
 }

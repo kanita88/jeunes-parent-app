@@ -5,11 +5,11 @@ struct FormView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var parentViewModel = ParentViewModel()
 
-    @State private var nom = ""
-    @State private var prenom = ""
+    @State private var nom = "Doe"
+    @State private var prenom = "John"
     @State private var dateDeNaissance = Date()  // La date est un objet Date
-    @State private var email = ""
-    @State private var motDePasse = ""
+    @State private var email = "john.doe@test.com"
+    @State private var motDePasse = "123456"
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
 

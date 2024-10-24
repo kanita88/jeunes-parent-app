@@ -9,8 +9,8 @@ struct GrossesseView: View {
     @State private var dateConception = Date()
     @State private var dateAccouchement = Date()
     @State private var grossesseMultiple = false
-    @State private var modeAccouchement  = ""
-    @State private var conditionsMedicales = ""
+    @State private var modeAccouchement  = "Naturel"
+    @State private var conditionsMedicales = "Hypertension"
     
     // Variable pour activer la navigation après validation
     @State private var navigateToEnfant = false

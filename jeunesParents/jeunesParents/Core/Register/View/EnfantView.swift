@@ -14,13 +14,13 @@ struct EnfantView: View {
     @State private var navigateToHome = false
     
     // Champs d'entrée pour les informations de l'enfant
-    @State private var prenom = ""
-    @State private var genre = ""
+    @State private var prenom = "Pépita"
+    @State private var genre = "Féminin"
     @State private var dateDeNaissance = Date()
     @State private var terme = false
-    @State private var alimentation = ""
-    @State private var poidsString = "" // Stocker le poids comme une chaîne de caractères
-    @State private var tailleString = "" // Stocker la taille comme une chaîne de caractères
+    @State private var alimentation = "allaitement"
+    @State private var poidsString = "25" // Stocker le poids comme une chaîne de caractères
+    @State private var tailleString = "175" // Stocker la taille comme une chaîne de caractères
     
     let alimentations = ["allaitement", "biberon", "mixte"]
     
@@ -154,8 +154,8 @@ struct EnfantView: View {
                 }.padding(.horizontal)
             }
             .navigationDestination(isPresented: $navigateToHome) {
-                HomeView()
-                    .navigationBarBackButtonHidden(true) // Cache le bouton de retour pour la HomeView
+                MainTabView()
+                    .navigationBarBackButtonHidden(true)
             }
         }
         .disableAutocorrection(true)

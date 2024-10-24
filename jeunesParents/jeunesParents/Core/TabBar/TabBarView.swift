@@ -49,7 +49,7 @@ struct MainTabView: View {
                 .tag(Tab.myself)
             
             
-            Text("Conseils")
+            AdviceView()
                 .tabItem {
                     Image(systemName: "person.2.wave.2.fill")
                         .renderingMode(.template)

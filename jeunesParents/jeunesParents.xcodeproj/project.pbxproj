@@ -23,6 +23,8 @@
 		69C5A0602CC6932E006A88A5 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A05F2CC6932E006A88A5 /* TaskViewModel.swift */; };
 		69C5A0622CC6FD85006A88A5 /* TaskAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5A0612CC6FD84006A88A5 /* TaskAddView.swift */; };
 		6AFECC2A2CC8F842005FA0BF /* ArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFECC292CC8F842005FA0BF /* ArticlesView.swift */; };
+		703AC0B92CD8D88F000C9EF2 /* JWToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703AC0B82CD8D88F000C9EF2 /* JWToken.swift */; };
+		703AC0BB2CD8D8BE000C9EF2 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703AC0BA2CD8D8BE000C9EF2 /* KeyChainManager.swift */; };
 		70B44D4E2CC7B226003C1A91 /* DateCarouselAndChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B44D4A2CC7B226003C1A91 /* DateCarouselAndChartView.swift */; };
 		70B44D4F2CC7B226003C1A91 /* MyChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B44D4B2CC7B226003C1A91 /* MyChildView.swift */; };
 		70B44E012CC8E319003C1A91 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B44E002CC8E319003C1A91 /* CardView.swift */; };
@@ -66,6 +68,8 @@
 		69C5A05F2CC6932E006A88A5 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		69C5A0612CC6FD84006A88A5 /* TaskAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddView.swift; sourceTree = "<group>"; };
 		6AFECC292CC8F842005FA0BF /* ArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesView.swift; sourceTree = "<group>"; };
+		703AC0B82CD8D88F000C9EF2 /* JWToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWToken.swift; sourceTree = "<group>"; };
+		703AC0BA2CD8D8BE000C9EF2 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		70B44D4A2CC7B226003C1A91 /* DateCarouselAndChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCarouselAndChartView.swift; sourceTree = "<group>"; };
 		70B44D4B2CC7B226003C1A91 /* MyChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChildView.swift; sourceTree = "<group>"; };
 		70B44E002CC8E319003C1A91 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				A52CC2152CC6D65B00232974 /* AuthService.swift */,
+				703AC0B82CD8D88F000C9EF2 /* JWToken.swift */,
+				703AC0BA2CD8D8BE000C9EF2 /* KeyChainManager.swift */,
 			);
 			path = "API Service";
 			sourceTree = "<group>";
@@ -510,6 +516,7 @@
 				76ED77A32CC8DF94002AFB8F /* Article.swift in Sources */,
 				76ED77A52CC8DFE1002AFB8F /* ArticleViewModel.swift in Sources */,
 				695AA1A92CB6768400D64E06 /* ContentView.swift in Sources */,
+				703AC0B92CD8D88F000C9EF2 /* JWToken.swift in Sources */,
 				A52CC23A2CC6D87E00232974 /* SplashView.swift in Sources */,
 				A56D87AA2CC838980096BDBA /* ChildViewModel.swift in Sources */,
 				69C5A0622CC6FD85006A88A5 /* TaskAddView.swift in Sources */,
@@ -518,6 +525,7 @@
 				69C5A0542CC2690E006A88A5 /* HomeView.swift in Sources */,
 				A56D87B22CC841190096BDBA /* ChildProfileView.swift in Sources */,
 				A56D87A72CC837D50096BDBA /* ChildService.swift in Sources */,
+				703AC0BB2CD8D8BE000C9EF2 /* KeyChainManager.swift in Sources */,
 				69C5A04F2CC261FC006A88A5 /* Task.swift in Sources */,
 				A52CC21C2CC6D65B00232974 /* AuthentificationViewModel.swift in Sources */,
 				A52CC21D2CC6D65B00232974 /* AuthentificationView.swift in Sources */,

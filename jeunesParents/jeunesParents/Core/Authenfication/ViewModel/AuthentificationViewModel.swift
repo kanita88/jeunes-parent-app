@@ -10,8 +10,8 @@ class AuthentificationViewModel: ObservableObject {
     @Published var profileImage: UIImage? // Image de profil sélectionnée
     @Published var isUploading = false // État de téléchargement de l'image
     @Published var uploadSuccess = false // Indicateur de succès du téléchargement
-    @Published var email: String = "emilie.petit@example.com" // Email de l'utilisateur
-    @Published var password: String = "emilie1234" // Mot de passe de l'utilisateur
+    @Published var email: String = "thomasl@gmail.com" // Email de l'utilisateur
+    @Published var password: String = "thomas123456789" // Mot de passe de l'utilisateur
     @Published var isAuthenticated: Bool = false // Statut d'authentification
     @Published var errorMessage: String? // Message d'erreur en cas de problème
     @Published var isLoading: Bool = false // Indicateur de chargement pendant la connexion
@@ -42,10 +42,10 @@ class AuthentificationViewModel: ObservableObject {
     
     /// Fonction de validation de l'email avec regex simple
     private func isValidEmail(_ email: String) -> Bool {
-        // Regex pour valider l'email
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64]"
+        // Modèle regex simplifié pour valider l'adresse email
+        let emailRegEx = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email) // Retourne vrai si l'email correspond au regex
+        return emailPred.evaluate(with: email)
     }
     
     /// Fonction de connexion

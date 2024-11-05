@@ -6,7 +6,7 @@ class AuthService {
     private init() {}
     
     func login(email: String, password: String, completion: @escaping (Result<JWToken, Error>) -> Void) {
-        let url = URL(string: "http://127.0.0.1:8080/parent/login")
+        let url = URL(string: "http://127.0.0.1:8080/parents/login")
         var request = URLRequest(url: url!)
         
         request.httpMethod = "POST"

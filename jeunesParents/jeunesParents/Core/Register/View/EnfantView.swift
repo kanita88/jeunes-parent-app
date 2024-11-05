@@ -19,8 +19,8 @@ struct EnfantView: View {
     @State private var dateDeNaissance = Date()
     @State private var terme = false
     @State private var alimentation = "allaitement"
-    @State private var poidsString = "25" // Stocker le poids comme une chaîne de caractères
-    @State private var tailleString = "175" // Stocker la taille comme une chaîne de caractères
+    @State private var poidsString = "25" // Stocke le poids comme une chaîne de caractères
+    @State private var tailleString = "175" // Stocke la taille comme une chaîne de caractères
     
     let alimentations = ["allaitement", "biberon", "mixte"]
     
@@ -86,6 +86,7 @@ struct EnfantView: View {
                     
                     Section(header: Text("Date de Naissance")) {
                         DatePicker("", selection: $dateDeNaissance, displayedComponents: .date)
+                            .labelsHidden() // Cache l'étiquette vide
                     }
                     
                     Section(header: Text("Né à terme")) {
@@ -97,10 +98,15 @@ struct EnfantView: View {
                     }
                     
                     Section(header: Text("Alimentation")) {
-                        Picker("", selection: $alimentation) {
-                            ForEach(alimentations, id: \.self) { mode in
-                                Text(mode).tag(mode)
+                        HStack {
+                            Spacer()
+                            Picker("", selection: $alimentation) {
+                                ForEach(alimentations, id: \.self) { mode in
+                                    Text(mode).tag(mode)
+                                }
                             }
+                            .pickerStyle(SegmentedPickerStyle()) // Ou autre style de Picker si souhaité
+                            Spacer()
                         }
                     }
                     
@@ -158,7 +164,6 @@ struct EnfantView: View {
                     .navigationBarBackButtonHidden(true)
             }
         }
-        .disableAutocorrection(true)
         .scrollContentBackground(.hidden)
     }
 }

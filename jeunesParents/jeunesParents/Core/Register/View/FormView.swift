@@ -95,6 +95,7 @@ struct FormView: View {
 
                     Section(header: Text("Date de Naissance")) {
                         DatePicker("", selection: $dateDeNaissance, displayedComponents: .date)  // La date sera envoyée en tant que Date
+                            .labelsHidden() // Cache l'étiquette vide
                     }
 
                     Section(header: Text("Email")) {
@@ -150,7 +151,7 @@ struct FormView: View {
                         navigateToGrossesse = true  // Active la navigation si la validation passe
                     }
                 }) {
-                    Text("Création")
+                    Text("Valider")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()

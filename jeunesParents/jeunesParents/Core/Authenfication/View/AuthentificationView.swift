@@ -61,7 +61,7 @@ struct AuthentificationView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.primaire)  // Remplacez par Color.primaire si défini
+                            .background(Color.primaire)
                             .cornerRadius(10)
                     }
                 }

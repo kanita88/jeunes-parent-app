@@ -28,7 +28,7 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 30, height: 30)
                     .clipShape(Circle())
-                Text("Bonjour!")
+                Text("Bonjour, \(viewModel.prenom) !")
                     .font(.title)
                     .bold()
                 Spacer()
@@ -38,6 +38,9 @@ struct HomeView: View {
                     .padding(.trailing)
             }
             .padding()
+            .onAppear {
+                viewModel.fetchPrenom(token: "")
+            }
             //
             Text("Comment allez-vous aujourd'hui?")
                 .font(.headline)

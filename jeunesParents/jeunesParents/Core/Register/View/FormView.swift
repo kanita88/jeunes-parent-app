@@ -1,174 +1,123 @@
 import SwiftUI
 
 struct FormView: View {
-
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var parentViewModel = ParentViewModel()
-
-    @State private var nom = "Doe"
-    @State private var prenom = "John"
-    @State private var dateDeNaissance = Date()  // La date est un objet Date
-    @State private var email = "john.doe@test.com"
-    @State private var motDePasse = "123456"
+    
+    // Variables liées aux champs du formulaire
+    @State private var nom = ""
+    @State private var prenom = ""
+    @State private var dateDeNaissance = Date()
+    @State private var email = ""
+    @State private var motDePasse = ""
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
-
-    // Variable pour activer la navigation après validation du formulaire
+    
     @State private var navigateToGrossesse = false
-
-    // Variables pour afficher les messages d'erreur
-    @State private var emailError = ""
-    @State private var motDePasseError = ""
-    @State private var nomError = ""
-    @State private var prenomError = ""
-
-    // Fonction pour valider les informations de l'email
-    func validateEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-
-    // Validation des champs
-    func validateFields() -> Bool {
-        var isValid = true
-
-        // Réinitialiser les erreurs
-        emailError = ""
-        motDePasseError = ""
-        nomError = ""
-        prenomError = ""
-
-        // Validation des informations
-        if nom.isEmpty {
-            nomError = "Le nom ne peut pas être vide."
-            isValid = false
-        }
-
-        if prenom.isEmpty {
-            prenomError = "Le prénom ne peut pas être vide."
-            isValid = false
-        }
-
-        if !validateEmail(email) {
-            emailError = "Veuillez entrer un email valide."
-            isValid = false
-        }
-
-        if motDePasse.isEmpty {
-            motDePasseError = "Le mot de passe ne peut pas être vide."
-            isValid = false
-        }
-
-        return isValid
-    }
-
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                Image("Logo")
-                    .resizable()
-                    .frame(width: 200, height: 200)
-
-                Text("Inscription")
-                    .font(.title)
-                    .fontWeight(.bold)
-
-                Form {
-                    Section(header: Text("Nom")) {
-                        TextField("Quel est votre nom ?", text: $nom)
-                        if !nomError.isEmpty {
-                            Text(nomError)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                        }
-                    }
-
-                    Section(header: Text("Prénom")) {
-                        TextField("Quel est votre prénom ?", text: $prenom)
-                        if !prenomError.isEmpty {
-                            Text(prenomError)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                        }
-                    }
-
-                    Section(header: Text("Date de Naissance")) {
-                        DatePicker("", selection: $dateDeNaissance, displayedComponents: .date)  // La date sera envoyée en tant que Date
-                            .labelsHidden() // Cache l'étiquette vide
-                    }
-
-                    Section(header: Text("Email")) {
-                        TextField("test@test.com", text: $email)
-                            .textInputAutocapitalization(.never)
-                        if !emailError.isEmpty {
-                            Text(emailError)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                        }
-                    }
-
-                    Section(header: Text("Mot de passe")) {
-                        SecureField("Mot de passe", text: $motDePasse)
-                            .textInputAutocapitalization(.never)
-                        if !motDePasseError.isEmpty {
-                            Text(motDePasseError)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                        }
-                    }
-
-                    Section(header: Text("Première expérience parentale")) {
-                        Picker("Avez-vous une première expérience parentale ?", selection: $premiereExperienceParentale) {
-                            Text("Oui").tag(true)
-                            Text("Non").tag(false)
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                    }
-
-                    Section(header: Text("Êtes-vous en couple ?")) {
-                        Picker("Êtes-vous en couple ?", selection: $enCouple) {
-                            Text("Oui").tag(true)
-                            Text("Non").tag(false)
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
+            Form {
+                Section(header: Text("Nom")) {
+                    TextField("Quel est votre nom ?", text: $nom)
+                    if !parentViewModel.nomError.isEmpty {
+                        Text(parentViewModel.nomError)
+                            .foregroundColor(.red)
+                            .font(.caption)
                     }
                 }
-
-                // Bouton de validation
-                Button(action: {
-                    // Valider les champs avant l'ajout
-                    if validateFields() {
-                        parentViewModel.addParent(
-                            id: UUID(),
-                            nom: nom,
-                            prenom: prenom,
-                            dateDeNaissance: dateDeNaissance,  // Date envoyée en tant que `Date`
-                            motDePasse: motDePasse,
-                            premiereExperienceParentale: premiereExperienceParentale,
-                            enCouple: enCouple
-                        )
-                        navigateToGrossesse = true  // Active la navigation si la validation passe
+                
+                Section(header: Text("Prénom")) {
+                    TextField("Quel est votre prénom ?", text: $prenom)
+                    if !parentViewModel.prenomError.isEmpty {
+                        Text(parentViewModel.prenomError)
+                            .foregroundColor(.red)
+                            .font(.caption)
                     }
-                }) {
-                    Text("Valider")
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.primaire)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
                 }
-                .padding(.horizontal)
-
-                // Navigation vers la vue Grossesse
-                NavigationLink(destination: GrossesseView(), isActive: $navigateToGrossesse) {
-                    EmptyView()
+                
+                Section(header: Text("Date de Naissance")) {
+                    DatePicker("", selection: $dateDeNaissance, displayedComponents: .date)
+                        .labelsHidden()
+                }
+                
+                Section(header: Text("Email")) {
+                    TextField("test@test.com", text: $email)
+                        .textInputAutocapitalization(.never)
+                    if !parentViewModel.emailError.isEmpty {
+                        Text(parentViewModel.emailError)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
+                }
+                
+                Section(header: Text("Mot de passe")) {
+                    SecureField("Mot de passe", text: $motDePasse)
+                        .textInputAutocapitalization(.never)
+                    if !parentViewModel.motDePasseError.isEmpty {
+                        Text(parentViewModel.motDePasseError)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
+                }
+                
+                Section(header: Text("Première expérience parentale")) {
+                    Picker("Avez-vous une première expérience parentale ?", selection: $premiereExperienceParentale) {
+                        Text("Oui").tag(true)
+                        Text("Non").tag(false)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section(header: Text("Êtes-vous en couple ?")) {
+                    Picker("Êtes-vous en couple ?", selection: $enCouple) {
+                        Text("Oui").tag(true)
+                        Text("Non").tag(false)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section {
+                    Button(action: {
+                        // Valider les champs avant l'ajout
+                        if parentViewModel.validateFields(nom: nom, prenom: prenom, email: email, motDePasse: motDePasse) {
+                            parentViewModel.addParent(
+                                id: UUID(),
+                                nom: nom,
+                                prenom: prenom,
+                                dateDeNaissance: dateDeNaissance,
+                                motDePasse: motDePasse,
+                                premiereExperienceParentale: premiereExperienceParentale,
+                                enCouple: enCouple
+                            )
+                            navigateToGrossesse = true
+                        }
+                    }) {
+                        Text("Valider")
+                            .fontWeight(.bold)
+                            .frame(width: 200)
+                            .padding()
+                            .background(isFormValid() ? Color.primaire : Color.gray) // Active le bouton uniquement si le formulaire est valide
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .disabled(!isFormValid()) // Désactive le bouton si le formulaire est invalide
                 }
             }
-            .disableAutocorrection(true)
             .scrollContentBackground(.hidden)
+            .navigationTitle("Inscription")
+            .navigationDestination(isPresented: $navigateToGrossesse) {
+                GrossesseView()
+            }
         }
+    }
+    
+    // Fonction pour vérifier si le formulaire est valide
+    func isFormValid() -> Bool {
+        return nom.isEmpty == false &&
+               prenom.isEmpty == false &&
+               parentViewModel.validateEmail(email) &&
+               motDePasse.isEmpty == false
     }
 }
 

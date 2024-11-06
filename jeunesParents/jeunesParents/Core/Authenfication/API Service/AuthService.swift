@@ -2,6 +2,7 @@ import Foundation
 
 class AuthService {
     static let shared = AuthService()
+    @Published var isAuthenticated: Bool = true  // État d'authentification
     
     private init() {}
     
@@ -36,5 +37,13 @@ class AuthService {
                 completion(.failure(error))
             }
         }.resume()
+    }
+    
+    // Fonction de déconnexion
+       
+    func logout() {
+        KeyChainManager.deleteToken() // Supprime le token
+        isAuthenticated = false       // Met à jour l'état
+        print("Utilisateur déconnecté avec succès")
     }
 }

@@ -40,5 +40,19 @@ struct KeyChainManager {
         }
         return nil
     }
+    
+    static func deleteToken() {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: "authToken"
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        if status != errSecSuccess {
+            print("Erreur lors de la suppression du token : \(status)")
+        } else {
+            print("Token supprimé avec succès du Keychain")
+        }
+    }
 }
 

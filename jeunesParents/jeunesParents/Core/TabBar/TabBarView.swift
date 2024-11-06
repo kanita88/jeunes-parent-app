@@ -22,7 +22,7 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             
-            HomeView()
+            HomeView(authViewModel: AuthentificationViewModel(enfant: nil))
                 .tabItem {
                     Image(systemName: "sun.max")
                         .renderingMode(.template)

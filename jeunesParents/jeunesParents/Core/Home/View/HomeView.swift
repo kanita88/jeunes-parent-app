@@ -13,6 +13,7 @@ struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @StateObject var articleViewModel = ArticleViewModel()
+    @ObservedObject var authViewModel: AuthentificationViewModel
     @State private var selectedTab: Tab = .myday
     @State private var showingAddTaskView = false
     @State private var showingEditTaskView = false
@@ -20,6 +21,7 @@ struct HomeView: View {
     @State private var showEditTaskSheet = false
     @State private var showingTaskDetailView = false
     @State private var showingArticleDetail = false
+    @State private var logoutToLogin = false
     
     var body: some View {
         VStack {
@@ -215,6 +217,23 @@ struct HomeView: View {
             }
             
         }
+        
+        // Connexion Button
+        Button(action: {
+            authViewModel.logout()
+        }) {
+            Text("Déconnexion")
+                .foregroundColor(.white).bold()
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.red)
+                .cornerRadius(10)
+        }
+        .navigationDestination(isPresented: $logoutToLogin) {
+            AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
+                .navigationBarBackButtonHidden(true)
+        }
+        .padding(.horizontal)
     }
     // Suppression via glissement
     func deleteTask(at offsets: IndexSet) {
@@ -223,10 +242,11 @@ struct HomeView: View {
             taskViewModel.deleteTask(task) // Suppression de la tâche via le ViewModel
         }
     }
+    
 }
 
 
 #Preview {
-    HomeView()
+    HomeView(authViewModel: AuthentificationViewModel(enfant: nil))
 }
 

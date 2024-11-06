@@ -79,7 +79,7 @@ class AuthentificationViewModel: ObservableObject {
     }
     
     func logout() {
-        AuthService.shared.logout()
-        isAuthenticated = false // Réinitialise l'état d'authentification
+        KeyChainManager.deleteToken()
+        self.isAuthenticated = false // Réinitialise l'état d'authentification
     }
 }

@@ -38,12 +38,4 @@ class AuthService {
             }
         }.resume()
     }
-    
-    // Fonction de déconnexion
-       
-    func logout() {
-        KeyChainManager.deleteToken() // Supprime le token
-        isAuthenticated = false       // Met à jour l'état
-        print("Utilisateur déconnecté avec succès")
-    }
 }

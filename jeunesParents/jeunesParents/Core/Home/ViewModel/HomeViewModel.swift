@@ -9,7 +9,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    @Published var prenom: String = "Utilisateur" // prénom de l'utilisateur
+    @Published var prenom: String = "" // prénom de l'utilisateur
     
     @Published var selectSmile: Int? = nil
     
@@ -30,9 +30,16 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchPrenom(token: String) {
-        var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/parent/profile")!)
+        var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/parents/profile")!)
         request.httpMethod = "GET"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        guard let token = KeyChainManager.get() else {
+            print("Pas token")
+            return
+        }
+        
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

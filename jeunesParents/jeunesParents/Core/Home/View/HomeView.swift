@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @StateObject var articleViewModel = ArticleViewModel()
     @State private var selectedTab: Tab = .myday
@@ -28,7 +28,7 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 30, height: 30)
                     .clipShape(Circle())
-                Text("Bonjour, \(viewModel.prenom) !")
+                Text("Bonjour, \(String(describing: viewModel.prenom)) !")
                     .font(.title)
                     .bold()
                 Spacer()
@@ -39,7 +39,14 @@ struct HomeView: View {
             }
             .padding()
             .onAppear {
-                viewModel.fetchPrenom(token: "")
+                viewModel.fetchPrenom { result in
+                    switch result {
+                    case .success(let prenom):
+                        print("Prénom récupéré : \(prenom)")
+                    case .failure(let error):
+                        print("Erreur : \(error.localizedDescription)")
+                    }
+                }
             }
             //
             Text("Comment allez-vous aujourd'hui?")

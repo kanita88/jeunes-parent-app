@@ -29,36 +29,49 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func fetchPrenom(token: String) {
-        var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/parents/profile")!)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        guard let token = KeyChainManager.get() else {
-            print("Pas token")
+    private let baseURL = "http://127.0.0.1:8080/parents/profile"
+
+    func fetchPrenom(completion: @escaping (Result<String, Error>) -> Void) {
+        guard let url = URL(string: baseURL) else {
+            completion(.failure(NSError(domain: "URL Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "URL invalide"])))
             return
         }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+        if let token = KeyChainManager.get() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            completion(.failure(NSError(domain: "Auth Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Token introuvable"])))
+            return
+        }
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Erreur de réseau : \(error.localizedDescription)")
+                completion(.failure(error))
                 return
             }
             
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data {
-                do {
-                    let responseDict = try JSONDecoder().decode([String: String].self, from: data)
-                    DispatchQueue.main.async {
-                        self.prenom = responseDict["prenom"] ?? "Nom inconnu"
-                        print("Prénom récupéré : \(self.prenom)")
-                    }
-                } catch {
-                    print("Erreur de décodage : \(error.localizedDescription)")
+            guard let data = data else {
+                completion(.failure(NSError(domain: "Data Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Aucune donnée reçue"])))
+                return
+            }
+            
+            // Affiche la réponse JSON brute
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Réponse JSON brute : \(jsonString)")
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let prenom = json["prenom"] as? String {
+                    completion(.success(prenom))
+                } else {
+                    completion(.failure(NSError(domain: "Parse Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Format JSON invalide"])))
                 }
-            } else {
-                print("Requête échouée avec le code : \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+            } catch {
+                completion(.failure(error))
             }
         }.resume()
     }

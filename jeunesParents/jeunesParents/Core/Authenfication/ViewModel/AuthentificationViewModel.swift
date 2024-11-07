@@ -19,18 +19,19 @@ class AuthentificationViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>() // Ensemble pour stocker les abonnements Combine
     
     init() {
-        // Chargement du token depuis le Keychain pour maintenir la session
-        loadToken()
+        loadToken()  // Chargement du token pour maintenir la session ouverte si possible
     }
     
-    /// Fonction pour valider les informations d'authentification
+    // Validation des informations de connexion
     private func validateCredentials() -> Bool {
-        if email.isEmpty || password.isEmpty {
+        // Vérifie les champs vides
+        guard !email.isEmpty, !password.isEmpty else {
             errorMessage = "L'email et le mot de passe ne peuvent pas être vides."
             return false
         }
         
-        if !isValidEmail(email) {
+        // Vérifie le format de l'email
+        guard isValidEmail(email) else {
             errorMessage = "Veuillez entrer une adresse email valide."
             return false
         }
@@ -38,15 +39,18 @@ class AuthentificationViewModel: ObservableObject {
         return true
     }
     
-    /// Fonction de validation de l'email avec regex simple
+    // Validation de l'email à l'aide d'une expression régulière
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
     
-    /// Fonction de connexion
+    // Fonction de connexion
     func login() {
+        
+        // Empêche le déclenchement multiple si la connexion est déjà en cours
+        guard !isLoading else { return }
         guard validateCredentials() else { return }
         
         isLoading = true
@@ -54,33 +58,36 @@ class AuthentificationViewModel: ObservableObject {
         
         AuthService.shared.login(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
-                self?.isLoading = false
+                guard let self = self else { return }
                 
+                self.isLoading = false
                 switch result {
                 case .success(let token):
-                    self?.isAuthenticated = true
+                    self.isAuthenticated = true
                     print("Connexion réussie, token : \(token.token)")
                     
-                    // Sauvegarder le token dans le Keychain
+                    // Sauvegarde du token dans le Keychain
                     KeyChainManager.save(token: token.token)
                     
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
-                    self?.isAuthenticated = false
+                    self.errorMessage = error.localizedDescription
+                    self.isAuthenticated = false
                 }
             }
         }
     }
     
-    /// Fonction de déconnexion
+    // Fonction de déconnexion
     func logout() {
         KeyChainManager.deleteToken()
-        self.isAuthenticated = false
-        print("Déconnexion réussie et token supprimé.")
+        isAuthenticated = false
     }
     
-    /// Chargement du token au démarrage de l'application
-    func loadToken() {
+    // Chargement du token au démarrage de l'application pour maintenir la session si possible
+     func loadToken() {
+         // Ne charge le token que si l'utilisateur n'est pas encore authentifié
+         guard !isAuthenticated else { return }
+         
         if let token = KeyChainManager.get() {
             isAuthenticated = true
             print("Token trouvé : \(token)")

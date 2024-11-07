@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct jeunesParentsApp: App {
+    // Crée une instance d'AuthentificationViewModel pour l'utiliser globalement
+        @StateObject private var authViewModel = AuthentificationViewModel()
 
     var body: some Scene {
         WindowGroup {
            ContentView()
+                .environmentObject(authViewModel)
         }
     }
 }

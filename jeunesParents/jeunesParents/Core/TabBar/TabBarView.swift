@@ -21,7 +21,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(authViewModel: AuthentificationViewModel())
+            HomeView()
                 .tabItem {
                     Image(systemName: "sun.max")
                         .renderingMode(.template)

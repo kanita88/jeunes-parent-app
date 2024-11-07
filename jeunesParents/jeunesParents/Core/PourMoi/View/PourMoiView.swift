@@ -11,7 +11,7 @@ struct PourMoiView: View {
    @State private var searchText = ""
 
    var body: some View {
-      VStack(spacing: 20) {
+      VStack {
          Text("Aujourd'hui, vous êtes de bonne humeur !")
             .font(.headline)
             .padding(.top, 40)
@@ -20,8 +20,6 @@ struct PourMoiView: View {
          SearchBar(text: $searchText)
 
          ScrollView {
-            VStack(spacing: 25) {
-
                VStack(alignment: .leading) {
                   Text("moment de détente")
                      .font(.system(size: 18, weight: .medium))
@@ -47,7 +45,6 @@ struct PourMoiView: View {
          }
       }
    }
-}
 
 struct SearchBar: View {
    @Binding var text: String

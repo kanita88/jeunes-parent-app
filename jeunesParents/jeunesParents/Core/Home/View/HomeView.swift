@@ -13,7 +13,7 @@ struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @StateObject var articleViewModel = ArticleViewModel()
-    @ObservedObject var authViewModel: AuthentificationViewModel
+    @EnvironmentObject var authViewModel: AuthentificationViewModel // Récupération de l'authViewModel
     @State private var selectedTab: Tab = .myday
     @State private var showingAddTaskView = false
     @State private var showingEditTaskView = false
@@ -37,16 +37,17 @@ struct HomeView: View {
                     .font(.system(size: 20))
                 Button(action: {
                     authViewModel.logout() // Déconnexion
+                    authViewModel.isAuthenticated = false
                 }) {
                     Image(systemName: "power").bold()
                         .foregroundColor(.red)
                         .font(.system(size: 20))
                 }
-                .padding()
             }
             .padding()
             .onAppear {
-                    viewModel.fetchPrenom { result in
+                viewModel.fetchPrenom { result in
+                    DispatchQueue.main.async {
                         switch result {
                         case .success(let prenom):
                             viewModel.prenom = prenom  // Mise à jour du prénom dans le viewModel
@@ -56,6 +57,7 @@ struct HomeView: View {
                         }
                     }
                 }
+            }
             //
             Text("Comment allez-vous aujourd'hui?")
                 .font(.headline)
@@ -249,6 +251,8 @@ struct HomeView: View {
 
 
 #Preview {
-    HomeView(authViewModel: AuthentificationViewModel())
+        let authViewModel = AuthentificationViewModel()  // Créer une instance pour la preview
+        HomeView()
+            .environmentObject(authViewModel) // Passe authViewModel à HomeView
 }
 

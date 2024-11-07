@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AuthentificationView: View {
-    @ObservedObject var authViewModel: AuthentificationViewModel
+    @StateObject var authViewModel: AuthentificationViewModel
     @State var isShowingPassword: Bool = false
     @State var showError: Bool = false
     @State private var isAuthenticated = true

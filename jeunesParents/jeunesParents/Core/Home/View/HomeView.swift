@@ -28,7 +28,7 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 30, height: 30)
                     .clipShape(Circle())
-                Text("Bonjour, \(String(describing: viewModel.prenom)) !")
+                Text("Bonjour, \(viewModel.prenom) !")
                     .font(.title)
                     .bold()
                 Spacer()
@@ -39,15 +39,16 @@ struct HomeView: View {
             }
             .padding()
             .onAppear {
-                viewModel.fetchPrenom { result in
-                    switch result {
-                    case .success(let prenom):
-                        print("Prénom récupéré : \(prenom)")
-                    case .failure(let error):
-                        print("Erreur : \(error.localizedDescription)")
+                    viewModel.fetchPrenom { result in
+                        switch result {
+                        case .success(let prenom):
+                            viewModel.prenom = prenom  // Mise à jour du prénom dans le viewModel
+                            print("Prénom récupéré : \(prenom)")
+                        case .failure(let error):
+                            print("Erreur : \(error.localizedDescription)")
+                        }
                     }
                 }
-            }
             //
             Text("Comment allez-vous aujourd'hui?")
                 .font(.headline)

@@ -4,6 +4,7 @@ struct AuthentificationView: View {
     @ObservedObject var authViewModel: AuthentificationViewModel
     @State var isShowingPassword: Bool = false
     @State var showError: Bool = false
+    @State private var isAuthenticated = true
     
     var body: some View {
         NavigationStack {
@@ -95,5 +96,5 @@ struct AuthentificationView: View {
 }
 
 #Preview {
-    AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
+    AuthentificationView(authViewModel: AuthentificationViewModel())
 }

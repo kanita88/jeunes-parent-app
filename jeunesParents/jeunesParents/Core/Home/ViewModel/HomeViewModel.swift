@@ -12,6 +12,7 @@ class HomeViewModel: ObservableObject {
     @Published var prenom: String = "" // prénom de l'utilisateur
     
     @Published var selectSmile: Int? = nil
+    @Published var prenom: String = "" // prénom de l'utilisateur
     
     // Exécuter une action lors de la sélection d'un émoji
     func moodSelected(index: Int) {

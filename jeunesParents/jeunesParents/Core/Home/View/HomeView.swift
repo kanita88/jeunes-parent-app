@@ -13,6 +13,7 @@ struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @StateObject var articleViewModel = ArticleViewModel()
+    @ObservedObject var authViewModel: AuthentificationViewModel
     @State private var selectedTab: Tab = .myday
     @State private var showingAddTaskView = false
     @State private var showingEditTaskView = false
@@ -22,7 +23,7 @@ struct HomeView: View {
     @State private var showingArticleDetail = false
     
     var body: some View {
-        VStack {
+        NavigationStack {
             HStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -33,9 +34,15 @@ struct HomeView: View {
                     .bold()
                 Spacer()
                 Image(systemName: "bell")
-                    .resizable()
-                    .frame(width:20, height: 20)
-                    .padding(.trailing)
+                    .font(.system(size: 20))
+                Button(action: {
+                    authViewModel.logout() // Déconnexion
+                }) {
+                    Image(systemName: "power").bold()
+                        .foregroundColor(.red)
+                        .font(.system(size: 20))
+                }
+                .padding()
             }
             .padding()
             .onAppear {
@@ -69,7 +76,6 @@ struct HomeView: View {
             .cornerRadius(25)
             .shadow(radius: 5)
             
-            
             if let smile = viewModel.selectSmile {
                 Text("Votre humeur du jour : \(viewModel.emojiText(index: smile))")
                     .font(.headline)
@@ -79,6 +85,8 @@ struct HomeView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
+            
+            
             //Ajouter une tâche
             VStack(alignment: .leading) {
                 HStack {
@@ -148,6 +156,9 @@ struct HomeView: View {
                     .listStyle(PlainListStyle())
                 }
             }
+            .onAppear {
+                taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
+            }
             .padding()
             .sheet(isPresented: $showingAddTaskView) {
                 TaskAddView(taskViewModel: taskViewModel)
@@ -162,9 +173,7 @@ struct HomeView: View {
                     TaskDetailView(task: selectedTask)
                 }
             }
-            .onAppear {
-                taskViewModel.fetchTasks() // Charger les tâches lorsque la vue apparaît
-            }
+            
             
             // Section des recommandations
             VStack(alignment: .leading) {
@@ -214,6 +223,7 @@ struct HomeView: View {
                 .listStyle(PlainListStyle())
                 
             }
+            .padding()
             .onAppear {
                 articleViewModel.fetchArticles() // Charger les tâches lorsque la vue apparaît
                 print("Fetching articles...")
@@ -234,10 +244,11 @@ struct HomeView: View {
             taskViewModel.deleteTask(task) // Suppression de la tâche via le ViewModel
         }
     }
+    
 }
 
 
 #Preview {
-    HomeView()
+    HomeView(authViewModel: AuthentificationViewModel())
 }
 

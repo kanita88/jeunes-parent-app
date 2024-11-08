@@ -13,7 +13,7 @@ struct Grossesse: Identifiable, Codable {
     var dateMenstruation: Date?
     var dateConception: Date?
     var dateAccouchement: Date?
-    var grossesseMultiple: Bool
+    var grossesseMultiple: Bool?
     var modeAccouchement: String
     var conditionsMedicales: String
 }

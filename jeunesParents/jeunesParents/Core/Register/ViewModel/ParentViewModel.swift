@@ -16,20 +16,22 @@ class ParentViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    // Méthode pour ajouter un parent
-    func addParent(id: UUID, nom: String, prenom: String, dateDeNaissance: Date, motDePasse: String, premiereExperienceParentale: Bool, enCouple: Bool) {
+    func addParent(id: UUID, nom: String, prenom: String, date_de_naissance: Date, motDePasse: String, premiereExperienceParentale: Bool, enCouple: Bool, email: String) {
+        
+        let dateFormatter = ISO8601DateFormatter()
+        let formattedDate = dateFormatter.string(from: date_de_naissance)
         
         let newParent = Parent(
             id: id,
             nom: nom,
             prenom: prenom,
-            dateDeNaissance: dateDeNaissance,
-            motDePasse: motDePasse,
+            email: email,
+            date_de_naissance: formattedDate,  // Utilisation de 'date_De_Naissance'
+            password: motDePasse,
             premiereExperienceParentale: premiereExperienceParentale,
             enCouple: enCouple
         )
         
-        // Appel au service pour sauvegarder le parent
         ParentService.saveParentToDatabase(parent: newParent) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

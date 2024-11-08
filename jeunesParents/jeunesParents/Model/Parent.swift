@@ -13,8 +13,9 @@ struct Parent: Identifiable, Codable {
     var id: UUID = UUID()  // ID généré automatiquement
     var nom: String
     var prenom: String
-    var dateDeNaissance: Date?
-    var motDePasse: String?
+    var email: String
+    var date_de_naissance: String
+    var password: String
     var premiereExperienceParentale: Bool
     var enCouple: Bool
     var enfants: [Enfant] = []  // Tableau vide par défaut

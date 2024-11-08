@@ -1,11 +1,9 @@
 import Foundation
 
 class ParentService {
-    
-    // Fonction pour enregistrer un parent dans la base de données ou API
     static func saveParentToDatabase(parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:8080/parent") else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+        guard let url = URL(string: "http://127.0.0.1:8080/parents") else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "URL invalide"])))
             return
         }
         
@@ -15,24 +13,21 @@ class ParentService {
         
         do {
             let jsonData = try JSONEncoder().encode(parent)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON envoyé : \(jsonString)")  // Vérifiez la sortie ici
+            }
             request.httpBody = jsonData
-            
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    completion(.failure(NSError(domain: "Invalid response", code: 0, userInfo: nil)))
-                    return
-                }
-                
-                completion(.success(()))
-            }.resume()
-            
         } catch {
             completion(.failure(error))
+            return
         }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }.resume()
     }
 }

@@ -12,8 +12,9 @@ struct FormView: View {
     @State private var motDePasse = ""
     @State private var premiereExperienceParentale = false
     @State private var enCouple = false
-    
     @State private var navigateToGrossesse = false
+    
+    
     
     var body: some View {
         NavigationStack {
@@ -42,7 +43,7 @@ struct FormView: View {
                 }
                 
                 Section(header: Text("Email")) {
-                    TextField("test@test.com", text: $email)
+                    TextField("Quel est votre email ?", text: $email)
                         .textInputAutocapitalization(.never)
                     if !parentViewModel.emailError.isEmpty {
                         Text(parentViewModel.emailError)
@@ -76,36 +77,35 @@ struct FormView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                
-                Section {
-                    Button(action: {
-                        // Valider les champs avant l'ajout
-                        if parentViewModel.validateFields(nom: nom, prenom: prenom, email: email, motDePasse: motDePasse) {
-                            parentViewModel.addParent(
-                                id: UUID(),
-                                nom: nom,
-                                prenom: prenom,
-                                dateDeNaissance: dateDeNaissance,
-                                motDePasse: motDePasse,
-                                premiereExperienceParentale: premiereExperienceParentale,
-                                enCouple: enCouple
-                            )
-                            navigateToGrossesse = true
-                        }
-                    }) {
-                        Text("Valider")
-                            .fontWeight(.bold)
-                            .frame(width: 200)
-                            .padding()
-                            .background(isFormValid() ? Color.primaire : Color.gray) // Active le bouton uniquement si le formulaire est valide
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    .disabled(!isFormValid()) // Désactive le bouton si le formulaire est invalide
-                }
             }
             .scrollContentBackground(.hidden)
             .navigationTitle("Inscription")
+            
+            Button(action: {
+                // Valider les champs avant l'ajout
+                if parentViewModel.validateFields(nom: nom, prenom: prenom, email: email, motDePasse: motDePasse) {
+                    parentViewModel.addParent(
+                        id: UUID(),
+                        nom: nom,
+                        prenom: prenom,
+                        date_de_naissance: dateDeNaissance,
+                        motDePasse: motDePasse,
+                        premiereExperienceParentale: premiereExperienceParentale,
+                        enCouple:
+                            premiereExperienceParentale,
+                        email: email
+                    )
+                    navigateToGrossesse = true
+                }
+            }) {
+                Text("Valider")
+                    .fontWeight(.bold)
+                    .frame(width: 200)
+                    .padding()
+                    .background(Color.primaire)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
             .navigationDestination(isPresented: $navigateToGrossesse) {
                 GrossesseView()
             }
@@ -115,9 +115,9 @@ struct FormView: View {
     // Fonction pour vérifier si le formulaire est valide
     func isFormValid() -> Bool {
         return nom.isEmpty == false &&
-               prenom.isEmpty == false &&
-               parentViewModel.validateEmail(email) &&
-               motDePasse.isEmpty == false
+        prenom.isEmpty == false &&
+        parentViewModel.validateEmail(email) &&
+        motDePasse.isEmpty == false
     }
 }
 

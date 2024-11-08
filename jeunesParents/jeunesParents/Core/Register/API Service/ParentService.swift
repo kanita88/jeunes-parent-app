@@ -1,8 +1,8 @@
 import Foundation
 
 class ParentService {
-    static func saveParentToDatabase(parent: Parent, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:8080/parents") else {
+    static func saveParentToDatabase(parent: Parent, completion: @escaping (Result<String, Error>) -> Void) {
+        guard let url = URL(string: "http://127.0.0.1:8080/parents/signup") else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "URL invalide"])))
             return
         }
@@ -11,11 +11,9 @@ class ParentService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        // Ajoutez ici les informations sur l'utilisateur à envoyer
         do {
             let jsonData = try JSONEncoder().encode(parent)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print("JSON envoyé : \(jsonString)")  // Vérifiez la sortie ici
-            }
             request.httpBody = jsonData
         } catch {
             completion(.failure(error))
@@ -25,8 +23,19 @@ class ParentService {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
-            } else {
-                completion(.success(()))
+            } else if let data = data {
+                do {
+                    let responseJSON = try JSONDecoder().decode([String: String].self, from: data)
+                    if let token = responseJSON["token"] {
+                        // Sauvegarder le token d'inscription
+                        KeyChainManager.save(token: token)
+                        completion(.success(token))
+                    } else {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Token non trouvé dans la réponse"])))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }.resume()
     }

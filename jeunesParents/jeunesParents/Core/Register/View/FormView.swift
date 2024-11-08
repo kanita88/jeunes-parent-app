@@ -90,9 +90,9 @@ struct FormView: View {
                         prenom: prenom,
                         date_de_naissance: dateDeNaissance,
                         motDePasse: motDePasse,
-                        premiereExperienceParentale: premiereExperienceParentale,
+                        premiere_experience: premiereExperienceParentale,
                         enCouple:
-                            premiereExperienceParentale,
+                            enCouple,
                         email: email
                     )
                     navigateToGrossesse = true
@@ -107,7 +107,8 @@ struct FormView: View {
                     .cornerRadius(8)
             }
             .navigationDestination(isPresented: $navigateToGrossesse) {
-                GrossesseView()
+                MainTabView()
+                    .navigationBarBackButtonHidden(true)
             }
         }
     }

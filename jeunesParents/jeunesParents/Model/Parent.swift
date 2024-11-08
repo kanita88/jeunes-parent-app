@@ -16,7 +16,7 @@ struct Parent: Identifiable, Codable {
     var email: String
     var date_de_naissance: String
     var password: String
-    var premiereExperienceParentale: Bool
+    var premiere_experience: Bool
     var enCouple: Bool
     var enfants: [Enfant] = []  // Tableau vide par défaut
     

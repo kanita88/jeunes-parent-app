@@ -1,9 +1,7 @@
-import SwiftUI
+import Foundation
 import Combine
 
 class ParentViewModel: ObservableObject {
-    
-    // Propriétés observées
     @Published var parents: [Parent] = []
     @Published var errorMessage: String?
     @Published var isLoading = false
@@ -13,35 +11,42 @@ class ParentViewModel: ObservableObject {
     @Published var motDePasseError = ""
     @Published var nomError = ""
     @Published var prenomError = ""
+    @Published var token: String?  // Ajouter la variable pour stocker le token
     
     private var cancellables = Set<AnyCancellable>()
     
-    // Méthode pour ajouter un parent
-    func addParent(id: UUID, nom: String, prenom: String, dateDeNaissance: Date, motDePasse: String, premiereExperienceParentale: Bool, enCouple: Bool) {
+    func addParent(id: UUID, nom: String, prenom: String, date_de_naissance: Date, motDePasse: String, premiere_experience: Bool, enCouple: Bool, email: String) {
+        
+        let dateFormatter = ISO8601DateFormatter()
+        let formattedDate = dateFormatter.string(from: date_de_naissance)
         
         let newParent = Parent(
             id: id,
             nom: nom,
             prenom: prenom,
-            dateDeNaissance: dateDeNaissance,
-            motDePasse: motDePasse,
-            premiereExperienceParentale: premiereExperienceParentale,
+            email: email,
+            date_de_naissance: formattedDate,
+            password: motDePasse,
+            premiere_experience: premiere_experience,
             enCouple: enCouple
         )
         
-        // Appel au service pour sauvegarder le parent
-        ParentService.saveParentToDatabase(parent: newParent) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.parents.append(newParent)
-                case .failure(let error):
-                    self?.errorMessage = "Erreur lors de l'enregistrement: \(error.localizedDescription)"
-                }
-                self?.isLoading = false
-            }
-        }
-    }
+        
+           // Appel à la méthode saveParentToDatabase
+           ParentService.saveParentToDatabase(parent: newParent) { [weak self] result in
+               DispatchQueue.main.async {
+                   switch result {
+                   case .success(let token):  // Assurez-vous que le token est renvoyé ici
+                       self?.token = token  // Stocker le token dans le ViewModel
+                       print("Token JWT: \(token)")  // Afficher le token dans la console
+                       self?.parents.append(newParent)
+                   case .failure(let error):
+                       self?.errorMessage = "Erreur lors de l'enregistrement: \(error.localizedDescription)"
+                   }
+                   self?.isLoading = false
+               }
+           }
+       }
     
     // Validation des champs
     func validateFields(nom: String, prenom: String, email: String, motDePasse: String) -> Bool {

@@ -18,68 +18,82 @@ class AuthentificationViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>() // Ensemble pour stocker les abonnements Combine
     
-    // Initialisation avec un enfant (optionnel)
-    init(enfant: Enfant?) {
-        self.enfant = enfant
+    init() {
+        loadToken()  // Chargement du token pour maintenir la session ouverte si possible
     }
     
-    /// Fonction pour valider les informations d'authentification
+    // Validation des informations de connexion
     private func validateCredentials() -> Bool {
-        // Vérifie que les champs ne sont pas vides
-        if email.isEmpty || password.isEmpty {
+        // Vérifie les champs vides
+        guard !email.isEmpty, !password.isEmpty else {
             errorMessage = "L'email et le mot de passe ne peuvent pas être vides."
             return false
         }
         
-        // Vérifie que l'email est valide
-        if !isValidEmail(email) {
+        // Vérifie le format de l'email
+        guard isValidEmail(email) else {
             errorMessage = "Veuillez entrer une adresse email valide."
             return false
         }
         
-        return true // Retourne vrai si toutes les validations passent
+        return true
     }
     
-    /// Fonction de validation de l'email avec regex simple
+    // Validation de l'email à l'aide d'une expression régulière
     private func isValidEmail(_ email: String) -> Bool {
-        // Modèle regex simplifié pour valider l'adresse email
         let emailRegEx = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
     
-    /// Fonction de connexion
+    // Fonction de connexion
     func login() {
-        // Valide les informations d'identification avant de continuer
+        
+        // Empêche le déclenchement multiple si la connexion est déjà en cours
+        guard !isLoading else { return }
         guard validateCredentials() else { return }
         
-        isLoading = true // Active le chargement
-        errorMessage = nil // Réinitialise le message d'erreur
+        isLoading = true
+        errorMessage = nil
         
-        // Appelle la fonction de connexion du AuthService
         AuthService.shared.login(email: email, password: password) { [weak self] result in
-            // Passe sur le thread principal pour mettre à jour l'interface
             DispatchQueue.main.async {
-                self?.isLoading = false // Désactive le chargement
+                guard let self = self else { return }
                 
-                // Gère le résultat de la tentative de connexion
+                self.isLoading = false
                 switch result {
                 case .success(let token):
-                    // Connexion réussie : met à jour l'état et affiche le token
-                    self?.isAuthenticated = true
+                    self.isAuthenticated = true
                     print("Connexion réussie, token : \(token.token)")
                     
+                    // Sauvegarde du token dans le Keychain
+                    KeyChainManager.save(token: token.token)
+                    
                 case .failure(let error):
-                    // Connexion échouée : affiche le message d'erreur
-                    self?.errorMessage = error.localizedDescription
-                    self?.isAuthenticated = false
+                    self.errorMessage = error.localizedDescription
+                    self.isAuthenticated = false
                 }
             }
         }
     }
     
+    // Fonction de déconnexion
     func logout() {
         KeyChainManager.deleteToken()
-        self.isAuthenticated = false // Réinitialise l'état d'authentification
+        isAuthenticated = false
+    }
+    
+    // Chargement du token au démarrage de l'application pour maintenir la session si possible
+     func loadToken() {
+         // Ne charge le token que si l'utilisateur n'est pas encore authentifié
+         guard !isAuthenticated else { return }
+         
+        if let token = KeyChainManager.get() {
+            isAuthenticated = true
+            print("Token trouvé : \(token)")
+        } else {
+            isAuthenticated = false
+            print("Aucun token trouvé")
+        }
     }
 }

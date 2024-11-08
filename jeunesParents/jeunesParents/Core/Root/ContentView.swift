@@ -1,20 +1,23 @@
-////
-////  ContentView.swift
-////  jeunesParents
-////
-////  Created by Apprenant 172 on 09/10/2024.
-////
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var authViewModel = AuthentificationViewModel() // Initialisez ici
+    
     var body: some View {
-        AuthentificationView(authViewModel: AuthentificationViewModel(enfant: nil))
+        NavigationStack {
+            if authViewModel.isAuthenticated {
+                MainTabView()
+                    .environmentObject(authViewModel) // Passe l'environnement à MainTabView
+            } else {
+                AuthentificationView(authViewModel: authViewModel)
+                    .onAppear {
+                        authViewModel.loadToken() // Charger le token au démarrage
+                    }
+            }
+        }
     }
 }
-    
+
 #Preview {
     ContentView()
 }
-
-

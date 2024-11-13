@@ -14,7 +14,7 @@ struct AuthentificationView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300 , height: 300)
             
-            VStack(spacing: 21.0) {
+            VStack(spacing: 15.0) {
                 // Zone pour entrer l'email
                 TextField("Entrez votre email", text: $authViewModel.email)
                     .autocapitalization(.none)
@@ -68,7 +68,10 @@ struct AuthentificationView: View {
                 }
                 .padding(.horizontal)
                 
-                Text("Mot de passe oublié ? ")
+                NavigationLink(destination: ResetPasswordView()){
+                    Text("Mot de passe oublié ? ")
+                }
+                
                 
                 // Gestion des erreurs
                 if let errorMessage = authViewModel.errorMessage {

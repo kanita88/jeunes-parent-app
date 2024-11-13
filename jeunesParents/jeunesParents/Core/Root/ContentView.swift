@@ -9,10 +9,7 @@ struct ContentView: View {
                 MainTabView()
                     .environmentObject(authViewModel) // Passe l'environnement à MainTabView
             } else {
-                AuthentificationView(authViewModel: authViewModel)
-                    .onAppear {
-                        authViewModel.loadToken() // Charger le token au démarrage
-                    }
+                SplashView()
             }
         }
     }
